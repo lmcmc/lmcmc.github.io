@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>zkctf部分wp2 | 美豆的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="zkctf部分wp2">
+<meta name="keywords" content="zkctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zkctf部分wp2">
+<meta property="og:url" content="http://yoursite.com/2019/05/28/zkctf部分wp2/index.html">
+<meta property="og:site_name" content="美豆的博客">
+<meta property="og:description" content="zkctf部分wp2">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmL2vV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmLgg0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmLo59.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmLWuT.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmLfDU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmLIUJ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmLhbF.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmL5E4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/28/VmLH81.png">
+<meta property="og:updated_time" content="2019-05-28T13:08:05.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zkctf部分wp2">
+<meta name="twitter:description" content="zkctf部分wp2">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/28/VmL2vV.png">
+  
+    <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://lmcmc.github.io/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7S69DnEEH3PVK38zUzHnIRj5-gzGzoHsz", "hbIfv1jdAgFoNluKfAFAnpjt");</script>
+<script src="/js/Counter.js"></script>
+  
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">刘宸昕</a></h1>
+		  
+		</hgroup>
+
+		
+		<p class="header-subtitle">倘若我问心有愧呢？</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/writeup/" style="font-size: 10px;">writeup</a> <a href="/tags/zkctf/" style="font-size: 20px;">zkctf</a> <a href="/tags/代码审计/" style="font-size: 15px;">代码审计</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">刘宸昕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">刘宸昕</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">倘若我问心有愧呢？</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-zkctf部分wp2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/05/28/zkctf部分wp2/" class="article-date">
+  	<time datetime="2019-05-28T12:35:15.000Z" itemprop="datePublished">2019-05-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      zkctf部分wp2
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zkctf/">zkctf</a></li></ul>
+	</div>
+
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2019/05/28/zkctf部分wp2/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="zkctf部分wp2">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  zkctf部分wp2<br><a id="more"></a></p>
+<h1 id="Web-guess-game"><a href="#Web-guess-game" class="headerlink" title="Web guess game"></a>Web guess game</h1><p>查看源代码，发现其实又是代码审计</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- </span><br><span class="line">error_reporting(0);</span><br><span class="line">$flag = &quot;***********************&quot;;</span><br><span class="line"></span><br><span class="line">$invest = $_GET[&apos;invest&apos;];</span><br><span class="line">$rand = rand(2,50);  </span><br><span class="line"></span><br><span class="line">$len = strlen(trim($_GET[&apos;invest&apos;]));</span><br><span class="line"></span><br><span class="line">foreach ($_GET as $key =&gt; $value) &#123;</span><br><span class="line">    if(!is_numeric($value)||$value == &apos;0&apos;)&#123;</span><br><span class="line">        die(&apos;no no no!&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$money = number_format($invest*$rand);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$money = intval(str_replace(&apos;,&apos;,&apos;&apos;,$money));</span><br><span class="line"></span><br><span class="line">$guess = intval($_GET[&apos;guess&apos;]);</span><br><span class="line"></span><br><span class="line">if ($guess == $money &amp;&amp; strlen($money)===$len) &#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    echo &quot;这次的倍率是&quot;.$rand.&quot;，所以您中了&quot;.$money.&quot;元钱.&quot;;</span><br><span class="line">     echo &quot;&lt;br&gt;但是您的预期金额是&quot;.$_GET[&apos;guess&apos;].&quot;，没猜对，2333&quot;;</span><br><span class="line">&#125;</span><br><span class="line"> --</span><br></pre></td></tr></table></figure>
+<p>了解到rand函数作用为产生一个随机整数，在本题中产生2-50之间的随机数，要得到flag需要使guess的值等于money（即$invest*$rand）的值，并且money长度要与invest的长度相等。那我们可以直接直接bp爆破，猜一个guess，固定invest和guess的值，多次爆破，如果次数达到一定的上限一定会出现猜对倍数的情况，这样的话就会输出flag.</p>
+<p><img src="https://s2.ax1x.com/2019/05/28/VmL2vV.png" alt="1"><br>得到flag的前半段</p>
+<p><img src="https://s2.ax1x.com/2019/05/28/VmLgg0.png" alt="2"><br>同样的方法，可以得到flag的后半段</p>
+<hr>
+<p>本题知识点总结：</p>
+<p><strong>trim — 去除字符串首尾处的空白字符（或者其他字符）</strong></p>
+<p><strong>is_numeric — 检测变量是否为数字或数字字符串</strong></p>
+<p><strong>number_format — 以千位分隔符方式格式化一个数字</strong></p>
+<p>格式：<br>number_format ( float $number , int $decimals = 0 , string $dec_point = “.” , string $thousands_sep = “,” ) </p>
+<blockquote>
+<p>本函数可以接受1个、2个或者4个参数（注意：不能是3个）。<br>number：<br>你要格式化的数字<br>decimals：<br>要保留的小数位数<br>dec_point：<br>指定小数点显示的字符<br>thousands_sep：<br>指定千位分隔符显示的字符   </p>
+</blockquote>
+<hr>
+<h1 id="Misc-easy流量分析"><a href="#Misc-easy流量分析" class="headerlink" title="Misc easy流量分析"></a>Misc easy流量分析</h1><p>下载流量包用Wireshark打开，发现部分TCP流长度异常，追踪TCP流发现flag<br><img src="https://s2.ax1x.com/2019/05/28/VmLo59.png" alt="3"></p>
+<h1 id="Misc-马男波杰克有话说"><a href="#Misc-马男波杰克有话说" class="headerlink" title="Misc 马男波杰克有话说"></a>Misc 马男波杰克有话说</h1><p>下载得到一个名字为atool.png的图片，什么线索也没有得到，问了同学后知道这是一个atool解密，解密后得到flag。解密网址<a href="http://www.atool9.com/steganography.php" target="_blank" rel="noopener">http://www.atool9.com/steganography.php</a><br><img src="https://s2.ax1x.com/2019/05/28/VmLWuT.png" alt="4"></p>
+<h1 id="Misc-what"><a href="#Misc-what" class="headerlink" title="Misc what"></a>Misc what</h1><p>用十六进制打开what发现末尾处PK，判定是rar文件，将文件头改成50 4B 03 04，再打开what压缩包，得到zyr文件，再用WinHex打开发现是PNG图片，用图片打开得到flag</p>
+<h1 id="Misc-模糊的图片"><a href="#Misc-模糊的图片" class="headerlink" title="Misc 模糊的图片"></a>Misc 模糊的图片</h1><p>这个题照着网上搜到的wp做的<br><img src="https://s2.ax1x.com/2019/05/28/VmLfDU.png" alt="5"><br>这一道lsb隐写题，用StegSolve进行分析，发现在red plane 0这里是纯黑的，<br><img src="https://s2.ax1x.com/2019/05/28/VmLIUJ.png" alt="6"><br>说明这里什么也没有，正常的图片都不会是这样子的，其它通道也都显示正常。<br>那我们要从其他的通道比如：blue、alpha、green中找些到信息。整张图片看起来是毫无规则的像素点，那一定想把真正的信息隐藏起来，再用一些毫无规则的像素点干扰我们。我们如果想得到其中的信息，就要去掉这些干扰点。但是到底去掉哪些呢。经过前面的步骤我们知道了信息可能隐藏在plane 0中，所以我们要先把各个通道的plane 0提取出来。Red plane 0因为是空信息，可以不用提取了。我们提取出（File-&gt;Save as）Green plane 0、Alpha plane 0、Blue plane 0，把他们各另存为一张图。然后各个图进行比对（Analyse-&gt;image Combiner），最后发现Alpha plane 0 和Green plane 0 异或运算下的图出现了flag。<br><img src="https://s2.ax1x.com/2019/05/28/VmLhbF.png" alt="7"></p>
+<h1 id="Misc-看得到吗？"><a href="#Misc-看得到吗？" class="headerlink" title="Misc 看得到吗？"></a>Misc 看得到吗？</h1><p>打开图片，观察到图片的宽和高差距太大，十六进制打开，修改图片的宽高<br><img src="https://s2.ax1x.com/2019/05/28/VmL5E4.png" alt="8"><br>打开看到flag<br><img src="https://s2.ax1x.com/2019/05/28/VmLH81.png" alt="9"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/01/2019ISCC-Misc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          2019ISCC Misc
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/16/zkctf部分wp/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">zkctf部分wp</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="zkctf部分wp2" data-title="zkctf部分wp2" data-url="http://yoursite.com/2019/05/28/zkctf部分wp2/" data-images="https://lmcmc.github.io/img/lmc.jpg" data-content="zkctf部分wp2">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 刘宸昕
+      </div>
+        <div class="footer-right">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

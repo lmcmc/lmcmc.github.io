@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>zkctf friend | 美豆的博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring">
+<meta name="keywords" content="zkctf,代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zkctf friend">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/zk-web-friend/index.html">
+<meta property="og:site_name" content="美豆的博客">
+<meta property="og:description" content="涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgPED.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgF4H.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgiUe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDcxjx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDcvg1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgpDK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDg9HO.png">
+<meta property="og:updated_time" content="2019-05-16T11:29:09.237Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zkctf friend">
+<meta name="twitter:description" content="涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/06/EDgPED.png">
+  
+    <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://lmcmc.github.io/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7S69DnEEH3PVK38zUzHnIRj5-gzGzoHsz", "hbIfv1jdAgFoNluKfAFAnpjt");</script>
+<script src="/js/Counter.js"></script>
+  
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">刘宸昕</a></h1>
+		  
+		</hgroup>
+
+		
+		<p class="header-subtitle">倘若我问心有愧呢？</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/writeup/" style="font-size: 10px;">writeup</a> <a href="/tags/zkctf/" style="font-size: 20px;">zkctf</a> <a href="/tags/代码审计/" style="font-size: 15px;">代码审计</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">刘宸昕</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">刘宸昕</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">倘若我问心有愧呢？</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-zk-web-friend" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/05/06/zk-web-friend/" class="article-date">
+  	<time datetime="2019-05-06T05:46:20.000Z" itemprop="datePublished">2019-05-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      zkctf friend
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zkctf/">zkctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+	</div>
+
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2019/05/06/zk-web-friend/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="zkctf friend">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring<br><a id="more"></a><br>又是一道代码审计的题，源码index.php：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">//include(&quot;./class.php&quot;); </span><br><span class="line">header(&quot;content-type:text/html;charset=utf-8&quot;); </span><br><span class="line">error_reporting(0); </span><br><span class="line">if(isset($_GET[&quot;file&quot;]))&#123; </span><br><span class="line">    $file = $_GET[&quot;file&quot;]; </span><br><span class="line">    if(isset($_GET[&quot;password&quot;]))&#123; </span><br><span class="line">        $password = $_GET[&quot;password&quot;]; </span><br><span class="line">        if(preg_match(&quot;/flag/&quot;,$file))&#123;  </span><br><span class="line">            echo &quot;不能现在就给你flag哦&quot;; </span><br><span class="line">            exit();   </span><br><span class="line">        &#125;else&#123;   </span><br><span class="line">            require_once($file); </span><br><span class="line">            highlight_file(&quot;$file&quot;); </span><br><span class="line">            $password = unserialize($password);  </span><br><span class="line">            echo $password; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;else&#123; </span><br><span class="line">        echo &quot;需要密码的！&lt;br&gt;&quot;; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;else&#123; </span><br><span class="line">    highlight_file(&apos;./index.php&apos;); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">if(preg_match(&quot;/flag/&quot;,$file))&#123;  </span><br><span class="line">    echo &quot;不能现在就给你flag哦&quot;; </span><br><span class="line">    exit();   </span><br><span class="line">&#125;else&#123;   </span><br><span class="line">    include($file);  </span><br><span class="line">    $password = unserialize($password);  </span><br><span class="line">    echo $password; </span><br><span class="line">&#125; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>看第一行代码，发现有一个class.php文件，但访问发现不能直接访问，但可以用php://filter将这个php文件中的代码以base64的形式输出在页面上<br><img src="https://s2.ax1x.com/2019/05/06/EDgPED.png" alt="1"><br>通过base64解码，得到class.php<br><img src="https://s2.ax1x.com/2019/05/06/EDgF4H.png" alt="2"><br>class.php代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- hello friend! --&gt;</span><br><span class="line">&lt;?php  </span><br><span class="line">class Flag&#123;//flag_good.php  </span><br><span class="line">    public $file;  </span><br><span class="line">    public function __tostring()&#123;  </span><br><span class="line">        if(isset($this-&gt;file))&#123;  </span><br><span class="line">            echo file_get_contents($this-&gt;file); </span><br><span class="line">			echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">		return (&quot;good&lt;br&gt;&quot;);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>在这个文件中我们看到flag_good.php，推测flag应该在这个文件里，但是index.php里对file参数有限制不能包含flag，所以不能直接访问flag_good.php。<br>再阅读代码，发现<br><img src="https://s2.ax1x.com/2019/05/06/EDgiUe.png" alt="3"><br>如果file的值中不包含flag，那么就能把这个文件包含进来，之后将password反序列化一下，并输出password的结果。<br>在class.php中当Flag方法当做字符串执行时，会自动执行 <strong>tostring 方法（只知道这是个php魔术方法，具体作用是什么我也没搞懂，只是看别人写的wp知道是这样写然后拿的flag，emmmmm这个地方暂时存疑叭），如果file文件存在，就输出file文件中的内容。<br>所以首先我们可以利用第一句require_once将class.php引进来，即让参数file=class.php，则在index.php也就有了Flag这一类的定义，最后就要靠password这个参数了，要让password成为一个Flag类，且password-&gt;file=’flag_good.php’，这样就可以在输出password的时候调用</strong>tostring这个方法。unserialize()函数是个反序列化函数，所以我们要构造一个序列化后的password，写个php脚本利用一下serialize()这个函数。<img src="https://s2.ax1x.com/2019/05/06/EDcxjx.png" alt="4"><br>得到我们需要的序列化结果<br><img src="https://s2.ax1x.com/2019/05/06/EDcvg1.png" alt="5"><br>将该值赋给password即可，所以构造url：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=class.php&amp;password=O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:13:&quot;flag_good.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDgpDK.png" alt="6"><br>查看源代码即可拿到flag<br><img src="https://s2.ax1x.com/2019/05/06/EDg9HO.png" alt="7"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/16/zkctf部分wp/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          zkctf部分wp
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/06/zk-web-代码审计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">zkctf 代码审计</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="zk-web-friend" data-title="zkctf friend" data-url="http://yoursite.com/2019/05/06/zk-web-friend/" data-images="https://lmcmc.github.io/img/lmc.jpg" data-content="zkctf friend">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 刘宸昕
+      </div>
+        <div class="footer-right">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
