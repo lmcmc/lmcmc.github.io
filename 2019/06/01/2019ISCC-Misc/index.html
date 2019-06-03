@@ -54,7 +54,8 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/06/01/V3OmsH.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/06/01/V3OVzD.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/06/01/V3OKeA.png">
-<meta property="og:updated_time" content="2019-06-01T15:54:50.267Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/06/03/VJIexJ.png">
+<meta property="og:updated_time" content="2019-06-03T09:14:08.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019ISCC Misc">
 <meta name="twitter:description" content="2019ISCC Misc全部wp">
@@ -289,7 +290,7 @@
 <p><img src="https://s2.ax1x.com/2019/06/01/V3OSsJ.png" alt="25"><br>将图片用360压缩打开得到一个01.mp3<br><img src="https://s2.ax1x.com/2019/06/01/V3OpL9.png" alt="27"><br>这里是 MP3隐写，需要用到工具MP3Stego，<br>进入电脑的cmd,先cd到MP3Stego所在的文件夹，把需要分析的mp3文件拖到Decode.exe所在目录里<br><img src="https://s2.ax1x.com/2019/06/01/V3OAJK.png" alt="31"><br>输入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Decode.exe -X 01.mp3 -P 201902252228</span><br></pre></td></tr></table></figure></p>
 <p>（格式：<strong>Decode.exe -X 获取隐藏的东西 -P 后面写密码</strong><br>注意：-X -P必须大写。也可以写成Decode.exe -X -P 201902252228 01.mp3）<br><img src="https://s2.ax1x.com/2019/06/01/V3OCZR.png" alt="28"><br>得到这两个文件<br><img src="https://s2.ax1x.com/2019/06/01/V3Oki6.png" alt="31.1"><br>打开01.mp3.txt，得到html编码<br><img src="https://s2.ax1x.com/2019/06/01/V3OPd1.png" alt="29"><br>解码得到flag<br><img src="https://s2.ax1x.com/2019/06/01/V3OiIx.png" alt="30"></p>
 <h1 id="10-碎纸机"><a href="#10-碎纸机" class="headerlink" title="10 碎纸机"></a>10 碎纸机</h1><p>打开压缩包得到十张拼图<br><img src="https://s2.ax1x.com/2019/06/01/V3OeQe.png" alt="32"><br>把每一张拖到WinHex里发现这里许多00 中间夹杂着其他字符<br><img src="https://s2.ax1x.com/2019/06/01/V3OERO.png" alt="33"><br>复制这些十六进制数到notepad中打开<br><img src="https://s2.ax1x.com/2019/06/01/V3OmsH.png" alt="34"><br>之后ctrl+F  查找标记 0<br><img src="https://s2.ax1x.com/2019/06/01/V3OVzD.png" alt="35"><br>调整窗口角度会发现<br><img src="https://s2.ax1x.com/2019/06/01/V3OKeA.png" alt="36"><br>同理，对其余九副图依次分别处理，再将拼图拼在一起得到flag</p>
-<p>（11解密成绩单 不会~）</p>
+<h1 id="11-解密成绩单"><a href="#11-解密成绩单" class="headerlink" title="11 解密成绩单"></a>11 解密成绩单</h1><p>用IDA打开文件，一直往下拉 发现<br><img src="https://s2.ax1x.com/2019/06/03/VJIexJ.png" alt="37"><br>usename：admin<br>password: ISCCq19pc1Yhb6SqtGhliYH688feCH7lqQxtfa2MpOdONW1wmIleBo4TW5n<br>输入即可得到flag</p>
 
       
     </div>
