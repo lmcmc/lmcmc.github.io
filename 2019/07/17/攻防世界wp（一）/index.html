@@ -311,7 +311,7 @@
 
 	<a href="/2019/07/17/攻防世界wp（一）/" itemprop="url">
 		<time datetime="2019-07-17T13:01:31.000Z" itemprop="dateUpdated">
-	  		2019-07-17
+	  		2019-07-18
 	  </time>
 	</a> 
 
@@ -342,7 +342,15 @@
 	<div class="article-content" id="article-content">
 		<p>攻防世界新手题<br><!-- 唔... --></p>
 <h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="give-you-flag"><a href="#give-you-flag" class="headerlink" title="give_you_flag"></a>give_you_flag</h2><p>修复二维码扫描得到flag<br>打开gif图会看见丘比龙数完钞票会展示二维码，使用Stegsolve打开文件选择Frame Browser帧浏览器对动图进行分解,得到含有二维码的图片，发现二维码残缺，随便找一个二维码使用photoshop补上缺口，得到完整二维码，扫描得到flag<br><img src="https://s2.ax1x.com/2019/07/17/ZOQTwF.png" alt="1"></p>
-<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="robots"><a href="#robots" class="headerlink" title="robots"></a>robots</h2><p>题目描述：X老师上课讲了Robots协议，小宁同学却上课打了瞌睡，赶紧来教教小宁Robots协议是什么吧。</p>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="view-source"><a href="#view-source" class="headerlink" title="view_source"></a>view_source</h2><blockquote>
+<p>X老师让小宁同学查看一个网页的源代码，但小宁同学发现鼠标右键好像不管用了。</p>
+</blockquote>
+<p>Ctrl+U查看源代码得到flag</p>
+<h2 id="get-post"><a href="#get-post" class="headerlink" title="get_post"></a>get_post</h2><blockquote>
+<p>X老师告诉小宁同学HTTP通常使用两种请求方法，你知道是哪两种吗？</p>
+</blockquote>
+<p>考察HTTP两种请求方法get和post，使用火狐+hackbar传参，得到flag</p>
+<h2 id="robots"><a href="#robots" class="headerlink" title="robots"></a>robots</h2><p>题目描述：X老师上课讲了Robots协议，小宁同学却上课打了瞌睡，赶紧来教教小宁Robots协议是什么吧。</p>
 <p>百度Robots协议，了解到Robots协议（也称为爬虫协议、机器人协议等）的全称是“网络爬虫排除标准”（Robots Exclusion Protocol），网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。</p>
 <p>在网站根目录下放一个robots.txt文本文件（如 <a href="https://www.taobao.com/robots.txt" target="_blank" rel="noopener">https://www.taobao.com/robots.txt</a> ），里面可以指定不同的网络爬虫能访问的页面和禁止访问的页面，指定的页面由正则表达式表示。网络爬虫在采集这个网站之前，首先获取到这个robots.txt文本文件，然后解析到其中的规则，然后根据规则来采集网站的数据。</p>
 <p>于是查询robots.txt<br><img src="https://s2.ax1x.com/2019/07/17/ZOMLKf.png" alt="2"><br>读取文件得到flag<br><img src="https://s2.ax1x.com/2019/07/17/ZOMOr8.png" alt="3"></p>
