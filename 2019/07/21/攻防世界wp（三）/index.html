@@ -311,7 +311,7 @@
 
 	<a href="/2019/07/21/攻防世界wp（三）/" itemprop="url">
 		<time datetime="2019-07-21T09:58:46.000Z" itemprop="dateUpdated">
-	  		2019-07-21
+	  		2019-07-22
 	  </time>
 	</a> 
 
@@ -340,8 +340,15 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>攻防世界新手题3<br><a id="more"></a></p>
-<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="simple-php"><a href="#simple-php" class="headerlink" title="simple_php"></a>simple_php</h2><blockquote>
+		<p>攻防世界web新手题3<br><a id="more"></a></p>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="xff-referer"><a href="#xff-referer" class="headerlink" title="xff_referer"></a>xff_referer</h2><blockquote>
+<p>X老师告诉小宁其实xff和referer是可以伪造的。</p>
+</blockquote>
+<p>根据描述信息，知道题目应该与xff和referer相关，进入题目，看到<br><img src="https://s2.ax1x.com/2019/07/22/eCllZj.png" alt="1"></p>
+<p>于是用brup抓包，在http头加一条 X-Forwarded-For: 123.123.123.123<br>发送请求<br><img src="https://s2.ax1x.com/2019/07/22/eClMLQ.png" alt="2"><br>看到必须来自谷歌，于是再增加一条 Referer: <a href="https://www.google.com" target="_blank" rel="noopener">https://www.google.com</a><br>再次发送请求<br><img src="https://s2.ax1x.com/2019/07/22/eCl1ds.png" alt="3"><br>得到flag<br><img src="https://s2.ax1x.com/2019/07/22/eClKsg.png" alt="4"></p>
+<h3 id="本题涉及知识点："><a href="#本题涉及知识点：" class="headerlink" title="本题涉及知识点："></a>本题涉及知识点：</h3><h4 id="XFF-IP欺骗"><a href="#XFF-IP欺骗" class="headerlink" title="XFF - IP欺骗"></a>XFF - IP欺骗</h4><p>XFF即”X-Forwarded-For”字段，设置此字段可以伪造IP地址，这样部分服务器会认为是客户端经过代理访问自己，而其真实IP即为伪造IP地址。此字段在http头部增加即可生效。</p>
+<h4 id="Referer伪造"><a href="#Referer伪造" class="headerlink" title="Referer伪造"></a>Referer伪造</h4><p>Referer是HTTP协议中的一个请求报头，用于告知服务器用户的来源页面。要注意的是，referer是由浏览器自动为我们加上的，但并不是所有浏览器都会设置该值。和XFF一样，referer可以伪造，并不可信。</p>
+<h2 id="simple-php"><a href="#simple-php" class="headerlink" title="simple_php"></a>simple_php</h2><blockquote>
 <p>小宁听说php是最好的语言,于是她简单学习之后写了几行php代码。</p>
 </blockquote>
 <p>打开题目看到源代码</p>
@@ -351,8 +358,8 @@
 <p>所以构造url：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:34608/index.php?a=0a&amp;b=12345a</span><br></pre></td></tr></table></figure>
 <p>回车得到flag</p>
-<h3 id="本题涉及知识点："><a href="#本题涉及知识点：" class="headerlink" title="本题涉及知识点："></a>本题涉及知识点：</h3><h4 id="php弱类型比较"><a href="#php弱类型比较" class="headerlink" title="php弱类型比较"></a>php弱类型比较</h4><p>php中有两种比较的符号： == 与 ===</p>
-<p>== 在进行比较的时候，会先将字符串类型转化成相同，再比较<br><strong>如果一个数值和字符串进行比较的时候，会将字符串转换成数值再比较。</strong></p>
+<h3 id="本题涉及知识点：-1"><a href="#本题涉及知识点：-1" class="headerlink" title="本题涉及知识点："></a>本题涉及知识点：</h3><h4 id="php弱类型比较"><a href="#php弱类型比较" class="headerlink" title="php弱类型比较"></a>php弱类型比较</h4><p>php中有两种比较的符号： == 与 ===</p>
+<p>== 在进行比较的时候，会先将字符串类型转化成相同，再比较 <strong>如果一个数值和字符串进行比较的时候，会将字符串转换成数值再比较。</strong></p>
 <p>=== 在进行比较的时候，会先判断两种字符串的类型是否相等，再比较</p>
 <p>所以本题中令a=0a会先将0a转换成0再与0比较</p>
 <h4 id="is-numeric-函数"><a href="#is-numeric-函数" class="headerlink" title="is_numeric()函数"></a>is_numeric()函数</h4><p>is_numeric() 函数用于检测变量是否为数字或数字字符串。<br>若变量为数字或数字字符串，则if()语句为真。<br>审计代码可知本题中要令&amp;b不为数字或数字字符串，所以令b=12345a，同样因为php是弱类型语言，12345a在与1234比较时会先将12345a转换成12345，于是得到flag2</p>
@@ -404,8 +411,8 @@
 								七月 17日, 2019				
 							</p>
 							<p class="relate-post-content">
-								攻防世界新手题
-Miscgive_you_flag修复二维码扫描得到flag打开gif图会看见丘比龙数完钞票会展示二维码，使用Stegsolve打开文件选择Frame Browser帧浏览器对动图进行分解,得到含有二维码的图片，发现二...
+								攻防世界web新手题
+Miscgive_you_flag修复二维码扫描得到flag打开gif图会看见丘比龙数完钞票会展示二维码，使用Stegsolve打开文件选择Frame Browser帧浏览器对动图进行分解,得到含有二维码的图片，...
 							</p>
 						</div>
 
@@ -477,11 +484,11 @@ Miscgive_you_flag修复二维码扫描得到flag打开gif图会看见丘比龙�
 								七月 18日, 2019				
 							</p>
 							<p class="relate-post-content">
-								攻防世界新手题2
+								攻防世界web新手题2
 webbackup
 X老师忘记删除备份文件，他派小宁同学去把备份文件找出来,一起来帮小宁同学吧！
 
-这道题考察的是备份文件漏洞（Backup-File Artifacts），该漏洞可能存在于编辑器自动备份，版本控制系...
+这道题考察的是备份文件漏洞（Backup-File Artifacts），该漏洞可能存在于编辑器自动备份，版本...
 							</p>
 						</div>
 
