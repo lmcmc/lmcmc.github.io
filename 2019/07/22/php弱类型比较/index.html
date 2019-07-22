@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      zkctf friend | 美豆的博客
+      php弱类型比较 | 美豆的博客
     
   </title>
   <meta name="author" content="刘宸昕">
@@ -160,7 +160,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《zkctf friend》
+			当前文章&nbsp;:&nbsp;《php弱类型比较》
 		
 	</p>
 
@@ -258,6 +258,18 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
 	 
 
 <div class="layout-post">
@@ -265,8 +277,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/05/06/zk-web-friend/" itemprop="url">
-		zkctf friend
+	<a href="/2019/07/22/php弱类型比较/" itemprop="url">
+		php弱类型比较
 	</a>
 
 	</div>
@@ -279,9 +291,9 @@
 
 	发布于
 
-	<a href="/2019/05/06/zk-web-friend/" itemprop="url">
-		<time datetime="2019-05-06T05:46:20.000Z" itemprop="datePublished">
-	  		2019-05-06
+	<a href="/2019/07/22/php弱类型比较/" itemprop="url">
+		<time datetime="2019-07-22T13:37:21.000Z" itemprop="datePublished">
+	  		2019-07-22
 	  </time>
 	</a>
 	&nbsp;
@@ -297,9 +309,9 @@
 
 	更新于
 
-	<a href="/2019/05/06/zk-web-friend/" itemprop="url">
-		<time datetime="2019-05-06T05:46:20.000Z" itemprop="dateUpdated">
-	  		2019-06-05
+	<a href="/2019/07/22/php弱类型比较/" itemprop="url">
+		<time datetime="2019-07-22T13:37:21.000Z" itemprop="dateUpdated">
+	  		2019-07-22
 	  </time>
 	</a> 
 
@@ -310,12 +322,8 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/zkctf/" class=" ">
-			zkctf
-		</a>
-	
-		<a href="/tags/代码审计/" class=" ">
-			代码审计
+		<a href="/tags/php/" class=" ">
+			php
 		</a>
 	
 		
@@ -328,16 +336,30 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring<br><a id="more"></a><br>又是一道代码审计的题，源码index.php：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">//include(&quot;./class.php&quot;); </span><br><span class="line">header(&quot;content-type:text/html;charset=utf-8&quot;); </span><br><span class="line">error_reporting(0); </span><br><span class="line">if(isset($_GET[&quot;file&quot;]))&#123; </span><br><span class="line">    $file = $_GET[&quot;file&quot;]; </span><br><span class="line">    if(isset($_GET[&quot;password&quot;]))&#123; </span><br><span class="line">        $password = $_GET[&quot;password&quot;]; </span><br><span class="line">        if(preg_match(&quot;/flag/&quot;,$file))&#123;  </span><br><span class="line">            echo &quot;不能现在就给你flag哦&quot;; </span><br><span class="line">            exit();   </span><br><span class="line">        &#125;else&#123;   </span><br><span class="line">            require_once($file); </span><br><span class="line">            highlight_file(&quot;$file&quot;); </span><br><span class="line">            $password = unserialize($password);  </span><br><span class="line">            echo $password; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;else&#123; </span><br><span class="line">        echo &quot;需要密码的！&lt;br&gt;&quot;; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;else&#123; </span><br><span class="line">    highlight_file(&apos;./index.php&apos;); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">if(preg_match(&quot;/flag/&quot;,$file))&#123;  </span><br><span class="line">    echo &quot;不能现在就给你flag哦&quot;; </span><br><span class="line">    exit();   </span><br><span class="line">&#125;else&#123;   </span><br><span class="line">    include($file);  </span><br><span class="line">    $password = unserialize($password);  </span><br><span class="line">    echo $password; </span><br><span class="line">&#125; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
-<p>看第一行代码，发现有一个class.php文件，但访问发现不能直接访问，但可以用php://filter将这个php文件中的代码以base64的形式输出在页面上<br><img src="https://s2.ax1x.com/2019/05/06/EDgPED.png" alt="1"><br>通过base64解码，得到class.php<br><img src="https://s2.ax1x.com/2019/05/06/EDgF4H.png" alt="2"><br>class.php代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- hello friend! --&gt;</span><br><span class="line">&lt;?php  </span><br><span class="line">class Flag&#123;//flag_good.php  </span><br><span class="line">    public $file;  </span><br><span class="line">    public function __tostring()&#123;  </span><br><span class="line">        if(isset($this-&gt;file))&#123;  </span><br><span class="line">            echo file_get_contents($this-&gt;file); </span><br><span class="line">			echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">		return (&quot;good&lt;br&gt;&quot;);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>在这个文件中我们看到flag_good.php，推测flag应该在这个文件里，但是index.php里对file参数有限制不能包含flag，所以不能直接访问flag_good.php。<br>再阅读代码，发现<br><img src="https://s2.ax1x.com/2019/05/06/EDgiUe.png" alt="3"><br>如果file的值中不包含flag，那么就能把这个文件包含进来，之后将password反序列化一下，并输出password的结果。<br>在class.php中当Flag方法当做字符串执行时，会自动执行 <strong>tostring 方法（只知道这是个php魔术方法，具体作用是什么我也没搞懂，只是看别人写的wp知道是这样写然后拿的flag，emmmmm这个地方暂时存疑叭），如果file文件存在，就输出file文件中的内容。<br>所以首先我们可以利用第一句require_once将class.php引进来，即让参数file=class.php，则在index.php也就有了Flag这一类的定义，最后就要靠password这个参数了，要让password成为一个Flag类，且password-&gt;file=’flag_good.php’，这样就可以在输出password的时候调用</strong>tostring这个方法。unserialize()函数是个反序列化函数，所以我们要构造一个序列化后的password，写个php脚本利用一下serialize()这个函数。<img src="https://s2.ax1x.com/2019/05/06/EDcxjx.png" alt="4"><br>得到我们需要的序列化结果<br><img src="https://s2.ax1x.com/2019/05/06/EDcvg1.png" alt="5"><br>将该值赋给password即可，所以构造url：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=class.php&amp;password=O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:13:&quot;flag_good.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.ax1x.com/2019/05/06/EDgpDK.png" alt="6"><br>查看源代码即可拿到flag<br><img src="https://s2.ax1x.com/2019/05/06/EDg9HO.png" alt="7"></p>
+		<p>php是弱类型语言，它含有很多隐式的转换。常见的php弱类型，主要分为类型转换问题和内置函数参数的松散性两类。</p>
+<h2 id="类型转换问题"><a href="#类型转换问题" class="headerlink" title="类型转换问题"></a>类型转换问题</h2><p>类型转换是无法避免的问题。例如需要将GET或者是POST的参数转换为int类型，或者是两个变量不匹配的时候，PHP会自动地进行变量转换。</p>
+<h4 id="“-“和”-“"><a href="#“-“和”-“" class="headerlink" title="“ == “和” === “"></a>“ == “和” === “</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a == $b ;</span><br><span class="line">$a === $b ;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>=== 在进行比较的时候，会先判断两种字符串的类型是否相等，再比较</p>
+<p>== 在进行比较的时候，会先将字符串类型转化成相同，再比较</p>
+<p>==如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行。==</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> Hash比较</li>
+<li style="list-style: none"><input type="checkbox" checked> 十六进制转换</li>
+<li style="list-style: none"><input type="checkbox" checked> intval()和(string) 类型的转换</li>
+<li style="list-style: none"><input type="checkbox" checked> bool类型的true可以和任意字符弱类型相等</li>
+<li style="list-style: none"><input type="checkbox" checked> json绕过</li>
+</ul>
+<h2 id="内置函数的参数的松散性"><a href="#内置函数的参数的松散性" class="headerlink" title="内置函数的参数的松散性"></a>内置函数的参数的松散性</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> md5()</li>
+<li style="list-style: none"><input type="checkbox" checked> strcmp()</li>
+<li style="list-style: none"><input type="checkbox" checked> switch()</li>
+<li style="list-style: none"><input type="checkbox" checked> in_array()</li>
+<li style="list-style: none"><input type="checkbox" checked> php的超全局变量</li>
+</ul>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/img/post-cover/5.jpg"></div>
+	<div id="current-post-cover" data-scr="/img/post-cover/11.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -352,12 +374,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/05/06/zk-web-代码审计/" title="zkctf 代码审计" rel="next">
+			<a href="/2019/07/21/攻防世界wp（三）/" title="攻防世界（三）" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -375,127 +393,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">
-								zkctf部分wp2			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 28日, 2019				
-							</p>
-							<p class="relate-post-content">
-								  zkctf部分wp2
-Web guess game查看源代码，发现其实又是代码审计
-1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/4.jpg" alt="zkctf部分wp2">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">
-								zkctf部分wp			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 16日, 2019				
-							</p>
-							<p class="relate-post-content">
-								zkctf部分题目的wp
-Web upload打开题目地址发现是空白查看源代码看到upload.php所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件写php一句话木马上传时用bp抓包对比上传正常的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/3.jpg" alt="zkctf部分wp">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/06/zk-web-代码审计/" title="zkctf 代码审计">
-								zkctf 代码审计			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 6日, 2019				
-							</p>
-							<p class="relate-post-content">
-								涉及知识点：ereg函数存在00截断的漏洞zkctf一道代码审计的题，代码如下：1234567891011121314151617181920212223242526272829303132&lt;?php include(&quot...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/06/zk-web-代码审计/" title="zkctf 代码审计">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/6.jpg" alt="zkctf 代码审计">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">
-								2019ISCC web1 （代码审计）			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 3日, 2019				
-							</p>
-							<p class="relate-post-content">
-								2019ISCC web1题目
-题解拿到题目直接给出源码：
-1234567891011121314151617&lt;?phperror_reporting(0);require &apos;flag.php&apos;;$value...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/1.jpg" alt="2019ISCC web1 （代码审计）">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/07/22/php弱类型比较/" title="php弱类型比较">
-								php弱类型比较			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								七月 22日, 2019				
-							</p>
-							<p class="relate-post-content">
-								php是弱类型语言，它含有很多隐式的转换。常见的php弱类型，主要分为类型转换问题和内置函数参数的松散性两类。
-类型转换问题类型转换是无法避免的问题。例如需要将GET或者是POST的参数转换为int类型，或者是两个变量不匹配的时候，P...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/07/22/php弱类型比较/" title="php弱类型比较">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/11.jpg" alt="php弱类型比较">
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -595,6 +492,126 @@ Miscgive_you_flag修复二维码扫描得到flag打开gif图会看见丘比龙�
 							<a href="/2019/06/01/2019ISCC-Misc/" title="2019ISCC Misc">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/2.jpg" alt="2019ISCC Misc">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">
+								zkctf部分wp2			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 28日, 2019				
+							</p>
+							<p class="relate-post-content">
+								  zkctf部分wp2
+Web guess game查看源代码，发现其实又是代码审计
+1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/4.jpg" alt="zkctf部分wp2">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">
+								zkctf部分wp			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 16日, 2019				
+							</p>
+							<p class="relate-post-content">
+								zkctf部分题目的wp
+Web upload打开题目地址发现是空白查看源代码看到upload.php所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件写php一句话木马上传时用bp抓包对比上传正常的...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/3.jpg" alt="zkctf部分wp">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/06/zk-web-friend/" title="zkctf friend">
+								zkctf friend			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 6日, 2019				
+							</p>
+							<p class="relate-post-content">
+								涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring又是一道代码审计的题，源码index.php：1234567891011121314151617181920212223242526272829303...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/06/zk-web-friend/" title="zkctf friend">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/5.jpg" alt="zkctf friend">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/06/zk-web-代码审计/" title="zkctf 代码审计">
+								zkctf 代码审计			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 6日, 2019				
+							</p>
+							<p class="relate-post-content">
+								涉及知识点：ereg函数存在00截断的漏洞zkctf一道代码审计的题，代码如下：1234567891011121314151617181920212223242526272829303132&lt;?php include(&quot...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/06/zk-web-代码审计/" title="zkctf 代码审计">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/6.jpg" alt="zkctf 代码审计">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">
+								2019ISCC web1 （代码审计）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 3日, 2019				
+							</p>
+							<p class="relate-post-content">
+								2019ISCC web1题目
+题解拿到题目直接给出源码：
+1234567891011121314151617&lt;?phperror_reporting(0);require &apos;flag.php&apos;;$value...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/1.jpg" alt="2019ISCC web1 （代码审计）">
 							</a>
 						</div>
 					</li>											
