@@ -346,7 +346,9 @@
 <li>用pdf编辑工具使图片缩小可以看到图片后面的flag</li>
 <li>利用在线工具：<a href="https://app.xunjiepdf.com/pdf2word" target="_blank" rel="noopener">https://app.xunjiepdf.com/pdf2word</a> 将pdf转换为word，从而移开图片</li>
 </ol>
-<h1 id="SimpleRAR"><a href="#SimpleRAR" class="headerlink" title="SimpleRAR"></a>SimpleRAR</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXEqK.png" alt="2"><br>解压后只有一个txt文件,上面写着flag is not here,将压缩包用winhex打发现RAR里面有一个图片，但是没有解压出来，原因是这个压缩包被损坏<br><img src="https://s2.ax1x.com/2019/07/24/eVXkKx.png" alt="3"><br>更改RAR对png文件头的编码，把A8 3C 7A中的7A改成74，保存，重新解压，得到一个纯白图片<br><img src="https://s2.ax1x.com/2019/07/24/eVXix1.png" alt="4"><br>把图片拖进winhex发现是个gif，用stegsolve打开选择帧功能模块，又看到两张纯白的图片。。。（后来才知道这两张纯白的图片，调节颜色后就能得到两张残缺的二维码图片。。。）</p>
+<h1 id="SimpleRAR"><a href="#SimpleRAR" class="headerlink" title="SimpleRAR"></a>SimpleRAR</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXEqK.png" alt="2"><br>解压后只有一个txt文件,上面写着flag is not here,将压缩包用winhex打发现RAR里面有一个图片，但是没有解压出来，原因是这个压缩包被损坏</p>
+<p><img src="https://s2.ax1x.com/2019/07/24/eVXkKx.png" alt="3"><br>更改RAR对png文件头的编码，把A8 3C 7A中的7A改成74，保存，重新解压，得到一个纯白图片</p>
+<p><img src="https://s2.ax1x.com/2019/07/24/eVXix1.png" alt="4"><br>把图片拖进winhex发现是个gif，用stegsolve打开选择帧功能模块，又看到两张纯白的图片。。。（后来才知道这两张纯白的图片，调节颜色后就能得到两张残缺的二维码图片。。。）</p>
 <p>。。而我选择先用PS打开secret.gif，有两个图层（题目中的双图层），分离后保存，再用Stegsolve分别打开，得到两张残缺的二维码图片<br><img src="https://s2.ax1x.com/2019/07/24/eVXAr6.png" alt="5"><br>使用ps将二维码合并补齐，扫描得到flag<br><img src="https://s2.ax1x.com/2019/07/24/eVXZVO.png" alt="6"></p>
 <h1 id="坚持60s"><a href="#坚持60s" class="headerlink" title="坚持60s"></a>坚持60s</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXmIe.png" alt="7"><br>使用java反编译工具，查看源码，看到经过base64加密后的flag，解密得到flag<br><img src="https://s2.ax1x.com/2019/07/24/eVXuPH.png" alt="8"><br>JD-GUI（Java反编译工具）下载地址： <a href="https://www.cr173.com/soft/5606.html" target="_blank" rel="noopener">https://www.cr173.com/soft/5606.html</a></p>
 	
