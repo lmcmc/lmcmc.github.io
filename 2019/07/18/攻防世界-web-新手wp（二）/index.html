@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      攻防世界-misc-新手wp（一） | 美豆的博客
+      攻防世界web新手wp（二） | 美豆的博客
     
   </title>
   <meta name="author" content="刘宸昕">
@@ -160,7 +160,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《攻防世界-misc-新手wp（一）》
+			当前文章&nbsp;:&nbsp;《攻防世界web新手wp（二）》
 		
 	</p>
 
@@ -277,8 +277,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/07/24/攻防世界misc新手wp（一）/" itemprop="url">
-		攻防世界-misc-新手wp（一）
+	<a href="/2019/07/18/攻防世界-web-新手wp（二）/" itemprop="url">
+		攻防世界web新手wp（二）
 	</a>
 
 	</div>
@@ -291,9 +291,9 @@
 
 	发布于
 
-	<a href="/2019/07/24/攻防世界misc新手wp（一）/" itemprop="url">
-		<time datetime="2019-07-24T14:09:19.000Z" itemprop="datePublished">
-	  		2019-07-24
+	<a href="/2019/07/18/攻防世界-web-新手wp（二）/" itemprop="url">
+		<time datetime="2019-07-18T14:50:40.000Z" itemprop="datePublished">
+	  		2019-07-18
 	  </time>
 	</a>
 	&nbsp;
@@ -309,8 +309,8 @@
 
 	更新于
 
-	<a href="/2019/07/24/攻防世界misc新手wp（一）/" itemprop="url">
-		<time datetime="2019-07-24T14:09:19.000Z" itemprop="dateUpdated">
+	<a href="/2019/07/18/攻防世界-web-新手wp（二）/" itemprop="url">
+		<time datetime="2019-07-18T14:50:40.000Z" itemprop="dateUpdated">
 	  		2019-08-01
 	  </time>
 	</a> 
@@ -340,21 +340,28 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>攻防世界misc新手题4-6题<br><a id="more"></a></p>
-<h1 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXeaD.png" alt="1"><br>根据题目描述可知，flag可能会隐藏在图片下面。<br>将图片移开的方法：</p>
-<ol>
-<li>用pdf编辑工具使图片缩小可以看到图片后面的flag</li>
-<li>利用在线工具：<a href="https://app.xunjiepdf.com/pdf2word" target="_blank" rel="noopener">https://app.xunjiepdf.com/pdf2word</a> 将pdf转换为word，从而移开图片</li>
-</ol>
-<h1 id="SimpleRAR"><a href="#SimpleRAR" class="headerlink" title="SimpleRAR"></a>SimpleRAR</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXEqK.png" alt="2"><br>解压后只有一个txt文件,上面写着flag is not here,将压缩包用winhex打发现RAR里面有一个图片，但是没有解压出来，原因是这个压缩包被损坏</p>
-<p><img src="https://s2.ax1x.com/2019/07/24/eVXkKx.png" alt="3"><br>更改RAR对png文件头的编码，把A8 3C 7A中的7A改成74，保存，重新解压，得到一个纯白图片</p>
-<p><img src="https://s2.ax1x.com/2019/07/24/eVXix1.png" alt="4"><br>把图片拖进winhex发现是个gif，用stegsolve打开选择帧功能模块，又看到两张纯白的图片。。。（后来才知道这两张纯白的图片，调节颜色后就能得到两张残缺的二维码图片。。。）</p>
-<p>。。而我选择先用PS打开secret.gif，有两个图层（题目中的双图层），分离后保存，再用Stegsolve分别打开，得到两张残缺的二维码图片<br><img src="https://s2.ax1x.com/2019/07/24/eVXAr6.png" alt="5"><br>使用ps将二维码合并补齐，扫描得到flag<br><img src="https://s2.ax1x.com/2019/07/25/eZJIwn.png" alt="6"></p>
-<h1 id="坚持60s"><a href="#坚持60s" class="headerlink" title="坚持60s"></a>坚持60s</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXmIe.png" alt="7"><br>使用java反编译工具，查看源码，看到经过base64加密后的flag，解密得到flag<br><img src="https://s2.ax1x.com/2019/07/24/eVXuPH.png" alt="8"><br>JD-GUI（Java反编译工具）下载地址： <a href="https://www.cr173.com/soft/5606.html" target="_blank" rel="noopener">https://www.cr173.com/soft/5606.html</a></p>
+		<p>攻防世界web新手题4-6题<br><a id="more"></a></p>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="backup"><a href="#backup" class="headerlink" title="backup"></a>backup</h2><blockquote>
+<p>X老师忘记删除备份文件，他派小宁同学去把备份文件找出来,一起来帮小宁同学吧！</p>
+</blockquote>
+<p>这道题考察的是备份文件漏洞（Backup-File Artifacts），该漏洞可能存在于编辑器自动备份，版本控制系统备份和开发者手动备份<br>。相关链接<a href="https://www.4hou.com/technology/1958.html" target="_blank" rel="noopener">https://www.4hou.com/technology/1958.html</a></p>
+<p>于是知道了index.php的备份文件index.php.bak,下载文件得到flag<br><img src="https://s2.ax1x.com/2019/07/19/ZxpwlQ.png" alt="1"></p>
+<blockquote>
+<p>补充：后缀名为bak的文件是备份文件</p>
+</blockquote>
+<h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><blockquote>
+<p>X老师告诉小宁他在cookie里放了些东西，小宁疑惑地想：‘这是夹心饼干的意思吗？’</p>
+</blockquote>
+<p>Cookie，指某些网站为了辨别用户身份、进行 session 跟踪而储存在用户本地终端上的数据。</p>
+<p>打开题目，F12打开开发者工具， 查看cookies，发现一个php网页，尝试访问<br><img src="https://s2.ax1x.com/2019/07/18/ZjDLUH.png" alt="2"><br>拿到新的提示，查看响应头，拿到flag<br><img src="https://s2.ax1x.com/2019/07/18/ZjDqVe.png" alt="3"></p>
+<h2 id="disabled-button"><a href="#disabled-button" class="headerlink" title="disabled_button"></a>disabled_button</h2><blockquote>
+<p>X老师今天上课讲了前端知识，然后给了大家一个不能按的按钮，小宁惊奇地发现这个按钮按不下去，到底怎么才能按下去呢？</p>
+</blockquote>
+<p>获取在线场景查看网页，发现一个不能按的按钮，猜测通过这个按钮可以得到flag，查看源代码，发现按钮设置了disabled属性，删除这个属性，再点击按钮，拿到flag</p>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/img/post-cover/11.jpg"></div>
+	<div id="current-post-cover" data-scr="/img/post-cover/9.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -369,8 +376,12 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
+			<a href="/2019/07/18/攻防世界wp（二）/" title="攻防世界-web-新手wp（二）" rel="prev">
+				&laquo;上一篇
+			</a>
 		
-			<a href="/2019/07/24/攻防世界-misc-新手wp（一）/" title="攻防世界misc新手wp（一）" rel="next">
+		
+			<a href="/2019/07/17/攻防世界wp（一）/" title="攻防世界-web-新手wp（一）" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -388,6 +399,33 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/24/攻防世界misc新手wp（一）/" title="攻防世界-misc-新手wp（一）">
+								攻防世界-misc-新手wp（一）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界misc新手题4-6题
+pdf根据题目描述可知，flag可能会隐藏在图片下面。将图片移开的方法：
+
+用pdf编辑工具使图片缩小可以看到图片后面的flag
+利用在线工具：https://app.xunjiepdf.com/pdf...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/24/攻防世界misc新手wp（一）/" title="攻防世界-misc-新手wp（一）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/11.jpg" alt="攻防世界-misc-新手wp（一）">
+							</a>
+						</div>
+					</li>											
+			
 			
 					<li>
 						<div class="relate-post-text">
@@ -494,33 +532,6 @@ X老师忘记删除备份文件，他派小宁同学去把备份文件找出来,
 							<a href="/2019/07/18/攻防世界wp（二）/" title="攻防世界-web-新手wp（二）">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/9.jpg" alt="攻防世界-web-新手wp（二）">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/07/18/攻防世界-web-新手wp（二）/" title="攻防世界web新手wp（二）">
-								攻防世界web新手wp（二）			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								七月 18日, 2019				
-							</p>
-							<p class="relate-post-content">
-								攻防世界web新手题4-6题
-webbackup
-X老师忘记删除备份文件，他派小宁同学去把备份文件找出来,一起来帮小宁同学吧！
-
-这道题考察的是备份文件漏洞（Backup-File Artifacts），该漏洞可能存在于编辑器自动备份...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/07/18/攻防世界-web-新手wp（二）/" title="攻防世界web新手wp（二）">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/9.jpg" alt="攻防世界web新手wp（二）">
 							</a>
 						</div>
 					</li>											
