@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      zkctf部分wp | 美豆的博客
+      xss攻击 | 美豆的博客
     
   </title>
   <meta name="author" content="刘宸昕">
@@ -160,7 +160,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《zkctf部分wp》
+			当前文章&nbsp;:&nbsp;《xss攻击》
 		
 	</p>
 
@@ -258,18 +258,6 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
-
-	
-		<div class="layout-toc">
-			<div id="layout-toc">
-				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
-			</div>
-		</div>
-
-		
-		<script src="/plugin/toc/katelog.min.js"></script>
-
-		
 	 
 
 <div class="layout-post">
@@ -277,8 +265,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/05/16/zkctf部分wp/" itemprop="url">
-		zkctf部分wp
+	<a href="/2019/09/03/xss攻击/" itemprop="url">
+		xss攻击
 	</a>
 
 	</div>
@@ -291,9 +279,9 @@
 
 	发布于
 
-	<a href="/2019/05/16/zkctf部分wp/" itemprop="url">
-		<time datetime="2019-05-16T11:26:44.000Z" itemprop="datePublished">
-	  		2019-05-16
+	<a href="/2019/09/03/xss攻击/" itemprop="url">
+		<time datetime="2019-09-03T12:09:32.000Z" itemprop="datePublished">
+	  		2019-09-03
 	  </time>
 	</a>
 	&nbsp;
@@ -309,9 +297,9 @@
 
 	更新于
 
-	<a href="/2019/05/16/zkctf部分wp/" itemprop="url">
-		<time datetime="2019-05-16T11:26:44.000Z" itemprop="dateUpdated">
-	  		2019-06-05
+	<a href="/2019/09/03/xss攻击/" itemprop="url">
+		<time datetime="2019-09-03T12:09:32.000Z" itemprop="dateUpdated">
+	  		2019-09-03
 	  </time>
 	</a> 
 
@@ -322,8 +310,8 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/zkctf/" class=" ">
-			zkctf
+		<a href="/tags/web安全/" class=" ">
+			web安全
 		</a>
 	
 		
@@ -336,25 +324,15 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>zkctf部分题目的wp<br><a id="more"></a></p>
-<h1 id="Web-upload"><a href="#Web-upload" class="headerlink" title="Web upload"></a>Web upload</h1><p>打开题目地址发现是空白<br><img src="https://s2.ax1x.com/2019/05/16/EbtrR0.png" alt="1"><br>查看源代码看到upload.php<br><img src="https://s2.ax1x.com/2019/05/16/EbtcsU.png" alt="2"><br>所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件<br><img src="https://s2.ax1x.com/2019/05/16/EbtszV.png" alt="3"><br>写php一句话木马<br><img src="https://s2.ax1x.com/2019/05/16/EbtRZ4.png" alt="4"><br>上传时用bp抓包<br><img src="https://s2.ax1x.com/2019/05/16/Ebt6MT.png" alt="5"><br>对比上传正常的jpg文件时的请求，把一句话的文件类型改成image/jpeg<br><img src="https://s2.ax1x.com/2019/05/16/EbtgLF.png" alt="6"><br>go一下发现上传成功<br><img src="https://s2.ax1x.com/2019/05/16/Ebtfo9.png" alt="7"><br>接着用菜刀连接<br><img src="https://s2.ax1x.com/2019/05/16/EbtWdJ.png" alt="8"><br>得到flag<br><img src="https://s2.ax1x.com/2019/05/16/Ebt4iR.png" alt="9"></p>
-<h1 id="Web-warmup"><a href="#Web-warmup" class="headerlink" title="Web warmup"></a>Web warmup</h1><p>打开题目地址页面上只有一个haha…查看源代码发现一个index.php<br><img src="https://s2.ax1x.com/2019/05/16/EbttsS.png" alt="10"><br>在url中添上index.php得到一段代码<br><img src="https://s2.ax1x.com/2019/05/16/EbtaZQ.png" alt="11"><br>查阅assert函数：检查一个断言是否为 FALSE，如果 传入的值是字符串，它将会被 assert() 当做 PHP 代码来执行。<br>所以可以令a=highlight_file(‘flag.php’);// 高亮显示flag.php，并注释掉后面的代码（==$b都被注释掉了）<br>阅读代码，当b!=Hello World!时程序结束并输出haha…所以先传入b的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?b=Hello%20word!&amp;a=highlight_file(%27flag.php%27);//</span><br></pre></td></tr></table></figure></p>
-<p>得到flag<br><img src="https://s2.ax1x.com/2019/05/16/EbtYM8.png" alt="12"></p>
-<h1 id="Web-where-is-flag"><a href="#Web-where-is-flag" class="headerlink" title="Web where is flag"></a>Web where is flag</h1><p>因为有中英文按钮，发现可以文件上传<br><img src="https://s2.ax1x.com/2019/05/16/EbtwIs.png" alt="13"><br>用php://filter读取index.php,再用base64解码即可得到flag<br><img src="https://s2.ax1x.com/2019/05/16/EbtNqg.png" alt="14"></p>
-<h1 id="Web-sql-1"><a href="#Web-sql-1" class="headerlink" title="Web sql-1"></a>Web sql-1</h1><p>判断回显位<br>-1’ union select 1,2,3,4 #</p>
-<p>爆数据库<br>-1’ union select database(),2,3,4 #<br>【或：-1’ union select group_concat(schema_name),2,3,4 from information_schema.schemata #】</p>
-<p>爆sql1数据库的数据表<br>-1’ union select  group_concat(table_name),2,3,4 from information_schema.tables where table_schema=’sql1’#</p>
-<p>爆 fl4g 表的列<br>‘ union select group_concat(column_name),2,3,4 from information_schema.columns where table_name=’fl4g’ #</p>
-<p>爆出flag<br>‘ union select *,2,3,4 from fl4g #</p>
-<h1 id="Misc-dog"><a href="#Misc-dog" class="headerlink" title="Misc dog"></a>Misc dog</h1><p>下载的压缩包中含有一个flag.jpg和一个打开需要密码的flag.txt，把图片用记事本格式打开查找secret得到打开txt文件需要的密码，打开文件得到flag</p>
-<h1 id="Misc-real-pass"><a href="#Misc-real-pass" class="headerlink" title="Misc real pass"></a>Misc real pass</h1><p>打开压缩包发现需要密码，尝试暴力破解但是提示该文件被损坏或是未加密文件<br><img src="https://s2.ax1x.com/2019/05/16/EbtBin.png" alt="16"><br>于是猜想可能是伪加密，用WinHex打开<br><img src="https://s2.ax1x.com/2019/05/16/EbtDGq.png" alt="17"><br>发现源文件数据区加密区为09 00，改成00 00再打开就不需要密码，于是拿到flag。</p>
-<h1 id="Misc-hotdog"><a href="#Misc-hotdog" class="headerlink" title="Misc hotdog"></a>Misc hotdog</h1><p>用WinHex打开发现图片中还隐藏了一个flag.zip，将该图片用360压缩打开，得到<br><img src="https://s2.ax1x.com/2019/05/16/Ebtdaj.png" alt="15"><br>打开flag.zip需要密码，密码由颜文字解密得到，解密网站<a href="https://tool.zcmzcm.org/aadecode" target="_blank" rel="noopener">https://tool.zcmzcm.org/aadecode</a><br>输入密码打开flag.txt文件即拿到flag。</p>
-<h1 id="Misc-zkzkzk"><a href="#Misc-zkzkzk" class="headerlink" title="Misc zkzkzk"></a>Misc zkzkzk</h1><p>拼图得flag</p>
-<h1 id="Misc-格式里的秘密"><a href="#Misc-格式里的秘密" class="headerlink" title="Misc 格式里的秘密"></a>Misc 格式里的秘密</h1><p>图片用记事本打开搜索得到flag</p>
+		<a id="more"></a>
+<p><strong>学习报告</strong><br>xss攻击,中文名跨站脚本攻击(Cross Site Scripting)通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常使JavaScript，但实际上也可以包括Java、VBScript、ActiveX、Flash或者甚至是普通的HTML。攻击成功后，攻击者可能得到更高的权限、私密网页内容、会话和cookie等各种内容。</p>
+<blockquote>
+<p>人们经常将跨站脚本攻击（Cross Site Scripting）缩写为CSS，但这会与层叠样式表（Cascading Style Sheets，CSS）的缩写混淆。因此，有人将跨站脚本攻击缩写为XSS。<br>跨站脚本攻击（XSS），是目前最普遍的Web应用安全漏洞。这类漏洞能够使得攻击者嵌入恶意脚本代码到正常用户会访问到的页面中，当正常用户访问该页面时，则可导致嵌入的恶意脚本代码的执行，从而达到恶意攻击用户的目的。<br>攻击者可以使用户在浏览器中执行其预定义的恶意脚本，其导致的危害可想而知，如劫持用户会话，插入恶意内容、重定向用户、使用恶意软件劫持用户浏览器、繁殖XSS蠕虫，甚至破坏网站、修改路由器配置信息等。<br>XSS漏洞可以追溯到上世纪90年代。大量的网站曾遭受XSS漏洞攻击或被发现此类漏洞，如Twitter、Facebook、MySpace、Orkut、新浪微博和百度贴吧。研究表明，最近几年XSS已经超过缓冲区溢出成为最流行的攻击方式，有68%的网站可能遭受此类攻击。根据开放网页应用安全计划（Open Web Application Security Project）公布的2010年统计数据，在Web安全威胁前10位中，XSS排名第2，仅次于代码注入（Injection）。</p>
+</blockquote>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/img/post-cover/3.jpg"></div>
+	<div id="current-post-cover" data-scr="/img/post-cover/13.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -369,12 +347,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/05/06/zk-web-friend/" title="zkctf friend" rel="next">
+			<a href="/2019/08/01/攻防世界web新手wp（四）/" title="攻防世界web新手wp（四）" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -392,101 +366,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">
-								zkctf部分wp2			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 28日, 2019				
-							</p>
-							<p class="relate-post-content">
-								  zkctf部分wp2
-Web guess game查看源代码，发现其实又是代码审计
-1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/4.jpg" alt="zkctf部分wp2">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/06/zk-web-friend/" title="zkctf friend">
-								zkctf friend			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 6日, 2019				
-							</p>
-							<p class="relate-post-content">
-								涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring又是一道代码审计的题，源码index.php：1234567891011121314151617181920212223242526272829303...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/06/zk-web-friend/" title="zkctf friend">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/5.jpg" alt="zkctf friend">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/06/zk-web-代码审计/" title="zkctf 代码审计">
-								zkctf 代码审计			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 6日, 2019				
-							</p>
-							<p class="relate-post-content">
-								涉及知识点：ereg函数存在00截断的漏洞zkctf一道代码审计的题，代码如下：1234567891011121314151617181920212223242526272829303132&lt;?php include(&quot...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/06/zk-web-代码审计/" title="zkctf 代码审计">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/6.jpg" alt="zkctf 代码审计">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/09/03/xss攻击/" title="xss攻击">
-								xss攻击			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 3日, 2019				
-							</p>
-							<p class="relate-post-content">
-								
-学习报告xss攻击,中文名跨站脚本攻击(Cross Site Scripting)通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常使Java...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/09/03/xss攻击/" title="xss攻击">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/13.jpg" alt="xss攻击">
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -636,6 +515,102 @@ Miscgive_you_flag修复二维码扫描得到flag打开gif图会看见丘比龙�
 							<a href="/2019/07/17/攻防世界web新手wp（一）/" title="攻防世界web新手wp（一）">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/8.jpg" alt="攻防世界web新手wp（一）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/06/01/2019ISCC-Misc/" title="2019ISCC Misc">
+								2019ISCC Misc			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								六月 1日, 2019				
+							</p>
+							<p class="relate-post-content">
+								2019ISCC Misc全部wp
+01 隐藏的信息题目给出的文件10126 062 0126 0163 0142 0103 0102 0153 0142 062 065 0154 0111 0121 0157 0113 0111 0...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/06/01/2019ISCC-Misc/" title="2019ISCC Misc">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/2.jpg" alt="2019ISCC Misc">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">
+								zkctf部分wp2			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 28日, 2019				
+							</p>
+							<p class="relate-post-content">
+								  zkctf部分wp2
+Web guess game查看源代码，发现其实又是代码审计
+1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/4.jpg" alt="zkctf部分wp2">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">
+								zkctf部分wp			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 16日, 2019				
+							</p>
+							<p class="relate-post-content">
+								zkctf部分题目的wp
+Web upload打开题目地址发现是空白查看源代码看到upload.php所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件写php一句话木马上传时用bp抓包对比上传正常的...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/3.jpg" alt="zkctf部分wp">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/06/zk-web-friend/" title="zkctf friend">
+								zkctf friend			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 6日, 2019				
+							</p>
+							<p class="relate-post-content">
+								涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring又是一道代码审计的题，源码index.php：1234567891011121314151617181920212223242526272829303...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/06/zk-web-friend/" title="zkctf friend">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/5.jpg" alt="zkctf friend">
 							</a>
 						</div>
 					</li>											
