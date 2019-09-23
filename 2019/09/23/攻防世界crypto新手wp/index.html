@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      zkctf 代码审计 | 美豆的博客
+      攻防世界crypto新手wp | 美豆的博客
     
   </title>
   <meta name="author" content="刘宸昕">
@@ -160,7 +160,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《zkctf 代码审计》
+			当前文章&nbsp;:&nbsp;《攻防世界crypto新手wp》
 		
 	</p>
 
@@ -258,6 +258,18 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
 	 
 
 <div class="layout-post">
@@ -265,8 +277,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/05/06/zk-web-代码审计/" itemprop="url">
-		zkctf 代码审计
+	<a href="/2019/09/23/攻防世界crypto新手wp/" itemprop="url">
+		攻防世界crypto新手wp
 	</a>
 
 	</div>
@@ -279,9 +291,9 @@
 
 	发布于
 
-	<a href="/2019/05/06/zk-web-代码审计/" itemprop="url">
-		<time datetime="2019-05-06T03:09:42.000Z" itemprop="datePublished">
-	  		2019-05-06
+	<a href="/2019/09/23/攻防世界crypto新手wp/" itemprop="url">
+		<time datetime="2019-09-23T15:20:14.000Z" itemprop="datePublished">
+	  		2019-09-23
 	  </time>
 	</a>
 	&nbsp;
@@ -297,9 +309,9 @@
 
 	更新于
 
-	<a href="/2019/05/06/zk-web-代码审计/" itemprop="url">
-		<time datetime="2019-05-06T03:09:42.000Z" itemprop="dateUpdated">
-	  		2019-06-05
+	<a href="/2019/09/23/攻防世界crypto新手wp/" itemprop="url">
+		<time datetime="2019-09-23T15:20:14.000Z" itemprop="dateUpdated">
+	  		2019-09-23
 	  </time>
 	</a> 
 
@@ -310,12 +322,12 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/zkctf/" class=" ">
-			zkctf
+		<a href="/tags/writeup/" class=" ">
+			writeup
 		</a>
 	
-		<a href="/tags/代码审计/" class=" ">
-			代码审计
+		<a href="/tags/攻防世界/" class=" ">
+			攻防世界
 		</a>
 	
 		
@@ -328,19 +340,36 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>涉及知识点：ereg函数存在00截断的漏洞<br><a id="more"></a><br>zkctf一道代码审计的题，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">include(&quot;./flag.php&quot;); </span><br><span class="line">show_source(__FILE__); </span><br><span class="line">error_reporting(0); </span><br><span class="line">$a=$_GET[&apos;a&apos;]; </span><br><span class="line">if(stripos($a,&apos;.&apos;)) </span><br><span class="line">&#123; </span><br><span class="line">    echo &apos;Hahahahahaha&apos;; </span><br><span class="line">    die(); </span><br><span class="line">&#125; </span><br><span class="line">$data = @file_get_contents($a,&apos;r&apos;); </span><br><span class="line">if($data==&quot;1433223!!!&quot;)&#123; </span><br><span class="line">    if (isset ($_GET[&apos;password&apos;])) </span><br><span class="line">    &#123; </span><br><span class="line">        if (ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE)&#123; </span><br><span class="line">            echo &apos;You password must be alphanumeric&apos;; </span><br><span class="line">        &#125;else if (strlen($_GET[&apos;password&apos;]) &lt; 8 &amp;&amp; $_GET[&apos;password&apos;] &gt; 9999999)&#123; </span><br><span class="line">            if (strpos ($_GET[&apos;password&apos;], &apos;-&apos;) !== FALSE) </span><br><span class="line">            &#123; </span><br><span class="line">                die(&apos;Flag: &apos; . $flag); </span><br><span class="line">            &#125;else&#123; </span><br><span class="line">                echo(&apos;- have not been found&apos;); </span><br><span class="line">            &#125; </span><br><span class="line">        &#125;else&#123; </span><br><span class="line">            echo &apos;Invalid password&apos;; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;else&#123; </span><br><span class="line">    echo &apos;Unhappy!&apos;; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
-<p>分析代码得知，要拿到flag需要满足五个条件：<br>1.$data==1433223!!!<br>2.isset ($_GET[‘password’]，password值存在<br>3.ereg (“^[a-zA-Z0-9]+$”, $_GET[‘password’]) === FALSE，password值中含有任意字母或数字。<br>4.strlen($_GET[‘password’]) &lt; 8 &amp;&amp; $_GET[‘password’] &gt; 9999999，password的字符长度小于8，且值大于9999999。<br>5.strpos ($_GET[‘password’], ‘-‘) !== FALSE，在password中存在”-“。</p>
-<p>要满足第一个条件$data==1433223!!!，需要再分析代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a=$_GET[&apos;a&apos;];</span><br><span class="line">$data = @file_get_contents($a,&apos;r&apos;);</span><br></pre></td></tr></table></figure></p>
-<p>可知data的值是通过以只读方式打开名为a的文件，且文件内容为1433223!!!，利用php://input，使a=php://input，该文件内容为post内容，post方式传入1433223!!!即可满足第一个条件。</p>
-<p>接着通过get传参满足第二第三个条件，第四个条件password的长度不能大于8，且值要大于999999，我们可以用科学记数法达到这个条件。<br>最后一个条件在password中存在”-“，看起来很容易达到，但是再结合第三个条件password值中只能含有字母或数字，就知道需要通过别的方法绕过了，通过查询知道ereg函数存在00截断的漏洞，ereg函数在遇到%00会被截断，之后的就不会再判断，所以我们可以把”-“写在%00后面。<br>综上，我们可以把password的值设为1e9%00-，%00算一个字符，一共5个字符，满足长度小于8的条件</p>
-<p>因此get传参：?a=php://input&amp;password=1e9%00-<br>post传参：1433223!!!<br><img src="https://s2.ax1x.com/2019/05/06/EBytyT.png" alt="en"><br>得到flag</p>
-<hr>
-<p>知识点总结：<br>show_source ： 别名highlight_file()  高亮显示一个文件<br>stripos — 查找字符串首次出现的位置（不区分大小写）<br>strpos — 查找字符串首次出现的位置（区分大小写）<br>file_get_contents — 将整个文件读入一个字符串<br>isset — 检测变量是否已设置并且非 NULL<br>ereg — 正则表达式匹配<br>preg_match — 执行匹配正则表达式</p>
-<p>ereg函数有漏洞，可以进行00截断<br>使用科学记数法可以使字符串长度缩短</p>
+		<h1 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h1><blockquote>
+<p>元宵节灯谜是一种古老的传统民间观灯猜谜的习俗。 因为谜语能启迪智慧又饶有兴趣，灯谜增添节日气氛，是一项很有趣的活动。 你也很喜欢这个游戏，这不，今年元宵节，心里有个黑客梦的你，约上你青梅竹马的好伙伴小鱼， 来到了cyberpeace的攻防世界猜谜大会，也想着一展身手。 你们一起来到了小孩子叽叽喳喳吵吵闹闹的地方，你俩抬头一看，上面的大红灯笼上写着一些奇奇怪怪的 字符串，小鱼正纳闷呢，你神秘一笑，我知道这是什么了。</p>
+</blockquote>
+<p>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y3liZXJwZWFjZXtXZWxjb21lX3RvX25ld19Xb3JsZCF9</span><br></pre></td></tr></table></figure>
+<p>直接找在线解密网站进行解密得到flag：cyberpeace{Welcome_to_new_World!}</p>
+<h1 id="Caesar"><a href="#Caesar" class="headerlink" title="Caesar"></a>Caesar</h1><blockquote>
+<p>你成功的解出了来了灯谜，小鱼一脸的意想不到“没想到你懂得这么多啊！” 你心里面有点小得意，“那可不是，论学习我没你成绩好轮别的我知道的可不比你少，走我们去看看下一个” 你们继续走，看到前面也是热热闹闹的，同样的大红灯笼高高挂起，旁边呢好多人叽叽喳喳说个不停。你一看 大灯笼，上面还是一对字符，你正冥思苦想呢，小鱼神秘一笑，对你说道，我知道这个的答案是什么了</p>
+</blockquote>
+<p>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oknqdbqmoq&#123;kag_tmhq_xqmdzqp_omqemd_qzodkbfuaz&#125;</span><br></pre></td></tr></table></figure>
+<p>根据提示知道是凯撒加密，找到在线解密网站，位移为12时得到flag：cyberpeace{you_have_learned_caesar_encryption}</p>
+<h1 id="Morse"><a href="#Morse" class="headerlink" title="Morse"></a>Morse</h1><blockquote>
+<p>小鱼得意的瞟了你一眼，神神气气的拿走了答对谜语的奖励，你心里暗暗较劲 想着下一个谜题一定要比小鱼更快的解出来。不知不觉你们走到了下一个谜题的地方，这个地方有些奇怪。 上面没什么提示信息，只是刻着一些0和1，感觉有着一些奇怪的规律，你觉得有些熟悉，但是就是想不起来 这些01代表着什么意思。一旁的小鱼看你眉头紧锁的样子，扑哧一笑，对你讲“不好意思我又猜到答案了。”(flag格式为cyberpeace{xxxxxxxxxx},均为小写)</p>
+</blockquote>
+<p>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11 111 010 000 0 1010 111 100 0 00 000 000 111 00 10 1 0 010 0 000 1 00 10 110</span><br></pre></td></tr></table></figure></p>
+<p>把1转换成-，0转换成.，得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-- --- .-. ... . -.-. --- -.. . .. ... ... --- .. -. - . .-. . ... - .. -. --.</span><br></pre></td></tr></table></figure></p>
+<p>使用在线解密网站<a href="http://www.zou114.com/mesm/得到" target="_blank" rel="noopener">http://www.zou114.com/mesm/得到</a><br>morsecodeissointeresting，加上格式得到flag：cyberpeace{morsecodeissointeresting}</p>
+<h1 id="Railfence"><a href="#Railfence" class="headerlink" title="Railfence"></a>Railfence</h1><blockquote>
+<p>被小鱼一连将了两军，你心里更加不服气了。两个人一起继续往前走， 一路上杂耍卖艺的很多，但是你俩毫无兴趣，直直的就冲着下一个谜题的地方去了。 到了一看，这个谜面看起来就已经有点像答案了样子了，旁边还画着一张画，是一副农家小院的 图画，上面画着一个农妇在栅栏里面喂5只小鸡，你嘿嘿一笑对着小鱼说这次可是我先找到答案了。</p>
+</blockquote>
+<p>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ccehgyaefnpeoobe&#123;lcirg&#125;epriec_ora_g</span><br></pre></td></tr></table></figure></p>
+<p>栅栏密码分为传统型和WWW型两种，传统型解密网站<br><a href="http://www.zjslove.com/3.decode/zhalan/index.html" target="_blank" rel="noopener">http://www.zjslove.com/3.decode/zhalan/index.html</a><br>，这道题用传统型的方法解发现很奇怪<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5字一栏：cyperrocae&#123;gireeol&#125;eahfocec_gnbip_g</span><br><span class="line">7字一栏：cebgccfe&#125;_en&#123;eohplprgecrayoii_aoreg</span><br></pre></td></tr></table></figure></p>
+<p>所以这道题可能是WWW型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WWW型栅栏密码：</span><br><span class="line">例如字符串：123456789</span><br><span class="line">	key=3</span><br><span class="line">	1----5----9  \\让数字以W型组织，同样是三组，但每组的数量不一定相同</span><br><span class="line">	-2--4-6--8</span><br><span class="line">	--3----7--</span><br><span class="line">	加密密文：159246837</span><br></pre></td></tr></table></figure>
+<p>WWW型解密网站：<a href="http://www.atoolbox.net/Tool.php?Id=777" target="_blank" rel="noopener">http://www.atoolbox.net/Tool.php?Id=777</a><br>，得到flag：cyberpeace{railfence_cipher_gogogo}</p>
 	
 	</div>
 	
-	<div id="current-post-cover" data-scr="/img/post-cover/6.jpg"></div>
+	<div id="current-post-cover" data-scr="/img/post-cover/15.jpg"></div>
 
 	<!-- relate post, comment...-->
 	<div class="investment-container">
@@ -355,12 +384,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/05/06/zk-web-friend/" title="zkctf friend" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）" rel="next">
+			<a href="/2019/09/22/xss练习题/" title="xss练习题" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -378,127 +403,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">
-								zkctf部分wp2			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 28日, 2019				
-							</p>
-							<p class="relate-post-content">
-								  zkctf部分wp2
-Web guess game查看源代码，发现其实又是代码审计
-1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/4.jpg" alt="zkctf部分wp2">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">
-								zkctf部分wp			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 16日, 2019				
-							</p>
-							<p class="relate-post-content">
-								zkctf部分题目的wp
-Web upload打开题目地址发现是空白查看源代码看到upload.php所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件写php一句话木马上传时用bp抓包对比上传正常的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/16/zkctf部分wp/" title="zkctf部分wp">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/3.jpg" alt="zkctf部分wp">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/06/zk-web-friend/" title="zkctf friend">
-								zkctf friend			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 6日, 2019				
-							</p>
-							<p class="relate-post-content">
-								涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring又是一道代码审计的题，源码index.php：1234567891011121314151617181920212223242526272829303...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/06/zk-web-friend/" title="zkctf friend">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/5.jpg" alt="zkctf friend">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">
-								2019ISCC web1 （代码审计）			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 3日, 2019				
-							</p>
-							<p class="relate-post-content">
-								2019ISCC web1题目
-题解拿到题目直接给出源码：
-1234567891011121314151617&lt;?phperror_reporting(0);require &apos;flag.php&apos;;$value...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/1.jpg" alt="2019ISCC web1 （代码审计）">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/09/23/攻防世界crypto新手wp/" title="攻防世界crypto新手wp">
-								攻防世界crypto新手wp			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 23日, 2019				
-							</p>
-							<p class="relate-post-content">
-								base64
-元宵节灯谜是一种古老的传统民间观灯猜谜的习俗。 因为谜语能启迪智慧又饶有兴趣，灯谜增添节日气氛，是一项很有趣的活动。 你也很喜欢这个游戏，这不，今年元宵节，心里有个黑客梦的你，约上你青梅竹马的好伙伴小鱼， 来到了cybe...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/09/23/攻防世界crypto新手wp/" title="攻防世界crypto新手wp">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/15.jpg" alt="攻防世界crypto新手wp">
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -576,6 +480,134 @@ pdf根据题目描述可知，flag可能会隐藏在图片下面。将图片移�
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/21/攻防世界web新手wp（三）/" title="攻防世界web新手wp（三）">
+								攻防世界web新手wp（三）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 21日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界web新手题8-12题
+webxff_referer
+X老师告诉小宁其实xff和referer是可以伪造的。
+
+根据描述信息，知道题目应该与xff和referer相关，进入题目，看到
+于是用brup抓包，在http头加一条 X...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/21/攻防世界web新手wp（三）/" title="攻防世界web新手wp（三）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/10.jpg" alt="攻防世界web新手wp（三）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/18/攻防世界web新手wp（二）/" title="攻防世界web新手wp（二）">
+								攻防世界web新手wp（二）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 18日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界web新手题4-6题
+webbackup
+X老师忘记删除备份文件，他派小宁同学去把备份文件找出来,一起来帮小宁同学吧！
+
+这道题考察的是备份文件漏洞（Backup-File Artifacts），该漏洞可能存在于编辑器自动备份...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/18/攻防世界web新手wp（二）/" title="攻防世界web新手wp（二）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/9.jpg" alt="攻防世界web新手wp（二）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/07/17/攻防世界web新手wp（一）/" title="攻防世界web新手wp（一）">
+								攻防世界web新手wp（一）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								七月 17日, 2019				
+							</p>
+							<p class="relate-post-content">
+								攻防世界web新手题1-3题
+Miscgive_you_flag修复二维码扫描得到flag打开gif图会看见丘比龙数完钞票会展示二维码，使用Stegsolve打开文件选择Frame Browser帧浏览器对动图进行分解,得到含有二维码...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/07/17/攻防世界web新手wp（一）/" title="攻防世界web新手wp（一）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/8.jpg" alt="攻防世界web新手wp（一）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/06/01/2019ISCC-Misc/" title="2019ISCC Misc">
+								2019ISCC Misc			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								六月 1日, 2019				
+							</p>
+							<p class="relate-post-content">
+								2019ISCC Misc全部wp
+01 隐藏的信息题目给出的文件10126 062 0126 0163 0142 0103 0102 0153 0142 062 065 0154 0111 0121 0157 0113 0111 0...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/06/01/2019ISCC-Misc/" title="2019ISCC Misc">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/2.jpg" alt="2019ISCC Misc">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">
+								2019ISCC web1 （代码审计）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								五月 3日, 2019				
+							</p>
+							<p class="relate-post-content">
+								2019ISCC web1题目
+题解拿到题目直接给出源码：
+1234567891011121314151617&lt;?phperror_reporting(0);require &apos;flag.php&apos;;$value...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/05/03/2019ISCC-web1-（代码审计）/" title="2019ISCC web1 （代码审计）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/1.jpg" alt="2019ISCC web1 （代码审计）">
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2019/07/24/php弱类型比较/" title="php弱类型比较">
 								php弱类型比较			
 							</a>
@@ -600,27 +632,24 @@ pdf根据题目描述可知，flag可能会隐藏在图片下面。将图片移�
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/07/21/攻防世界web新手wp（三）/" title="攻防世界web新手wp（三）">
-								攻防世界web新手wp（三）			
+							<a class="relate-post-title" href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">
+								zkctf部分wp2			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								七月 21日, 2019				
+								五月 28日, 2019				
 							</p>
 							<p class="relate-post-content">
-								攻防世界web新手题8-12题
-webxff_referer
-X老师告诉小宁其实xff和referer是可以伪造的。
-
-根据描述信息，知道题目应该与xff和referer相关，进入题目，看到
-于是用brup抓包，在http头加一条 X...
+								  zkctf部分wp2
+Web guess game查看源代码，发现其实又是代码审计
+1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(...
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/2019/07/21/攻防世界web新手wp（三）/" title="攻防世界web新手wp（三）">				
+							<a href="/2019/05/28/zkctf部分wp2/" title="zkctf部分wp2">				
 								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/10.jpg" alt="攻防世界web新手wp（三）">
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/post-cover/4.jpg" alt="zkctf部分wp2">
 							</a>
 						</div>
 					</li>											
