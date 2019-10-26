@@ -82,7 +82,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#weak-auth"><span class="toc-text">weak_auth</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#webshell"><span class="toc-text">webshell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#command-execution"><span class="toc-text">command_execution</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#命令执行漏洞"><span class="toc-text">命令执行漏洞</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#weak-auth"><span class="toc-text">weak_auth</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#webshell"><span class="toc-text">webshell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#command-execution"><span class="toc-text">command_execution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令执行漏洞"><span class="toc-text">命令执行漏洞</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -159,7 +159,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 &amp;&amp; cat /home/flag.txt</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.ax1x.com/2019/08/01/ed95jK.png" alt="13"></p>
 <p>知识点：</p>
-<h6 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h6><p>当应用需要调用一些外部程序去处理内容时，就会用到一些执行系统命令的函数。如PHP中的system，exec，shell_exec等，当用户可以控制命令执行函数中的参数时，就可将恶意系统命令注入到正常命令中，造成命令执行攻击。</p>
+<h3 id="命令执行漏洞"><a href="#命令执行漏洞" class="headerlink" title="命令执行漏洞"></a>命令执行漏洞</h3><p>当应用需要调用一些外部程序去处理内容时，就会用到一些执行系统命令的函数。如PHP中的system，exec，shell_exec等，当用户可以控制命令执行函数中的参数时，就可将恶意系统命令注入到正常命令中，造成命令执行攻击。</p>
 <p>在操作系统中，“&amp;、|、||”都可以作为命令连接符使用，用户通过浏览器提交执行命令，由于服务器端没有针对执行函数做过滤，导致在没有指定绝对路径的情况下就执行命令</p>
 <ul>
 <li>A&amp;&amp;B，表示A命令语句执行成功，然后执行B命令语句</li>
