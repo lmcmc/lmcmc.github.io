@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  
+      <title>zkctf部分wp2 - 美豆的博客</title>
+  
+
+  
+  
+  <meta name="description" content="美豆的博客">
+  <meta name="author" content="美豆">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- load loadjs.js -->
+  <script src="/libs/loadjs/dist/loadjs.min.js"></script>
+
+<link rel="stylesheet" href="/libs/animate.css/animate.min.css">
+  <!-- load lightgallery -->
+<link rel="stylesheet" href="/css/lightgallery.css">
+<link rel="stylesheet" href="/libs/noty/lib/noty.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+    <link rel="stylesheet" href="/css/taurus.css">
+    
+        <link rel="stylesheet" href="/css/scheme-taurus/animations.css">
+    
+
+
+<link rel="stylesheet" href="/.css">
+
+  <!-- load font awesome 5 -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <!-- load mathjax -->
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax//libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- load js-cookie -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/js/social-share.min.js"></script>
+    <script src="/js/theme.js"></script>
+
+  <!-- include cookie.js -->
+  
+  
+
+  <!-- include comment system code -->
+  
+    <script src="/js/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  
+  <link rel="icon" href="/images/logo.png">
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+ 
+
+<header id="header" class="header">
+	<div class="header-title">
+		
+		<div class="header-logo">
+			<a href="/">
+				<img src="/images/logo.svg">
+			</a>
+		</div>
+		<div class="header-text">
+			<h1>
+				<a href="/">美豆的博客</a>
+			</h1>
+			<subtitle>
+				所谓无底深渊，下去，也是前程万里
+			</subtitle>
+		</div>
+		
+	</div>
+	<div id="header-nav">
+		
+
+
+
+<nav id="nav">
+	
+	
+	
+	<div class="nav-item" id="nav-item-toc">
+		
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-guess-game"><span class="toc-number">1.</span> <span class="toc-text">Web guess game</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-easy流量分析"><span class="toc-number">2.</span> <span class="toc-text">Misc easy流量分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-马男波杰克有话说"><span class="toc-number">3.</span> <span class="toc-text">Misc 马男波杰克有话说</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-what"><span class="toc-number">4.</span> <span class="toc-text">Misc what</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-模糊的图片"><span class="toc-number">5.</span> <span class="toc-text">Misc 模糊的图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-看得到吗？"><span class="toc-number">6.</span> <span class="toc-text">Misc 看得到吗？</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+	</div>
+	
+	<div class="nav-item" id="nav-item-archive">
+		
+				<div class="nav-icon">
+				
+			<a href="/archives/" title="Archivi">
+			<img src="/images/icons/blue-shadow/archive.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-search">
+		
+		<div class="nav-icon">
+		
+			<a href="/search/" title="Cerca">
+			<img src="/images/icons/blue-shadow/search.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-more">
+		<div class="nav-icon">
+				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
+				<img src="/images/icons/blue-shadow/menu.svg" alt>
+				</a>
+		</div>
+		<div class="nav-more-menu">
+				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
+		
+		
+	</div>
+	</div>
+</nav>
+
+	</div>
+</header>
+
+ 
+
+  
+
+
+
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div style="flex: 1;">
+      <style>
+    body {
+        background-color: white;
+    }
+</style>
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+    
+    
+        
+    
+
+    
+        
+    
+
+
+
+
+
+
+
+
+
+<article class="article" id="/2019/05/28/zkctf部分wp2/" data-name="zkctf部分wp2" data-version>
+
+    <!-- Title -->
+    <div class="article-header">
+         
+         <h1 class="article-title">
+            <a href="/2019/05/28/zkctf部分wp2/">
+                Zkctf部分wp2
+            </a>
+        </h1>
+        <!-- TODO: support nested categories,display them nicely -->
+        
+    </div>
+    
+    <!-- Date and Author -->
+    <div class="article-meta">
+    <ul>
+            <li><i class="fa fa-calendar"></i> 2019-05-28</li>
+            
+            <li><i class="fa fa-user"></i> 美豆</li>
+            <li><i class="fas fa-copyright"></i>
+            
+                
+                
+            
+            
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+            
+            </li>
+    </ul>
+    
+<div class="tags">
+	
+		
+			<label class="tag-1"><a href="/tags/zkctf/">Zkctf</a></label>
+		
+	
+	</div>
+
+    </div>
+    <div class="article-cards">
+        <!-- Author Card -->
+        <!---
+        <div class='Card-article Card-author'>
+            <div class='card-title'>
+                <h3></h3>
+            </div>
+            <div class='card-content'>
+                    <div class="author-meta">
+                            <div class='author-figure'>
+                                <img src="" alt="">
+                            </div>
+                            <div class='author-name'>
+                                美豆
+                            </div>
+                        </div>
+                        <div class="author-ai">
+                            <div class='author-intro'>
+                                <!-- TODO: auto generating author description -->
+                                <!-- 
+                            </div>
+                            <div class="author-articles">
+                                <!-- TODO: auto generating author articles -->
+                                <!-- <ul>
+                                    <li>Article 1</li>
+                                    <li>Article 2</li>
+                                    <li>Article 3</li>
+                                    <li>Article 4</li>
+                                    <li>Article 5</li>
+                                    <li>Article 6</li>
+                                </ul>
+                            </div>
+                        </div>
+            </div>
+            
+        </div> -->
+
+        <!-- Visit Card -->
+        <!-- <div class="Card-article Card-visit"> -->
+            <!-- <div class="card-title">
+  <h3>Post Visit</h3>
+</div>
+<div class="card-chart">
+  <div id="chart-post-visit"></div>
+</div> -->
+        <!-- </div> -->
+        
+        <!-- Auto Excerpt Card -->
+        <!-- <div class="Card-article Card-excerpt">
+            <div class="card-title">
+  <h3>Quick Read</h3>
+</div>
+<div class="card-text">
+  <p id="text-post-summary">zkctf部分wp2
+Web guess game查看源代码，发现其实又是代码审计
+1234567891011121314151617181920212223242526272829&lt;!-- error_reporting(0);$flag = &quot;***********************&quot;;$invest = $_GET[&apos;invest&apos;];$rand = rand(2,50);  $len = strlen(trim($_GET[&apos;invest&apos;]));foreach ($_GET as $key =&gt;...</p>
+</div>
+        </div> -->
+    </div>
+    
+    <!-- Gallery -->
+    <!-- TODO: add a slider to gallery -->
+    
+
+    <!-- Content -->
+    <!-- TODO: support table of content -->
+    <div class="article-toc" id="article-toc">
+    
+        
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-guess-game"><span class="toc-number">1.</span> <span class="toc-text">Web guess game</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-easy流量分析"><span class="toc-number">2.</span> <span class="toc-text">Misc easy流量分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-马男波杰克有话说"><span class="toc-number">3.</span> <span class="toc-text">Misc 马男波杰克有话说</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-what"><span class="toc-number">4.</span> <span class="toc-text">Misc what</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-模糊的图片"><span class="toc-number">5.</span> <span class="toc-text">Misc 模糊的图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-看得到吗？"><span class="toc-number">6.</span> <span class="toc-text">Misc 看得到吗？</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+    </div>
+    <div class="article-content">
+    <p>  zkctf部分wp2<br><a id="more"></a></p>
+<h1 id="Web-guess-game"><a href="#Web-guess-game" class="headerlink" title="Web guess game"></a>Web guess game</h1><p>查看源代码，发现其实又是代码审计</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- </span><br><span class="line">error_reporting(0);</span><br><span class="line">$flag = &quot;***********************&quot;;</span><br><span class="line"></span><br><span class="line">$invest = $_GET[&apos;invest&apos;];</span><br><span class="line">$rand = rand(2,50);  </span><br><span class="line"></span><br><span class="line">$len = strlen(trim($_GET[&apos;invest&apos;]));</span><br><span class="line"></span><br><span class="line">foreach ($_GET as $key =&gt; $value) &#123;</span><br><span class="line">    if(!is_numeric($value)||$value == &apos;0&apos;)&#123;</span><br><span class="line">        die(&apos;no no no!&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$money = number_format($invest*$rand);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$money = intval(str_replace(&apos;,&apos;,&apos;&apos;,$money));</span><br><span class="line"></span><br><span class="line">$guess = intval($_GET[&apos;guess&apos;]);</span><br><span class="line"></span><br><span class="line">if ($guess == $money &amp;&amp; strlen($money)===$len) &#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    echo &quot;这次的倍率是&quot;.$rand.&quot;，所以您中了&quot;.$money.&quot;元钱.&quot;;</span><br><span class="line">     echo &quot;&lt;br&gt;但是您的预期金额是&quot;.$_GET[&apos;guess&apos;].&quot;，没猜对，2333&quot;;</span><br><span class="line">&#125;</span><br><span class="line"> --</span><br></pre></td></tr></table></figure>
+<p>了解到rand函数作用为产生一个随机整数，在本题中产生2-50之间的随机数，要得到flag需要使guess的值等于money（即$invest*$rand）的值，并且money长度要与invest的长度相等。那我们可以直接直接bp爆破，猜一个guess，固定invest和guess的值，多次爆破，如果次数达到一定的上限一定会出现猜对倍数的情况，这样的话就会输出flag.</p>
+<p><img src="https://s2.ax1x.com/2019/05/28/VmL2vV.png" alt="1"><br>得到flag的前半段</p>
+<p><img src="https://s2.ax1x.com/2019/05/28/VmLgg0.png" alt="2"><br>同样的方法，可以得到flag的后半段</p>
+<hr>
+<p>本题知识点总结：</p>
+<p><strong>trim — 去除字符串首尾处的空白字符（或者其他字符）</strong></p>
+<p><strong>is_numeric — 检测变量是否为数字或数字字符串</strong></p>
+<p><strong>number_format — 以千位分隔符方式格式化一个数字</strong></p>
+<p>格式：<br>number_format ( float $number , int $decimals = 0 , string $dec_point = “.” , string $thousands_sep = “,” ) </p>
+<blockquote>
+<p>本函数可以接受1个、2个或者4个参数（注意：不能是3个）。<br>number：<br>你要格式化的数字<br>decimals：<br>要保留的小数位数<br>dec_point：<br>指定小数点显示的字符<br>thousands_sep：<br>指定千位分隔符显示的字符   </p>
+</blockquote>
+<hr>
+<h1 id="Misc-easy流量分析"><a href="#Misc-easy流量分析" class="headerlink" title="Misc easy流量分析"></a>Misc easy流量分析</h1><p>下载流量包用Wireshark打开，发现部分TCP流长度异常，追踪TCP流发现flag<br><img src="https://s2.ax1x.com/2019/05/28/VmLo59.png" alt="3"></p>
+<h1 id="Misc-马男波杰克有话说"><a href="#Misc-马男波杰克有话说" class="headerlink" title="Misc 马男波杰克有话说"></a>Misc 马男波杰克有话说</h1><p>下载得到一个名字为atool.png的图片，什么线索也没有得到，问了同学后知道这是一个atool解密，解密后得到flag。解密网址<a href="http://www.atool9.com/steganography.php" target="_blank" rel="noopener">http://www.atool9.com/steganography.php</a><br><img src="https://s2.ax1x.com/2019/05/28/VmLWuT.png" alt="4"></p>
+<h1 id="Misc-what"><a href="#Misc-what" class="headerlink" title="Misc what"></a>Misc what</h1><p>用十六进制打开what发现末尾处PK，判定是rar文件，将文件头改成50 4B 03 04，再打开what压缩包，得到zyr文件，再用WinHex打开发现是PNG图片，用图片打开得到flag</p>
+<h1 id="Misc-模糊的图片"><a href="#Misc-模糊的图片" class="headerlink" title="Misc 模糊的图片"></a>Misc 模糊的图片</h1><p>这个题照着网上搜到的wp做的<br><img src="https://s2.ax1x.com/2019/05/28/VmLfDU.png" alt="5"><br>这一道lsb隐写题，用StegSolve进行分析，发现在red plane 0这里是纯黑的，<br><img src="https://s2.ax1x.com/2019/05/28/VmLIUJ.png" alt="6"><br>说明这里什么也没有，正常的图片都不会是这样子的，其它通道也都显示正常。<br>那我们要从其他的通道比如：blue、alpha、green中找些到信息。整张图片看起来是毫无规则的像素点，那一定想把真正的信息隐藏起来，再用一些毫无规则的像素点干扰我们。我们如果想得到其中的信息，就要去掉这些干扰点。但是到底去掉哪些呢。经过前面的步骤我们知道了信息可能隐藏在plane 0中，所以我们要先把各个通道的plane 0提取出来。Red plane 0因为是空信息，可以不用提取了。我们提取出（File-&gt;Save as）Green plane 0、Alpha plane 0、Blue plane 0，把他们各另存为一张图。然后各个图进行比对（Analyse-&gt;image Combiner），最后发现Alpha plane 0 和Green plane 0 异或运算下的图出现了flag。<br><img src="https://s2.ax1x.com/2019/05/28/VmLhbF.png" alt="7"></p>
+<h1 id="Misc-看得到吗？"><a href="#Misc-看得到吗？" class="headerlink" title="Misc 看得到吗？"></a>Misc 看得到吗？</h1><p>打开图片，观察到图片的宽和高差距太大，十六进制打开，修改图片的宽高<br><img src="https://s2.ax1x.com/2019/05/28/VmL5E4.png" alt="8"><br>打开看到flag<br><img src="https://s2.ax1x.com/2019/05/28/VmLH81.png" alt="9"></p>
+
+    
+    </div>
+    
+    
+        <div class="article-comment" id="article-comment">
+            
+
+<h1>Commento</h1>
+
+  
+    <div id="comment-not-available">
+      Not available
+      <p><strong>For site maintainer: Please provide <code>appId</code> and <code>appKey</code> in your <code>_data/cutie.yml</code> file for <code>valine</code> comment system.</strong></p>
+    </div>
+  
+
+
+        </div>
+        
+</article>
+  </div>
+
+  
+
+<footer id="footer">
+    <div class="footer-copyright">
+        <div>
+            <p> Copyright by <a href>美豆 </a> @ 2019</p>
+            <p>Designed by: <i class="fas fa-paint-brush"></i> <a href="https://moober.cn">Moober</a> e <i class="fas fa-graduation-cap"></i> <a href="https://qutang.github.io">Qu Tang</a> &bull; Tema: <a href="https://hexo-theme-cutie.qutang.dev">Cutie 2.1.4-Taurus</a> &bull; Powered by <a href="http://hexo.io">Hexo.</a></p>
+        </div>
+    </div>
+    
+    <div class="footer-social">
+        
+    </div>
+</footer>
+
+  <br>
+
+  <div id="footer-nav" class='footer-nav'>
+		
+
+
+
+<nav id="nav">
+	
+	
+	
+	<div class="nav-item" id="nav-item-toc">
+		
+
+
+<div class="toc-container">
+<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-guess-game"><span class="toc-number">1.</span> <span class="toc-text">Web guess game</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-easy流量分析"><span class="toc-number">2.</span> <span class="toc-text">Misc easy流量分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-马男波杰克有话说"><span class="toc-number">3.</span> <span class="toc-text">Misc 马男波杰克有话说</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-what"><span class="toc-number">4.</span> <span class="toc-text">Misc what</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-模糊的图片"><span class="toc-number">5.</span> <span class="toc-text">Misc 模糊的图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc-看得到吗？"><span class="toc-number">6.</span> <span class="toc-text">Misc 看得到吗？</span></a></li></ol>
+</div>
+<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
+    <img src="/images/icons/blue-shadow/toc.svg" alt>
+</div>
+
+	</div>
+	
+	<div class="nav-item" id="nav-item-archive">
+		
+				<div class="nav-icon">
+				
+			<a href="/archives/" title="Archivi">
+			<img src="/images/icons/blue-shadow/archive.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-search">
+		
+		<div class="nav-icon">
+		
+			<a href="/search/" title="Cerca">
+			<img src="/images/icons/blue-shadow/search.svg" alt>
+			</a>
+		</div>
+	</div>
+	<div class="nav-item" id="nav-item-more">
+		<div class="nav-icon">
+				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
+				<img src="/images/icons/blue-shadow/menu.svg" alt>
+				</a>
+		</div>
+		<div class="nav-more-menu">
+				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
+		
+		
+	</div>
+	</div>
+</nav>
+
+	</div>
+
+  
+
+
+
+    
+
+
+
+
+
+
+
+    <script src="/js/lightgallery.min.js"></script>
+<script src="/js/lg-zoom.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#lightgallery").lightGallery(); 
+        $(".article-content img").each(function(){
+            console.log($(this).attr('src'))
+            $(this).attr('data-src', $(this).attr('src')).lightGallery({
+                selector: 'this'
+            })
+        });
+    });
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  
+  // update cookie if this page is opened (directly)
+  loadjs(['/libs/jshashes/hashes.min.js', '/libs/js-cookie/src/js.cookie.js', '/js/post.v2.js'], 'post-version');
+  loadjs.ready('post-version', function(){
+    
+    new Postv2('hashit_f0a98799f00a39e5cac311bb6a44a7e4ad64de07a1b6c0545a18d9a350885d8a').update('hashit_2e5ae8ce1166cb2c91fa11f81e9d0db2f6356899c07b657b9b832d976e20f083', function(){});
+  });
+  
+</script>
+
+
+
+<!-- <script src="/js/post.js"></script> -->
+
+<script src="/js/headroom.min.js"></script>
+
+<script data-no-instant type="text/javascript">
+
+initHeadroom();
+
+changeLayoutOnTouchScreen();
+
+// 
+// var post = new Post('', '');
+// post.getCommentCount(window.location.pathname, function(count){
+//     $('#article-comment-count').text(count);
+// });
+// post.addVisitRecord(window.location.pathname, userip);
+// post.getVisitCount(window.location.pathname, function(count){
+//     $('#article-visit-count').text(count);
+// });
+
+// 
+</script>
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
