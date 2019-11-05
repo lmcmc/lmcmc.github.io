@@ -1,139 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="美豆的博客">
-    <meta name="keyword" content>
-    <link rel="shortcut icon" href="/img/favicon.ico">
+  <meta charset="utf-8">
+  
+  <title>zkctf 代码审计 | 美豆的博客</title>
 
-    <title>
-        
-        zkctf 代码审计 - undefined
-        
-    </title>
+  <!-- keywords -->
+  
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/aircloud.css">
-    <link rel="stylesheet" href="/css/gitment.css">
-    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
-    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="涉及知识点：ereg函数存在00截断的漏洞">
+<meta name="keywords" content="代码审计,zkctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zkctf 代码审计">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/zk-web-代码审计/index.html">
+<meta property="og:site_name" content="美豆的博客">
+<meta property="og:description" content="涉及知识点：ereg函数存在00截断的漏洞">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EBytyT.png">
+<meta property="og:updated_time" content="2019-06-05T12:58:24.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zkctf 代码审计">
+<meta name="twitter:description" content="涉及知识点：ereg函数存在00截断的漏洞">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/06/EBytyT.png">
+  
+    <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://lmcmc.github.io/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
 
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7S69DnEEH3PVK38zUzHnIRj5-gzGzoHsz", "hbIfv1jdAgFoNluKfAFAnpjt");</script>
+<script src="/js/Counter.js"></script>
+  
+  
+</head></html>
 <body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			
+		</a>
 
-<div class="site-nav-toggle" id="site-nav-toggle">
-    <button>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-    </button>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">美豆</a></h1>
+		  
+		</hgroup>
+
+		
+		<p class="header-subtitle">所谓无底深渊，下去，也是前程万里</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web安全/" style="font-size: 10px;">web安全</a> <a href="/tags/writeup/" style="font-size: 20px;">writeup</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a> <a href="/tags/zkctf/" style="font-size: 16px;">zkctf</a> <a href="/tags/代码审计/" style="font-size: 14px;">代码审计</a> <a href="/tags/攻防世界/" style="font-size: 18px;">攻防世界</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">美豆</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">美豆</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">所谓无底深渊，下去，也是前程万里</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-zk-web-代码审计" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/05/06/zk-web-代码审计/" class="article-date">
+  	<time datetime="2019-05-06T03:09:42.000Z" itemprop="datePublished">2019-05-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      zkctf 代码审计
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zkctf/">zkctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+	</div>
+
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2019/05/06/zk-web-代码审计/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="zkctf 代码审计">
+         &nbsp;
+        view
+    </span>
 </div>
 
-<div class="index-about">
-    <i> 所谓无底深渊，下去，也是前程万里 </i>
-</div>
-
-<div class="index-container">
+        
+        <div class="clearfix"></div>
+      </div>
+      
     
-    <div class="index-left">
-        
-<div class="nav" id="nav">
-    <div class="avatar-name">
-        <div class="avatar radius">
-            <img src="/img/lmc.jpg">
-        </div>
-        <div class="name">
-            <i>美豆</i>
-        </div>
-    </div>
-    <div class="contents" id="nav-content">
-        <ul>
-            <li>
-                <a href="/">
-                    <i class="iconfont icon-shouye1"></i>
-                    <span>主页</span>
-                </a>
-            </li>
-            <li>
-                <a href="/tags">
-                    <i class="iconfont icon-biaoqian1"></i>
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="/archives">
-                    <i class="iconfont icon-guidang2"></i>
-                    <span>存档</span>
-                </a>
-            </li>
-            <li>
-                <a href="/about/">
-                    <i class="iconfont icon-guanyu2"></i>
-                    <span>关于</span>
-                </a>
-            </li>
-            
-        </ul>
-    </div>
-    
-        <div id="toc" class="toc-article">
-    
-</div>
-    
-</div>
-
-
-<div class="search-field" id="search-field">
-    <div class="search-container">
-        <div class="search-input">
-            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
-            <input id="search-input">
-            <span id="begin-search">搜索</span>
-        </div>
-        <div class="search-result-container" id="search-result-container">
-
-        </div>
-    </div>
-</div>
-
-        <div class="index-about-mobile">
-            <i> 所谓无底深渊，下去，也是前程万里 </i>
-        </div>
-    </div>
-    
-    <div class="index-middle">
-        <!-- Main Content -->
-        
-
-
-<div class="post-container">
-    <div class="post-title">
-        zkctf 代码审计
-    </div>
-
-    <div class="post-meta">
-        <span class="attr">发布于：<span>2019-05-06 11:09:42</span></span>
-        
-        <span class="attr">标签：/
-        
-        <a class="tag" href="/tags/#代码审计" title="代码审计">代码审计</a>
-        <span>/</span>
-        
-        <a class="tag" href="/tags/#zkctf" title="zkctf">zkctf</a>
-        <span>/</span>
-        
-        
-        </span>
-        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
-</span>
-
-    </div>
-    <div class="post-content ">
+    <div class="article-entry" itemprop="articleBody">
+      
         <p>涉及知识点：ereg函数存在00截断的漏洞<br><a id="more"></a><br>zkctf一道代码审计的题，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">include(&quot;./flag.php&quot;); </span><br><span class="line">show_source(__FILE__); </span><br><span class="line">error_reporting(0); </span><br><span class="line">$a=$_GET[&apos;a&apos;]; </span><br><span class="line">if(stripos($a,&apos;.&apos;)) </span><br><span class="line">&#123; </span><br><span class="line">    echo &apos;Hahahahahaha&apos;; </span><br><span class="line">    die(); </span><br><span class="line">&#125; </span><br><span class="line">$data = @file_get_contents($a,&apos;r&apos;); </span><br><span class="line">if($data==&quot;1433223!!!&quot;)&#123; </span><br><span class="line">    if (isset ($_GET[&apos;password&apos;])) </span><br><span class="line">    &#123; </span><br><span class="line">        if (ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE)&#123; </span><br><span class="line">            echo &apos;You password must be alphanumeric&apos;; </span><br><span class="line">        &#125;else if (strlen($_GET[&apos;password&apos;]) &lt; 8 &amp;&amp; $_GET[&apos;password&apos;] &gt; 9999999)&#123; </span><br><span class="line">            if (strpos ($_GET[&apos;password&apos;], &apos;-&apos;) !== FALSE) </span><br><span class="line">            &#123; </span><br><span class="line">                die(&apos;Flag: &apos; . $flag); </span><br><span class="line">            &#125;else&#123; </span><br><span class="line">                echo(&apos;- have not been found&apos;); </span><br><span class="line">            &#125; </span><br><span class="line">        &#125;else&#123; </span><br><span class="line">            echo &apos;Invalid password&apos;; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;else&#123; </span><br><span class="line">    echo &apos;Unhappy!&apos;; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
 <p>分析代码得知，要拿到flag需要满足五个条件：<br>1.$data==1433223!!!<br>2.isset ($_GET[‘password’]，password值存在<br>3.ereg (“^[a-zA-Z0-9]+$”, $_GET[‘password’]) === FALSE，password值中含有任意字母或数字。<br>4.strlen($_GET[‘password’]) &lt; 8 &amp;&amp; $_GET[‘password’] &gt; 9999999，password的字符长度小于8，且值大于9999999。<br>5.strpos ($_GET[‘password’], ‘-‘) !== FALSE，在password中存在”-“。</p>
 <p>要满足第一个条件$data==1433223!!!，需要再分析代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a=$_GET[&apos;a&apos;];</span><br><span class="line">$data = @file_get_contents($a,&apos;r&apos;);</span><br></pre></td></tr></table></figure></p>
@@ -144,63 +236,114 @@
 <p>知识点总结：<br>show_source ： 别名highlight_file()  高亮显示一个文件<br>stripos — 查找字符串首次出现的位置（不区分大小写）<br>strpos — 查找字符串首次出现的位置（区分大小写）<br>file_get_contents — 将整个文件读入一个字符串<br>isset — 检测变量是否已设置并且非 NULL<br>ereg — 正则表达式匹配<br>preg_match — 执行匹配正则表达式</p>
 <p>ereg函数有漏洞，可以进行00截断<br>使用科学记数法可以使字符串长度缩短</p>
 
-        
-        <br>
-        <div id="comment-container">
-        </div>
-        <div id="disqus_thread"></div>
-
-        <div id="lv-container">
-        </div>
-
+      
     </div>
-</div>
-
-    </div>
-</div>
-
-
-<footer class="footer">
-    <ul class="list-inline text-center">
-        
-        
-
-        
-
-        
-
-        
-
-        
-
-    </ul>
     
-    <p>
-        <span id="busuanzi_container_site_pv">
-            <span id="busuanzi_value_site_pv"></span>PV
-        </span>
-        <span id="busuanzi_container_site_uv">
-            <span id="busuanzi_value_site_uv"></span>UV
-        </span>
-        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/06/zk-web-friend/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          zkctf friend
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/03/2019ISCC-web1-（代码审计）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2019ISCC web1 （代码审计）</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="zk-web-代码审计" data-title="zkctf 代码审计" data-url="http://yoursite.com/2019/05/06/zk-web-代码审计/" data-images="https://lmcmc.github.io/img/lmc.jpg" data-content="zkctf 代码审计">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 美豆
+      </div>
+        <div class="footer-right">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+        </div>
+    </div>
+  </div>
 </footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-
-
-
-</body>
 
 <script>
-    // We expose some of the variables needed by the front end
-    window.hexo_search_path = ""
-    window.hexo_root = "/"
-    window.isPost = true
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
 </script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="/js/main.js"></script>
 
 
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
 
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
 </html>

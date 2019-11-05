@@ -1,139 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="美豆的博客">
-    <meta name="keyword" content>
-    <link rel="shortcut icon" href="/img/favicon.ico">
+  <meta charset="utf-8">
+  
+  <title>zkctf friend | 美豆的博客</title>
 
-    <title>
-        
-        zkctf friend - undefined
-        
-    </title>
+  <!-- keywords -->
+  
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/aircloud.css">
-    <link rel="stylesheet" href="/css/gitment.css">
-    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
-    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
-    <!-- ga & ba script hoook -->
-    <script></script>
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring">
+<meta name="keywords" content="代码审计,zkctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zkctf friend">
+<meta property="og:url" content="http://yoursite.com/2019/05/06/zk-web-friend/index.html">
+<meta property="og:site_name" content="美豆的博客">
+<meta property="og:description" content="涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgPED.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgF4H.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgiUe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDcxjx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDcvg1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDgpDK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDg9HO.png">
+<meta property="og:updated_time" content="2019-06-05T12:58:16.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zkctf friend">
+<meta name="twitter:description" content="涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/06/EDgPED.png">
+  
+    <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://lmcmc.github.io/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
 
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("7S69DnEEH3PVK38zUzHnIRj5-gzGzoHsz", "hbIfv1jdAgFoNluKfAFAnpjt");</script>
+<script src="/js/Counter.js"></script>
+  
+  
+</head></html>
 <body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			
+		</a>
 
-<div class="site-nav-toggle" id="site-nav-toggle">
-    <button>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-    </button>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">美豆</a></h1>
+		  
+		</hgroup>
+
+		
+		<p class="header-subtitle">所谓无底深渊，下去，也是前程万里</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/web安全/" style="font-size: 10px;">web安全</a> <a href="/tags/writeup/" style="font-size: 20px;">writeup</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a> <a href="/tags/zkctf/" style="font-size: 16px;">zkctf</a> <a href="/tags/代码审计/" style="font-size: 14px;">代码审计</a> <a href="/tags/攻防世界/" style="font-size: 18px;">攻防世界</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">美豆</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">美豆</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">所谓无底深渊，下去，也是前程万里</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-zk-web-friend" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/05/06/zk-web-friend/" class="article-date">
+  	<time datetime="2019-05-06T05:46:20.000Z" itemprop="datePublished">2019-05-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      zkctf friend
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zkctf/">zkctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码审计/">代码审计</a></li></ul>
+	</div>
+
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2019/05/06/zk-web-friend/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="zkctf friend">
+         &nbsp;
+        view
+    </span>
 </div>
 
-<div class="index-about">
-    <i> 所谓无底深渊，下去，也是前程万里 </i>
-</div>
-
-<div class="index-container">
+        
+        <div class="clearfix"></div>
+      </div>
+      
     
-    <div class="index-left">
-        
-<div class="nav" id="nav">
-    <div class="avatar-name">
-        <div class="avatar radius">
-            <img src="/img/lmc.jpg">
-        </div>
-        <div class="name">
-            <i>美豆</i>
-        </div>
-    </div>
-    <div class="contents" id="nav-content">
-        <ul>
-            <li>
-                <a href="/">
-                    <i class="iconfont icon-shouye1"></i>
-                    <span>主页</span>
-                </a>
-            </li>
-            <li>
-                <a href="/tags">
-                    <i class="iconfont icon-biaoqian1"></i>
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
-                <a href="/archives">
-                    <i class="iconfont icon-guidang2"></i>
-                    <span>存档</span>
-                </a>
-            </li>
-            <li>
-                <a href="/about/">
-                    <i class="iconfont icon-guanyu2"></i>
-                    <span>关于</span>
-                </a>
-            </li>
-            
-        </ul>
-    </div>
-    
-        <div id="toc" class="toc-article">
-    
-</div>
-    
-</div>
-
-
-<div class="search-field" id="search-field">
-    <div class="search-container">
-        <div class="search-input">
-            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
-            <input id="search-input">
-            <span id="begin-search">搜索</span>
-        </div>
-        <div class="search-result-container" id="search-result-container">
-
-        </div>
-    </div>
-</div>
-
-        <div class="index-about-mobile">
-            <i> 所谓无底深渊，下去，也是前程万里 </i>
-        </div>
-    </div>
-    
-    <div class="index-middle">
-        <!-- Main Content -->
-        
-
-
-<div class="post-container">
-    <div class="post-title">
-        zkctf friend
-    </div>
-
-    <div class="post-meta">
-        <span class="attr">发布于：<span>2019-05-06 13:46:20</span></span>
-        
-        <span class="attr">标签：/
-        
-        <a class="tag" href="/tags/#代码审计" title="代码审计">代码审计</a>
-        <span>/</span>
-        
-        <a class="tag" href="/tags/#zkctf" title="zkctf">zkctf</a>
-        <span>/</span>
-        
-        
-        </span>
-        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
-</span>
-
-    </div>
-    <div class="post-content ">
+    <div class="article-entry" itemprop="articleBody">
+      
         <p>涉及知识点：序列化、反序列化unserialize()、魔术方法__tostring<br><a id="more"></a><br>又是一道代码审计的题，源码index.php：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">//include(&quot;./class.php&quot;); </span><br><span class="line">header(&quot;content-type:text/html;charset=utf-8&quot;); </span><br><span class="line">error_reporting(0); </span><br><span class="line">if(isset($_GET[&quot;file&quot;]))&#123; </span><br><span class="line">    $file = $_GET[&quot;file&quot;]; </span><br><span class="line">    if(isset($_GET[&quot;password&quot;]))&#123; </span><br><span class="line">        $password = $_GET[&quot;password&quot;]; </span><br><span class="line">        if(preg_match(&quot;/flag/&quot;,$file))&#123;  </span><br><span class="line">            echo &quot;不能现在就给你flag哦&quot;; </span><br><span class="line">            exit();   </span><br><span class="line">        &#125;else&#123;   </span><br><span class="line">            require_once($file); </span><br><span class="line">            highlight_file(&quot;$file&quot;); </span><br><span class="line">            $password = unserialize($password);  </span><br><span class="line">            echo $password; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;else&#123; </span><br><span class="line">        echo &quot;需要密码的！&lt;br&gt;&quot;; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;else&#123; </span><br><span class="line">    highlight_file(&apos;./index.php&apos;); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">if(preg_match(&quot;/flag/&quot;,$file))&#123;  </span><br><span class="line">    echo &quot;不能现在就给你flag哦&quot;; </span><br><span class="line">    exit();   </span><br><span class="line">&#125;else&#123;   </span><br><span class="line">    include($file);  </span><br><span class="line">    $password = unserialize($password);  </span><br><span class="line">    echo $password; </span><br><span class="line">&#125; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
 <p>看第一行代码，发现有一个class.php文件，但访问发现不能直接访问，但可以用php://filter将这个php文件中的代码以base64的形式输出在页面上<br><img src="https://s2.ax1x.com/2019/05/06/EDgPED.png" alt="1"><br>通过base64解码，得到class.php<br><img src="https://s2.ax1x.com/2019/05/06/EDgF4H.png" alt="2"><br>class.php代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- hello friend! --&gt;</span><br><span class="line">&lt;?php  </span><br><span class="line">class Flag&#123;//flag_good.php  </span><br><span class="line">    public $file;  </span><br><span class="line">    public function __tostring()&#123;  </span><br><span class="line">        if(isset($this-&gt;file))&#123;  </span><br><span class="line">            echo file_get_contents($this-&gt;file); </span><br><span class="line">			echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">		return (&quot;good&lt;br&gt;&quot;);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
@@ -141,63 +239,114 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=class.php&amp;password=O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:13:&quot;flag_good.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.ax1x.com/2019/05/06/EDgpDK.png" alt="6"><br>查看源代码即可拿到flag<br><img src="https://s2.ax1x.com/2019/05/06/EDg9HO.png" alt="7"></p>
 
-        
-        <br>
-        <div id="comment-container">
-        </div>
-        <div id="disqus_thread"></div>
-
-        <div id="lv-container">
-        </div>
-
+      
     </div>
-</div>
-
-    </div>
-</div>
-
-
-<footer class="footer">
-    <ul class="list-inline text-center">
-        
-        
-
-        
-
-        
-
-        
-
-        
-
-    </ul>
     
-    <p>
-        <span id="busuanzi_container_site_pv">
-            <span id="busuanzi_value_site_pv"></span>PV
-        </span>
-        <span id="busuanzi_container_site_uv">
-            <span id="busuanzi_value_site_uv"></span>UV
-        </span>
-        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/16/zkctf部分wp/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          zkctf部分wp
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/06/zk-web-代码审计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">zkctf 代码审计</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="zk-web-friend" data-title="zkctf friend" data-url="http://yoursite.com/2019/05/06/zk-web-friend/" data-images="https://lmcmc.github.io/img/lmc.jpg" data-content="zkctf friend">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 美豆
+      </div>
+        <div class="footer-right">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+        </div>
+    </div>
+  </div>
 </footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-
-
-
-</body>
 
 <script>
-    // We expose some of the variables needed by the front end
-    window.hexo_search_path = ""
-    window.hexo_root = "/"
-    window.isPost = true
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
 </script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="/js/main.js"></script>
 
 
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
 
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
 </html>
