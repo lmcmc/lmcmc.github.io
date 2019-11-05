@@ -9,19 +9,19 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="https://xss.haozi.me/#/0x04 习题答案解析： 0x00题目：123function render (input) &amp;#123;  return &amp;apos;&amp;lt;div&amp;gt;&amp;apos; + input + &amp;apos;&amp;lt;/div&amp;gt;&amp;apos;&amp;#125; payload：1&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt; 0x">
+  <meta name="description" content="xss">
 <meta name="keywords" content="writeup,xss">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xss练习题">
 <meta property="og:url" content="http://yoursite.com/2019/09/22/xss练习题/index.html">
 <meta property="og:site_name" content="美豆的博客">
-<meta property="og:description" content="https://xss.haozi.me/#/0x04 习题答案解析： 0x00题目：123function render (input) &amp;#123;  return &amp;apos;&amp;lt;div&amp;gt;&amp;apos; + input + &amp;apos;&amp;lt;/div&amp;gt;&amp;apos;&amp;#125; payload：1&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt; 0x">
+<meta property="og:description" content="xss">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://note.youdao.com/favicon.ico">
-<meta property="og:updated_time" content="2019-09-22T11:54:42.216Z">
+<meta property="og:updated_time" content="2019-11-05T14:20:30.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xss练习题">
-<meta name="twitter:description" content="https://xss.haozi.me/#/0x04 习题答案解析： 0x00题目：123function render (input) &amp;#123;  return &amp;apos;&amp;lt;div&amp;gt;&amp;apos; + input + &amp;apos;&amp;lt;/div&amp;gt;&amp;apos;&amp;#125; payload：1&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt; 0x">
+<meta name="twitter:description" content="xss">
 <meta name="twitter:image" content="https://note.youdao.com/favicon.ico">
   
     <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
@@ -226,7 +226,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://xss.haozi.me/#/0x04" target="_blank" rel="noopener">https://xss.haozi.me/#/0x04</a> 习题答案解析：</p>
+        <p>xss</p>
+<a id="more"></a>
+<p><a href="https://xss.haozi.me/#/0x04" target="_blank" rel="noopener">https://xss.haozi.me/#/0x04</a> 习题答案解析：</p>
 <h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;div&gt;&apos; + input + &apos;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="payload："><a href="#payload：" class="headerlink" title="payload："></a>payload：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(1);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h3><h5 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;textarea&gt;&apos; + input + &apos;&lt;/textarea&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

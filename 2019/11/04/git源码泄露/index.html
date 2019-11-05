@@ -9,20 +9,20 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git的简介Git是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。是为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 Git具有以下特点：  开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。（也是分布式相比于集中式的最大区别） 公共服务器压力和数据量都不会太大。 速度快、灵活。 任意两个">
+  <meta name="description" content="git源码泄露">
 <meta name="keywords" content="web安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git源码泄露">
 <meta property="og:url" content="http://yoursite.com/2019/11/04/git源码泄露/index.html">
 <meta property="og:site_name" content="美豆的博客">
-<meta property="og:description" content="Git的简介Git是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。是为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 Git具有以下特点：  开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。（也是分布式相比于集中式的最大区别） 公共服务器压力和数据量都不会太大。 速度快、灵活。 任意两个">
+<meta property="og:description" content="git源码泄露">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://s2.ax1x.com/2019/11/04/KxOSTx.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/11/04/KxLz01.png">
-<meta property="og:updated_time" content="2019-11-04T12:49:32.656Z">
+<meta property="og:updated_time" content="2019-11-05T14:19:57.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git源码泄露">
-<meta name="twitter:description" content="Git的简介Git是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。是为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。 Git具有以下特点：  开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。（也是分布式相比于集中式的最大区别） 公共服务器压力和数据量都不会太大。 速度快、灵活。 任意两个">
+<meta name="twitter:description" content="git源码泄露">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/11/04/KxOSTx.png">
   
     <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
@@ -227,7 +227,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!--我今天要写一篇博客，学习一个知识，不然对不起我刚刚架势十足的从实验室出去把门口排练小品的人赶走，原本出去玩了一天回来很累的我趴在实验室小憩，结果出去让他们学长过来后我说“你们换个地方练吧，我们都在学习呢”，回来不好意思睡觉了......毕竟我也是在学习呢......-->
+        <p>git源码泄露<br><a id="more"></a><br><!--我今天要写一篇博客，学习一个知识，不然对不起我刚刚架势十足的从实验室出去把门口排练小品的人赶走，原本出去玩了一天回来很累的我趴在实验室小憩，结果出去让他们学长过来后我说“你们换个地方练吧，我们都在学习呢”，回来不好意思睡觉了......毕竟我也是在学习呢......--></p>
 <h1 id="Git的简介"><a href="#Git的简介" class="headerlink" title="Git的简介"></a>Git的简介</h1><p>Git是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。是为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
 <p>Git具有以下特点：</p>
 <ol>
