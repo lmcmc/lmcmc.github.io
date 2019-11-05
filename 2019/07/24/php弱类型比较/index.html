@@ -1,333 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-
-
 <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  
-      <title>php弱类型比较 - 美豆的博客</title>
-  
+    <title>
+        
+        php弱类型比较 - undefined
+        
+    </title>
 
-  
-  
-  <meta name="description" content="美豆的博客">
-  <meta name="author" content="美豆">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- load loadjs.js -->
-  <script src="/libs/loadjs/dist/loadjs.min.js"></script>
-
-<link rel="stylesheet" href="/libs/animate.css/animate.min.css">
-  <!-- load lightgallery -->
-<link rel="stylesheet" href="/css/lightgallery.css">
-<link rel="stylesheet" href="/libs/noty/lib/noty.css">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  
-
-
-
-
-
-
-    <link rel="stylesheet" href="/css/taurus.css">
-    
-        <link rel="stylesheet" href="/css/scheme-taurus/animations.css">
-    
-
-
-<link rel="stylesheet" href="/.css">
-
-  <!-- load font awesome 5 -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-  });
-  </script>
-  <!-- load mathjax -->
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax//libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-  <!-- load js-cookie -->
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    <script src="/js/social-share.min.js"></script>
-    <script src="/js/theme.js"></script>
-
-  <!-- include cookie.js -->
-  
-  
-
-  <!-- include comment system code -->
-  
-    <script src="/js/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  
-  <link rel="icon" href="/images/logo.png">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 </head>
-<body style="display: flex; flex-direction: column; min-height: 100vh;">
 
- 
+<body>
 
-<header id="header" class="header">
-	<div class="header-title">
-		
-		<div class="header-logo">
-			<a href="/">
-				<img src="/images/logo.svg">
-			</a>
-		</div>
-		<div class="header-text">
-			<h1>
-				<a href="/">美豆的博客</a>
-			</h1>
-			<subtitle>
-				所谓无底深渊，下去，也是前程万里
-			</subtitle>
-		</div>
-		
-	</div>
-	<div id="header-nav">
-		
-
-
-
-<nav id="nav">
-	
-	
-	
-	<div class="nav-item" id="nav-item-toc">
-		
-
-
-<div class="toc-container">
-<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型转换问题"><span class="toc-number">1.</span> <span class="toc-text">类型转换问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置函数的参数的松散性"><span class="toc-number">2.</span> <span class="toc-text">内置函数的参数的松散性</span></a></li></ol>
-</div>
-<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
-    <img src="/images/icons/blue-shadow/toc.svg" alt>
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
 </div>
 
-	</div>
-	
-	<div class="nav-item" id="nav-item-archive">
-		
-				<div class="nav-icon">
-				
-			<a href="/archives/" title="Archivi">
-			<img src="/images/icons/blue-shadow/archive.svg" alt>
-			</a>
-		</div>
-	</div>
-	<div class="nav-item" id="nav-item-search">
-		
-		<div class="nav-icon">
-		
-			<a href="/search/" title="Cerca">
-			<img src="/images/icons/blue-shadow/search.svg" alt>
-			</a>
-		</div>
-	</div>
-	<div class="nav-item" id="nav-item-more">
-		<div class="nav-icon">
-				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
-				<img src="/images/icons/blue-shadow/menu.svg" alt>
-				</a>
-		</div>
-		<div class="nav-more-menu">
-				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
-		
-		
-	</div>
-	</div>
-</nav>
+<div class="index-about">
+    <i> 所谓无底深渊，下去，也是前程万里 </i>
+</div>
 
-	</div>
-</header>
-
- 
-
-  
-
-
-
-
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div style="flex: 1;">
-      <style>
-    body {
-        background-color: white;
-    }
-</style>
-
-
-
-
-
-
-
-
+<div class="index-container">
     
-    
-
-
-
-
-
-
-    
-    
+    <div class="index-left">
         
-    
-
-    
-        
-    
-
-
-
-
-
-
-
-
-
-<article class="article" id="/2019/07/24/php弱类型比较/" data-name="php弱类型比较" data-version>
-
-    <!-- Title -->
-    <div class="article-header">
-         
-         <h1 class="article-title">
-            <a href="/2019/07/24/php弱类型比较/">
-                Php弱类型比较
-            </a>
-        </h1>
-        <!-- TODO: support nested categories,display them nicely -->
-        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
     </div>
-    
-    <!-- Date and Author -->
-    <div class="article-meta">
-    <ul>
-            <li><i class="fa fa-calendar"></i> 2019-07-24</li>
-            
-            <li><i class="fa fa-user"></i> 美豆</li>
-            <li><i class="fas fa-copyright"></i>
-            
-                
-                
-            
-            
-                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
-            
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
             </li>
-    </ul>
-    
-<div class="tags">
-	
-		
-			<label class="tag-1"><a href="/tags/php/">Php</a></label>
-		
-	
-	</div>
-
-    </div>
-    <div class="article-cards">
-        <!-- Author Card -->
-        <!---
-        <div class='Card-article Card-author'>
-            <div class='card-title'>
-                <h3></h3>
-            </div>
-            <div class='card-content'>
-                    <div class="author-meta">
-                            <div class='author-figure'>
-                                <img src="" alt="">
-                            </div>
-                            <div class='author-name'>
-                                美豆
-                            </div>
-                        </div>
-                        <div class="author-ai">
-                            <div class='author-intro'>
-                                <!-- TODO: auto generating author description -->
-                                <!-- 
-                            </div>
-                            <div class="author-articles">
-                                <!-- TODO: auto generating author articles -->
-                                <!-- <ul>
-                                    <li>Article 1</li>
-                                    <li>Article 2</li>
-                                    <li>Article 3</li>
-                                    <li>Article 4</li>
-                                    <li>Article 5</li>
-                                    <li>Article 6</li>
-                                </ul>
-                            </div>
-                        </div>
-            </div>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
             
-        </div> -->
-
-        <!-- Visit Card -->
-        <!-- <div class="Card-article Card-visit"> -->
-            <!-- <div class="card-title">
-  <h3>Post Visit</h3>
-</div>
-<div class="card-chart">
-  <div id="chart-post-visit"></div>
-</div> -->
-        <!-- </div> -->
-        
-        <!-- Auto Excerpt Card -->
-        <!-- <div class="Card-article Card-excerpt">
-            <div class="card-title">
-  <h3>Quick Read</h3>
-</div>
-<div class="card-text">
-  <p id="text-post-summary">php是弱类型语言，它含有很多隐式的转换。常见的php弱类型，主要分为类型转换问题和内置函数参数的松散性两类。
-类型转换问题类型转换是无法避免的问题。例如需要将GET或者是POST的参数转换为int类型，或者是两个变量不匹配的时候，PHP会自动地进行变量转换。
-“ == “ 和 “ === “12$a == $b ;$a === $b ;
-=== 在进行比较的时候，会先判断两种字符串的类型是否相等，再比较
-==...</p>
-</div>
-        </div> -->
+        </ul>
     </div>
     
-    <!-- Gallery -->
-    <!-- TODO: add a slider to gallery -->
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型转换问题"><span class="toc-text">类型转换问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#“-“-和-“-“"><span class="toc-text">“ == “ 和 “ === “</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash比较"><span class="toc-text">Hash比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#十六进制转换"><span class="toc-text">十六进制转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类型转换"><span class="toc-text">类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bool类型的true比较"><span class="toc-text">bool类型的true比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#json绕过"><span class="toc-text">json绕过</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#内置函数的参数的松散性"><span class="toc-text">内置函数的参数的松散性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#md5-绕过"><span class="toc-text">md5()绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strcmp-漏洞绕过-php-v-lt-5-3"><span class="toc-text">strcmp()漏洞绕过 php -v &lt; 5.3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#switch"><span class="toc-text">switch()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#in-array"><span class="toc-text">in_array()</span></a></li></ol></li>
+</div>
     
+</div>
 
-    <!-- Content -->
-    <!-- TODO: support table of content -->
-    <div class="article-toc" id="article-toc">
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓无底深渊，下去，也是前程万里 </i>
+        </div>
+    </div>
     
+    <div class="index-middle">
+        <!-- Main Content -->
         
 
 
-<div class="toc-container">
-<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型转换问题"><span class="toc-number">1.</span> <span class="toc-text">类型转换问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置函数的参数的松散性"><span class="toc-number">2.</span> <span class="toc-text">内置函数的参数的松散性</span></a></li></ol>
-</div>
-<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
-    <img src="/images/icons/blue-shadow/toc.svg" alt>
-</div>
+<div class="post-container">
+    <div class="post-title">
+        php弱类型比较
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-07-24 19:37:21</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#php" title="php">php</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
 
     </div>
-    <div class="article-content">
-    <p>php是弱类型语言，它含有很多隐式的转换。常见的php弱类型，主要分为类型转换问题和内置函数参数的松散性两类。</p>
+    <div class="post-content ">
+        <p>php是弱类型语言，它含有很多隐式的转换。常见的php弱类型，主要分为类型转换问题和内置函数参数的松散性两类。</p>
 <h2 id="类型转换问题"><a href="#类型转换问题" class="headerlink" title="类型转换问题"></a>类型转换问题</h2><p>类型转换是无法避免的问题。例如需要将GET或者是POST的参数转换为int类型，或者是两个变量不匹配的时候，PHP会自动地进行变量转换。</p>
 <h4 id="“-“-和-“-“"><a href="#“-“-和-“-“" class="headerlink" title="“ == “ 和 “ === “"></a>“ == “ 和 “ === “</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a == $b ;</span><br><span class="line">$a === $b ;</span><br></pre></td></tr></table></figure>
 <p>=== 在进行比较的时候，会先判断两种字符串的类型是否相等，再比较</p>
@@ -401,172 +205,63 @@
 <hr>
 <p>参考：<br><a href="https://www.secpulse.com/archives/69529.html" target="_blank" rel="noopener">https://www.secpulse.com/archives/69529.html</a><br><a href="https://blog.spoock.com/2016/06/25/weakly-typed-security/" target="_blank" rel="noopener">https://blog.spoock.com/2016/06/25/weakly-typed-security/</a></p>
 
-    
-    </div>
-    
-    
-        <div class="article-comment" id="article-comment">
-            
-
-<h1>Commento</h1>
-
-  
-    <div id="comment-not-available">
-      Not available
-      <p><strong>For site maintainer: Please provide <code>appId</code> and <code>appKey</code> in your <code>_data/cutie.yml</code> file for <code>valine</code> comment system.</strong></p>
-    </div>
-  
-
-
-        </div>
         
-</article>
-  </div>
-
-  
-
-<footer id="footer">
-    <div class="footer-copyright">
-        <div>
-            <p> Copyright by <a href>美豆 </a> @ 2019</p>
-            <p>Designed by: <i class="fas fa-paint-brush"></i> <a href="https://moober.cn">Moober</a> e <i class="fas fa-graduation-cap"></i> <a href="https://qutang.github.io">Qu Tang</a> &bull; Tema: <a href="https://hexo-theme-cutie.qutang.dev">Cutie 2.1.4-Taurus</a> &bull; Powered by <a href="http://hexo.io">Hexo.</a></p>
+        <br>
+        <div id="comment-container">
         </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
     </div>
-    
-    <div class="footer-social">
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
         
-    </div>
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
 </footer>
 
-  <br>
-
-  <div id="footer-nav" class='footer-nav'>
-		
 
 
 
-<nav id="nav">
-	
-	
-	
-	<div class="nav-item" id="nav-item-toc">
-		
-
-
-<div class="toc-container">
-<i class="far fa-times-circle" id="toc-close" onclick="closeTOC(event);" ontouchstart="closeTOC(event);"></i>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型转换问题"><span class="toc-number">1.</span> <span class="toc-text">类型转换问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置函数的参数的松散性"><span class="toc-number">2.</span> <span class="toc-text">内置函数的参数的松散性</span></a></li></ol>
-</div>
-<div class="toc-button" onclick="toggleTOC(event);" ontouchstart="toggleTOC(event);">
-    <img src="/images/icons/blue-shadow/toc.svg" alt>
-</div>
-
-	</div>
-	
-	<div class="nav-item" id="nav-item-archive">
-		
-				<div class="nav-icon">
-				
-			<a href="/archives/" title="Archivi">
-			<img src="/images/icons/blue-shadow/archive.svg" alt>
-			</a>
-		</div>
-	</div>
-	<div class="nav-item" id="nav-item-search">
-		
-		<div class="nav-icon">
-		
-			<a href="/search/" title="Cerca">
-			<img src="/images/icons/blue-shadow/search.svg" alt>
-			</a>
-		</div>
-	</div>
-	<div class="nav-item" id="nav-item-more">
-		<div class="nav-icon">
-				<a href="#" onclick="onClickMenuIcon(event);" ontouchstart="onClickMenuIcon(event);">
-				<img src="/images/icons/blue-shadow/menu.svg" alt>
-				</a>
-		</div>
-		<div class="nav-more-menu">
-				<i class="far fa-times-circle" id="nav-more-menu-close" onclick="onClickNavMenuClose(event);" ontouchstart="onClickNavMenuClose(event);"></i>
-		
-		
-	</div>
-	</div>
-</nav>
-
-	</div>
-
-  
-
-
-
-    
-
-
-
-
-
-
-
-    <script src="/js/lightgallery.min.js"></script>
-<script src="/js/lg-zoom.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#lightgallery").lightGallery(); 
-        $(".article-content img").each(function(){
-            console.log($(this).attr('src'))
-            $(this).attr('data-src', $(this).attr('src')).lightGallery({
-                selector: 'this'
-            })
-        });
-    });
-</script>
-
-
-
-
-
-
-<script type="text/javascript">
-
-  
-  // update cookie if this page is opened (directly)
-  loadjs(['/libs/jshashes/hashes.min.js', '/libs/js-cookie/src/js.cookie.js', '/js/post.v2.js'], 'post-version');
-  loadjs.ready('post-version', function(){
-    
-    new Postv2('hashit_93a72f7381247df7bdfc8e8aef68285a62677a6468455255a54af21de1d078eb').update('hashit_06e211eebb27f6de47928d5b3d7caf930560b049b37880b8aa351087ce62bd46', function(){});
-  });
-  
-</script>
-
-
-
-<!-- <script src="/js/post.js"></script> -->
-
-<script src="/js/headroom.min.js"></script>
-
-<script data-no-instant type="text/javascript">
-
-initHeadroom();
-
-changeLayoutOnTouchScreen();
-
-// 
-// var post = new Post('', '');
-// post.getCommentCount(window.location.pathname, function(count){
-//     $('#article-comment-count').text(count);
-// });
-// post.addVisitRecord(window.location.pathname, userip);
-// post.getVisitCount(window.location.pathname, function(count){
-//     $('#article-visit-count').text(count);
-// });
-
-// 
-</script>
-
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
 </html>
