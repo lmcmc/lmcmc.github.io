@@ -119,27 +119,33 @@
     <div class="post-meta">
         <span class="attr">Post：<span>2019-11-22 11:39:59</span></span>
         
+        <span class="attr">Tags：/
         
+        <a class="tag" href="/tags/#工具" title="工具">工具</a>
+        <span>/</span>
+        
+        
+        </span>
         <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
 </span>
 
     </div>
     <div class="post-content ">
-        <p>开发人员工具<br><a id="more"></a><br>写南邮攻防平台一道web题(AAencode)的时候，看了别人的wp才知道js代码可以直接在控制台中执行，当我还是找颜文字js解密网站的时候人家都是直接复制到控制台中跑一下就得到flag了..<br><img src="https://note.youdao.com/favicon.ico" alt="1"><br>发现自己的基础知识可太薄弱了，于是决定总结一些开发人员工具里的功能</p>
+        <p>开发人员工具<br><a id="more"></a><br>写南邮攻防平台一道web题(AAencode)的时候，看了别人的wp才知道js代码可以直接在控制台中执行，当我还是找颜文字js解密网站的时候人家都是直接复制到控制台中跑一下就得到flag了..<br><img src="https://s2.ax1x.com/2019/11/22/MTCoNR.png" alt="1"><br>发现自己的基础知识可太薄弱了，于是决定总结一些开发人员工具里的功能</p>
 <hr>
-<h1 id="火狐和谷歌中的开发人员工具"><a href="#火狐和谷歌中的开发人员工具" class="headerlink" title="火狐和谷歌中的开发人员工具"></a>火狐和谷歌中的开发人员工具</h1><p><img src="https://note.youdao.com/favicon.ico" alt="001"><br><img src="https://note.youdao.com/favicon.ico" alt="002"></p>
+<h1 id="火狐和谷歌中的开发人员工具"><a href="#火狐和谷歌中的开发人员工具" class="headerlink" title="火狐和谷歌中的开发人员工具"></a>火狐和谷歌中的开发人员工具</h1><p><img src="https://s2.ax1x.com/2019/11/22/MTCIE9.png" alt="001"><br><img src="https://s2.ax1x.com/2019/11/22/MTChB4.png" alt="002"></p>
 <h1 id="几个常用工具"><a href="#几个常用工具" class="headerlink" title="几个常用工具"></a>几个常用工具</h1><h2 id="查看器"><a href="#查看器" class="headerlink" title="查看器"></a>查看器</h2><p>这个功能很熟悉了不用多说，作用查看页面源代码</p>
 <h2 id="控制台"><a href="#控制台" class="headerlink" title="控制台"></a>控制台</h2><p>控制台一般用于执行一次性代码，查看JavaScript对象，查看调试日志信息或异常信息.</p>
 <h6 id="1-console-log"><a href="#1-console-log" class="headerlink" title="1.console.log()"></a>1.console.log()</h6><p>用于在控制台输出信息。该方法对于开发过程进行测试很有帮助。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;消息内容！&apos;); //输出普通信息</span><br><span class="line">　　console.info(&apos;消息内容！&apos;); //输出提示信息</span><br><span class="line">　　console.error(&apos;消息内容！&apos;);//输出错误信息</span><br><span class="line">　　console.warn(&apos;消息内容！&apos;); //输出警告信息</span><br></pre></td></tr></table></figure>
-<p><img src="https://note.youdao.com/favicon.ico" alt="2"></p>
-<h6 id="2-console-table"><a href="#2-console-table" class="headerlink" title="2.console.table"></a>2.console.table</h6><p>格式化表格。<br>console.table可以将一段同格式的数组转换为一个表格输出在控制台，方便查看<br><img src="https://note.youdao.com/favicon.ico" alt="3"></p>
+<p><img src="https://s2.ax1x.com/2019/11/22/MTCRjU.png" alt="2"></p>
+<h6 id="2-console-table"><a href="#2-console-table" class="headerlink" title="2.console.table"></a>2.console.table</h6><p>格式化表格。<br>console.table可以将一段同格式的数组转换为一个表格输出在控制台，方便查看<br><img src="https://s2.ax1x.com/2019/11/22/MTCfuF.png" alt="3"></p>
 <h6 id="3-统计代码的执行时间"><a href="#3-统计代码的执行时间" class="headerlink" title="3. 统计代码的执行时间"></a>3. 统计代码的执行时间</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.time(&apos;统计时间&apos;)</span><br><span class="line">for(var i = 0; i &lt; 999 ;i++)&#123;&#125;</span><br><span class="line">console.timeEnd(&apos;统计时间&apos;)</span><br></pre></td></tr></table></figure>
-<p><img src="https://note.youdao.com/favicon.ico" alt="4"></p>
+<p><img src="https://s2.ax1x.com/2019/11/22/MTC2cT.png" alt="4"></p>
 <h6 id="4-分组输出"><a href="#4-分组输出" class="headerlink" title="4.分组输出"></a>4.分组输出</h6><p>调试复杂的程序，需做大量输出判断的时候使用分组输出</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.group(&apos;a组&apos;);</span><br><span class="line">　　console.log(&apos;a1&apos;);</span><br><span class="line">　　console.log(&apos;a2&apos;);</span><br><span class="line">　　console.log(&apos;a3&apos;);</span><br><span class="line">　　console.groupEnd();</span><br></pre></td></tr></table></figure>
-<p><img src="https://note.youdao.com/favicon.ico" alt="5"></p>
-<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p><img src="https://note.youdao.com/favicon.ico" alt="6"><br>记录了页面上网络请求的详情信息。Google里的network面板和Firefox里的网络面板显示内容略有不同，但功能都很强大，具体可以看这篇文章： <a href="https://blog.csdn.net/zengzhenzong/article/details/80446732" target="_blank" rel="noopener">Google开发者工具面板-network详解</a>，不过我注意到的一点是Firefox的网络面板可以直接点击“编辑和重发”进行模拟请求，跟bp功能差不多，谷歌应该也有，但是需要安装插件</p>
+<p><img src="https://s2.ax1x.com/2019/11/22/MTCg3V.png" alt="5"></p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p><img src="https://s2.ax1x.com/2019/11/22/MTC4HJ.png" alt="6"><br>记录了页面上网络请求的详情信息。Google里的network面板和Firefox里的网络面板显示内容略有不同，但功能都很强大，具体可以看这篇文章： <a href="https://blog.csdn.net/zengzhenzong/article/details/80446732" target="_blank" rel="noopener">Google开发者工具面板-network详解</a>，不过我注意到的一点是Firefox的网络面板可以直接点击“编辑和重发”进行模拟请求，跟bp功能差不多，谷歌应该也有，但是需要安装插件</p>
 <h2 id="Sources"><a href="#Sources" class="headerlink" title="Sources"></a>Sources</h2><p>进行js断点调试</p>
 <p>and so on ….<br>…<br>..<br>.</p>
 <h2 id="（不想写了-）"><a href="#（不想写了-）" class="headerlink" title="（不想写了.^.）"></a>（不想写了.^.）</h2><p>Chrome——F12 谷歌开发者工具详解<br><a href="https://www.cnblogs.com/xiaowenshu/p/10450848.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaowenshu/p/10450848.html</a></p>
