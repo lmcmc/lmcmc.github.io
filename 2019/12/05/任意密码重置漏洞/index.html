@@ -82,7 +82,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、验证码不失效（可爆破）"><span class="toc-text">一、验证码不失效（可爆破）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、验证码直接返回"><span class="toc-text">二、验证码直接返回</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、验证码未绑定用户"><span class="toc-text">三、验证码未绑定用户</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、修改接收的手机或邮箱"><span class="toc-text">四、修改接收的手机或邮箱</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、本地验证绕过"><span class="toc-text">五、本地验证绕过</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、跳过验证步骤"><span class="toc-text">六、跳过验证步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七、未校验用户字段的值"><span class="toc-text">七、未校验用户字段的值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#八、修改密码出id可替换"><span class="toc-text">八、修改密码出id可替换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#九、Cookie值的替换"><span class="toc-text">九、Cookie值的替换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#十、修改信息时替换字段"><span class="toc-text">十、修改信息时替换字段</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、验证码不失效（可爆破）"><span class="toc-text">一、验证码不失效（可爆破）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、验证码直接返回"><span class="toc-text">二、验证码直接返回</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、验证码未绑定用户"><span class="toc-text">三、验证码未绑定用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、修改接收的手机或邮箱"><span class="toc-text">四、修改接收的手机或邮箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、本地验证绕过"><span class="toc-text">五、本地验证绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、跳过验证步骤"><span class="toc-text">六、跳过验证步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、未校验用户字段的值"><span class="toc-text">七、未校验用户字段的值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、修改密码出id可替换"><span class="toc-text">八、修改密码出id可替换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九、Cookie值的替换"><span class="toc-text">九、Cookie值的替换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十、修改信息时替换字段"><span class="toc-text">十、修改信息时替换字段</span></a></li></ol>
 </div>
     
 </div>
@@ -126,25 +126,25 @@
     </div>
     <div class="post-content ">
         <!-- more !-->
-<h1 id="一、验证码不失效（可爆破）"><a href="#一、验证码不失效（可爆破）" class="headerlink" title="一、验证码不失效（可爆破）"></a>一、验证码不失效（可爆破）</h1><p>造成原因：找回密码的时候获取的验证码缺少时间限制仅判断了验证码是否正确未判断验证码是否过期</p>
+<h3 id="一、验证码不失效（可爆破）"><a href="#一、验证码不失效（可爆破）" class="headerlink" title="一、验证码不失效（可爆破）"></a>一、验证码不失效（可爆破）</h3><p>造成原因：找回密码的时候获取的验证码缺少时间限制仅判断了验证码是否正确未判断验证码是否过期</p>
 <p>利用：通过爆破找到真正的验证码后进行密码重置</p>
-<h1 id="二、验证码直接返回"><a href="#二、验证码直接返回" class="headerlink" title="二、验证码直接返回"></a>二、验证码直接返回</h1><p>造成原因：输入手机号后点击获取验证码，验证码在客户端生成并直接返回在Response，直接与用户输入的验证码进行比对</p>
+<h3 id="二、验证码直接返回"><a href="#二、验证码直接返回" class="headerlink" title="二、验证码直接返回"></a>二、验证码直接返回</h3><p>造成原因：输入手机号后点击获取验证码，验证码在客户端生成并直接返回在Response，直接与用户输入的验证码进行比对</p>
 <p>利用：输入目标手机号，点击获取验证码 观察返回包，在返回包中得到目标手机号获取的验证码，进而完成验证，重置密码成功</p>
-<h1 id="三、验证码未绑定用户"><a href="#三、验证码未绑定用户" class="headerlink" title="三、验证码未绑定用户"></a>三、验证码未绑定用户</h1><p>造成原因：输入手机号和验证码进行重置密码的时候，仅对验证码是否正确进行了判断，未对该验证码是否与手机号匹配做验证</p>
+<h3 id="三、验证码未绑定用户"><a href="#三、验证码未绑定用户" class="headerlink" title="三、验证码未绑定用户"></a>三、验证码未绑定用户</h3><p>造成原因：输入手机号和验证码进行重置密码的时候，仅对验证码是否正确进行了判断，未对该验证码是否与手机号匹配做验证</p>
 <p>利用：提交手机号和验证码后，拦截数据包，将手机号替换成他人的手机号，进行密码重置</p>
-<h1 id="四、修改接收的手机或邮箱"><a href="#四、修改接收的手机或邮箱" class="headerlink" title="四、修改接收的手机或邮箱"></a>四、修改接收的手机或邮箱</h1><p>造成原因：用户名、手机号、验证码三者没有统一进行验证，仅判断了三者中的手机号和验证码是否匹配和正确，如果正确则判断成功</p>
+<h3 id="四、修改接收的手机或邮箱"><a href="#四、修改接收的手机或邮箱" class="headerlink" title="四、修改接收的手机或邮箱"></a>四、修改接收的手机或邮箱</h3><p>造成原因：用户名、手机号、验证码三者没有统一进行验证，仅判断了三者中的手机号和验证码是否匹配和正确，如果正确则判断成功</p>
 <p>利用：输入用户名获取验证码，在数据包中修改接收验证码的手机号为自己的号码，之后输入自己手机号接收到的验证码进行验证</p>
-<h1 id="五、本地验证绕过"><a href="#五、本地验证绕过" class="headerlink" title="五、本地验证绕过"></a>五、本地验证绕过</h1><p>造成原因：客户端在本地进行验证码是否正确的判断，而该判断结果可以在本地修改，最终导致欺骗客户端，误以为我们输入了正确的验证码</p>
+<h3 id="五、本地验证绕过"><a href="#五、本地验证绕过" class="headerlink" title="五、本地验证绕过"></a>五、本地验证绕过</h3><p>造成原因：客户端在本地进行验证码是否正确的判断，而该判断结果可以在本地修改，最终导致欺骗客户端，误以为我们输入了正确的验证码</p>
 <p>利用：输入错误验证码，修改返回包，把错误改为正确，即可绕过验证步骤</p>
-<h1 id="六、跳过验证步骤"><a href="#六、跳过验证步骤" class="headerlink" title="六、跳过验证步骤"></a>六、跳过验证步骤</h1><p>造成原因：对修改密码的步骤没有进行校验，导致可以直接输入最终修改密码的地址进行密码重置</p>
+<h3 id="六、跳过验证步骤"><a href="#六、跳过验证步骤" class="headerlink" title="六、跳过验证步骤"></a>六、跳过验证步骤</h3><p>造成原因：对修改密码的步骤没有进行校验，导致可以直接输入最终修改密码的地址进行密码重置</p>
 <p>利用：先使用自己的账号进行重置密码，记下每一步的链接，重置他人用户时，获取验证码后直接输入修改密码的链接并补齐用户名等信息 ，进入到修改密码的界面进行重置密码。</p>
-<h1 id="七、未校验用户字段的值"><a href="#七、未校验用户字段的值" class="headerlink" title="七、未校验用户字段的值"></a>七、未校验用户字段的值</h1><p>造成原因：在重置密码的过程中，只对验证码和手机号做了校验，未对后面设置新密码的用户身份做判断，导致在最后一步可以通过修改用户身份来重置他人密码</p>
+<h3 id="七、未校验用户字段的值"><a href="#七、未校验用户字段的值" class="headerlink" title="七、未校验用户字段的值"></a>七、未校验用户字段的值</h3><p>造成原因：在重置密码的过程中，只对验证码和手机号做了校验，未对后面设置新密码的用户身份做判断，导致在最后一步可以通过修改用户身份来重置他人密码</p>
 <p>利用：使用自己的手机号走一遍流程，在走到最后一个设置密码的流程时，修改数据包里的用户信息。</p>
-<h1 id="八、修改密码出id可替换"><a href="#八、修改密码出id可替换" class="headerlink" title="八、修改密码出id可替换"></a>八、修改密码出id可替换</h1><p>造成原因：修改密码时，没有对原密码进行判断，且根据id的值来修改用户的密码，类似的sql语句：update user set password=”qwer1234” where id=’1’修改数据包里的id值，即可修改他人密码</p>
+<h3 id="八、修改密码出id可替换"><a href="#八、修改密码出id可替换" class="headerlink" title="八、修改密码出id可替换"></a>八、修改密码出id可替换</h3><p>造成原因：修改密码时，没有对原密码进行判断，且根据id的值来修改用户的密码，类似的sql语句：update user set password=”qwer1234” where id=’1’修改数据包里的id值，即可修改他人密码</p>
 <p>利用：修改自己的密码，抓取数据包，替换数据包中用户对应的id值，即可修改他人的密码</p>
-<h1 id="九、Cookie值的替换"><a href="#九、Cookie值的替换" class="headerlink" title="九、Cookie值的替换"></a>九、Cookie值的替换</h1><p>造成原因：重置密码走到最后一步的时候仅判断唯一的用户标识cookie是否存在，并没有判断该cookie有没有通过之前重置密码过程的验证，导致可替换cookie重置他人用户密码。（cookie可指定用户获取）</p>
+<h3 id="九、Cookie值的替换"><a href="#九、Cookie值的替换" class="headerlink" title="九、Cookie值的替换"></a>九、Cookie值的替换</h3><p>造成原因：重置密码走到最后一步的时候仅判断唯一的用户标识cookie是否存在，并没有判断该cookie有没有通过之前重置密码过程的验证，导致可替换cookie重置他人用户密码。（cookie可指定用户获取）</p>
 <p>利用：重置自己用户密码到达最后阶段，抓到数据包，并在第一阶段重新获取目标用户cookie，替换cookie到我们抓取的数据包中，发包测试</p>
-<h1 id="十、修改信息时替换字段"><a href="#十、修改信息时替换字段" class="headerlink" title="十、修改信息时替换字段"></a>十、修改信息时替换字段</h1><p>造成原因：在执行修改信息的sql语句的时候，用户的密码也当作字段执行了，而且是根据隐藏参数loginid来执行的，这样就导致修改隐藏参数loginid的值，就可以修改他人的用户密码。</p>
+<h3 id="十、修改信息时替换字段"><a href="#十、修改信息时替换字段" class="headerlink" title="十、修改信息时替换字段"></a>十、修改信息时替换字段</h3><p>造成原因：在执行修改信息的sql语句的时候，用户的密码也当作字段执行了，而且是根据隐藏参数loginid来执行的，这样就导致修改隐藏参数loginid的值，就可以修改他人的用户密码。</p>
 <p>利用：修改个人资料的时候，抓取数据包，然后来修改数据包的参数和对应的值，参数名一般可以在其他地方找到，替换隐藏参数即可修改他人的密码等信息</p>
 
         
