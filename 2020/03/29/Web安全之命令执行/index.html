@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Web安全之命令执行 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 所谓无底深渊，下去，也是前程万里 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#直接执行代码"><span class="toc-text">直接执行代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preg-replace-代码执行"><span class="toc-text">preg_replace()代码执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态函数执行"><span class="toc-text">动态函数执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反引号命令执行"><span class="toc-text">反引号命令执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Curly-Syntax"><span class="toc-text">Curly Syntax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调函数"><span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反序列化"><span class="toc-text">反序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防范方法"><span class="toc-text">防范方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#附：-amp-、-、-命令连接符"><span class="toc-text">附：  &amp;、||、| 命令连接符</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 所谓无底深渊，下去，也是前程万里 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Web安全之命令执行
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-29 21:06:09</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Web安全" title="Web安全">Web安全</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>Web安全之命令执行（Command Execution）</p>
+<a id="more"></a>
+<p>当应用需要调用一些外部程序去处理内容的情况下，就会用到一些执行系统命令的函数。如 PHP 中的 system、exec、shell_exec 等，当用户可以控制命令执行函数中的参数时，将可以注入恶意系统命令到正常命令中，造成命令执行攻击。本文只介绍 PHP 有关的命令执行漏洞。</p>
+<p><br></p>
+<h2 id="直接执行代码"><a href="#直接执行代码" class="headerlink" title="直接执行代码"></a>直接执行代码</h2><p>PHP 中有不少可以直接执行代码的函数，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eval();    将参数字符串作为php程序代码执行</span><br><span class="line">assert();</span><br><span class="line">system();  执行一个外部的应用程序并将相应的结果输出</span><br><span class="line">exec();    执行一个外部的应用程序</span><br><span class="line">``/shell_exec();   执行shell命令并返回输出的字符串</span><br><span class="line">passthru();   执行一个UNIX系统命令并显示原始的输出</span><br><span class="line">escapeshellcmd();</span><br><span class="line">pcntl_exec();</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">system(&quot;ls -al&quot;);</span><br><span class="line">eval(&quot;\$a = $b;&quot;);</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，system是命令执行函数，eval是代码执行函数</p>
+<p><br></p>
+<h2 id="preg-replace-代码执行"><a href="#preg-replace-代码执行" class="headerlink" title="preg_replace()代码执行"></a>preg_replace()代码执行</h2><p>自PHP5.5.0版本起 <strong><code>/e</code></strong> 修饰符被弃用</p>
+<p>函数说明：preg_replace — 执行一个正则表达式的搜索和替换<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mixed  preg_replace ( mixed  <span class="variable">$pattern</span> , mixed  <span class="variable">$replacement</span> , mixed  <span class="variable">$subject</span> [, int <span class="variable">$limit</span>  = -<span class="number">1</span> [, int &amp;<span class="variable">$count</span> ]] )</span><br><span class="line">搜索subject中匹配pattern的部分，以replacement进行替换。</span><br></pre></td></tr></table></figure></p>
+<p>在preg_replace()函数的第一个参数中使用/e修正符，会使引擎在完成替换后，将结果字符串作为php代码使用eval方式进行评估，并将返回值作为最终参与替换的字符串。</p>
+<p>但是要确保replacement构成一个合法的php代码字符串，并符合eval语法，否则代码会在preg_replace()这一行出现语法解析错误。</p>
+<p>如果没有<code>/e</code>修饰符，可以尝试 %00 截断。  —wiki</p>
+<p>eg-1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    echo preg_replace(&quot;/test/e&quot;,$_GET[&quot;h&quot;],&quot;jutst test&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>payload: <code>?h = hpinfo()</code></p>
+<p>eg-2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $var = &quot;&lt;tag&gt;phpinfo()&lt;/tag&gt;&quot;;</span><br><span class="line">    preg_replace(&quot;/&lt;tag&gt;(.*?)&lt;\/tag&gt;/e&quot;, &quot;addslashes(\\1)&quot;, $var);</span><br><span class="line">?&gt;</span><br><span class="line">// 其中的 \\1 实际上就是 \1，指的是第一个子匹配项，还可以使用 $1 来匹配</span><br></pre></td></tr></table></figure></p>
+<p>eg-3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    function test($str)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    echo preg_replace(&quot;/s*[php](.+?)[/php]s*/ies&quot;, &apos;test(&quot;\1&quot;)&apos;, $_GET[&quot;h&quot;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>payload：<code>?h=[php]{${phpinfo()}}[/php]</code></p>
+<p>此时提交 <code>?h=[php]phpinfo()[/php]</code>，phpinfo()不会被执行，因为经过正则匹配后， replacement 参数变为’test(“phpinfo”)’，此时phpinfo仅仅是被当做一个字符串参数。 </p>
+<p>提交 <code>?h=[php]{${phpinfo()}}[/php]</code> phpinfo()会被执行，因为在php中，双引号里面如果包含有变量，php会将其解析，而单引号中的变量不会被处理。 </p>
+<p>在这里我们通过 <strong>{${}}</strong> 构造出了一个特殊的变量<code>&#39;test(&quot;{${phpinfo()}}&quot;)&#39;</code>，达到让函数被执行的效果 (${phpinfo()}会被解释执行)。</p>
+<blockquote>
+<p>关于{${}}这种形式涉及到了php Complex (curly) syntax.</p>
+</blockquote>
+<p>测试代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;&#123;$&#123;phpinfo()&#125;&#125;&quot;;</span><br></pre></td></tr></table></figure></p>
+<p>在本例中将’test(“\1”)’修改为”test(‘\1’)”，这样’${phpinfo()}’就会被当做一个普通的字符串处理。</p>
+<p><br></p>
+<h2 id="动态函数执行"><a href="#动态函数执行" class="headerlink" title="动态函数执行"></a>动态函数执行</h2><p>用户自定义的函数可以导致代码执行。</p>
+<p>eg-1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $dyn_func = $_GET[&quot;dyn_func&quot;];</span><br><span class="line">    $argument = $_GET[&quot;argument&quot;];</span><br><span class="line">    $dyn_func($argument);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>payload：<code>?dyn_func=phpinfo &amp; argument=1</code></p>
+<p><img src="https://img-blog.csdnimg.cn/20200329200718850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzM3NjA3NQ==,size_16,color_FFFFFF,t_70" alt="1"></p>
+<p>payload：<code>?dyn_func=system &amp; argument=ipconfig</code></p>
+<p><img src="https://img-blog.csdnimg.cn/20200329201542568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzM3NjA3NQ==,size_16,color_FFFFFF,t_70" alt="2"></p>
+<p>eg-2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	function A() &#123; </span><br><span class="line">		echo &quot;aaa&quot;;</span><br><span class="line">	&#125; </span><br><span class="line">	function B() &#123; </span><br><span class="line">		echo &quot;bbb&quot;;</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	if (isset($_GET[&quot;func&quot;])) &#123; </span><br><span class="line">		$myfunc = $_GET[&quot;func&quot;]; </span><br><span class="line">		echo $myfunc(); </span><br><span class="line">	&#125; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>payload：</p>
+<p><code>?func = A</code> —&gt; 输出：aaa</p>
+<p><code>?func = phpinfo</code>  —&gt;  漏洞产生</p>
+<p><br></p>
+<h2 id="反引号命令执行"><a href="#反引号命令执行" class="headerlink" title="反引号命令执行"></a>反引号命令执行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    echo `ls -al`;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="Curly-Syntax"><a href="#Curly-Syntax" class="headerlink" title="Curly Syntax"></a>Curly Syntax</h2><p>前文提到的 <strong>{${}}</strong> 属于这一部分</p>
+<p>PHP的 Complex Syntax (Curly Syntax) 也能导致代码执行，它将执行花括号间的代码，并将结果替换回去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $var = &quot;aaabbbccc $&#123;`ls`&#125;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $foobar = &quot;phpinfo&quot;;</span><br><span class="line">    $&#123;&quot;foobar&quot;&#125;();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>很多函数都可以执行回调函数，当回调函数用户可控时，将导致代码执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $evil_callback = $_GET[&quot;callback&quot;];</span><br><span class="line">    $some_array = array(0,1,2,3);</span><br><span class="line">    $new_array = array_map($evil_callback, $some_array);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>payload：<code>?callback=phpinfo</code></p>
+<p><br></p>
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><p>如果 unserialize() 在执行时定义了 <code>__destruct()</code> 或 <code>__wakeup()</code> 函数，则有可能导致代码执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    class Example &#123;</span><br><span class="line">      var $var = &quot;&quot;;</span><br><span class="line">      function __destruct() &#123;</span><br><span class="line">        eval($this-&gt;$var);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    unserialize($_GET[&quot;saved_code&quot;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>payload：<code>?saved_code=O:7:&quot;Example&quot;:1:{s:3:&quot;var&quot;;s:10:&quot;phpinfo();&quot;;}</code></p>
+<p><br></p>
+<h2 id="防范方法"><a href="#防范方法" class="headerlink" title="防范方法"></a>防范方法</h2><ol>
+<li><p>尽量不使用执行命令的函数或在disable_functions中禁用</p>
+</li>
+<li><p>在进入执行命令的函数/方法之前，对参数进行过滤，对敏感字符进行转义</p>
+</li>
+<li><p>对于可控点是程序参数的情况下，使用escapeshellcmd函数进行过滤，对于可控点是程序参数值的情况下，使用escapeshellarg函数进行过滤</p>
+</li>
+<li><p>参数的值尽量使用引号包裹，并在拼接前调用addslashes进行转义</p>
+</li>
+<li><p>针对由第三方组件引发的漏洞，要及时打补丁，修改安装时的默认配置。 </p>
+</li>
+</ol>
+<ol start="6">
+<li>使用safe_mode_exec_dir指定可执行文件的路径，把可能使用的命令提前放入此路径内，限制外部程序的执行（推荐不执行任何程序指向网页目录）</li>
+</ol>
+<p>safe_mode = On</p>
+<p>safe_mode_exec_dir = /usr/local/php/bin/</p>
+<hr>
+<h5 id="附：-amp-、-、-命令连接符"><a href="#附：-amp-、-、-命令连接符" class="headerlink" title="附：  &amp;、||、| 命令连接符"></a>附：  &amp;、||、| 命令连接符</h5><p>windows：</p>
+<p>|   直接执行后面的语句  <code>ping 127.0.0.1 | whoami</code></p>
+<p>||  前面为假再执行后面  <code>ping 2 || whoami</code></p>
+<p>&amp;   前面可真可假（后面一定会执行）  <code>ping 127.0.0.1 &amp; whoami</code></p>
+<p>&amp;&amp;  前面只能为真（前面为假导致出错，后面不执行）  <code>ping 127.0.0.1 &amp;&amp; whoami</code></p>
+<p>linux：</p>
+<p>;   前面的执行完执行后面的  <code>ping 127.0.0.1 ; whoami</code></p>
+<p>|   管道符，显示后面的执行结果  <code>ping 127.0.0.1 | whoami</code></p>
+<p>||  前面为假再执行后面  <code>ping 1 || whoami</code></p>
+<p>&amp;   前面可真可假（后面一定会执行）  <code>ping 127.0.0.1 &amp; whoami</code></p>
+<p>&amp;&amp;  前面只能为真（前面为假导致出错，后面不执行）  <code>ping 127.0.0.1 &amp;&amp; whoami</code></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
