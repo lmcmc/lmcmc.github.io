@@ -1,225 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>攻防世界crypto新手wp（3） | 美豆的博客</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-  <!-- keywords -->
-  
+    <title>
+        
+        攻防世界crypto新手wp（3） - undefined
+        
+    </title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="crypto">
-<meta name="keywords" content="writeup,攻防世界">
-<meta property="og:type" content="article">
-<meta property="og:title" content="攻防世界crypto新手wp（3）">
-<meta property="og:url" content="http://yoursite.com/2019/10/17/攻防世界crypto新手wp（3）/index.html">
-<meta property="og:site_name" content="美豆的博客">
-<meta property="og:description" content="crypto">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-11-05T14:22:03.305Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="攻防世界crypto新手wp（3）">
-<meta name="twitter:description" content="crypto">
-  
-    <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="https://lmcmc.github.io/img/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
 
-  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-  
-      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("7S69DnEEH3PVK38zUzHnIRj5-gzGzoHsz", "hbIfv1jdAgFoNluKfAFAnpjt");</script>
-<script src="/js/Counter.js"></script>
-  
-  
-</head></html>
 <body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">美豆</a></h1>
-		  
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/MD5/" style="font-size: 12px;">MD5</a> <a href="/tags/Web安全/" style="font-size: 14px;">Web安全</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/php/" style="font-size: 14px;">php</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/web安全/" style="font-size: 10px;">web安全</a> <a href="/tags/writeup/" style="font-size: 20px;">writeup</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a> <a href="/tags/zkctf/" style="font-size: 16px;">zkctf</a> <a href="/tags/代码审计/" style="font-size: 12px;">代码审计</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/序列化/" style="font-size: 12px;">序列化</a> <a href="/tags/攻防世界/" style="font-size: 18px;">攻防世界</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-			</div>
-		</div>
-	</header>				
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">美豆</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">美豆</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap"><article id="post-攻防世界crypto新手wp（3）" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/10/17/攻防世界crypto新手wp（3）/" class="article-date">
-  	<time datetime="2019-10-17T12:00:00.000Z" itemprop="datePublished">2019-10-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      攻防世界crypto新手wp（3）
-      
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/writeup/">writeup</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/攻防世界/">攻防世界</a></li></ul>
-	</div>
-
-        
-
-        
-          
-<div class="counter-tag counter">
-    <span id="/2019/10/17/攻防世界crypto新手wp（3）/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="攻防世界crypto新手wp（3）">
-         &nbsp;
-        view
-    </span>
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
 </div>
 
-        
-        <div class="clearfix"></div>
-      </div>
-      
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
     
-    <div class="article-entry" itemprop="articleBody">
-      
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#混合编码"><span class="toc-text">混合编码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#easychallenge"><span class="toc-text">easychallenge</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#幂数加密"><span class="toc-text">幂数加密</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        攻防世界crypto新手wp（3）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-10-17 20:00:00</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#writeup" title="writeup">writeup</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#攻防世界" title="攻防世界">攻防世界</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
         <p>crypto<br><a id="more"></a></p>
 <!--又快一个月没更新博客了，放弃就是很容易。看了看新手2的博客，结尾是溜冰取得了很大进步？？今天上轮滑课我都要哭出来，我太害怕了，上周的课我摔了一跤，可能是把我摔怕了，我太胆小了，又想着放弃了.我想到了那段话：你15岁觉得游泳难，你放弃游泳，18岁遇见一个喜欢的人，约你去游泳，你只好说“我不会耶”，18岁时觉得英文难，放弃学英文，28岁出现一个很棒的工作机会，要求英语流利，你只好说“我不会耶”，人生前期越嫌麻烦，越懒得学，后来就越是会错过让你心动的人与事，错过风景。-->
 <h1 id="混合编码"><a href="#混合编码" class="headerlink" title="混合编码"></a>混合编码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">JiM3NjsmIzEyMjsmIzY5OyYjMTIwOyYjNzk7JiM4MzsmIzU2OyYjMTIwOyYjNzc7JiM2ODsmIzY5OyYjMTE4OyYjNzc7JiM4NDsmIzY1OyYjNTI7JiM3NjsmIzEyMjsmIzEwNzsmIzUzOyYjNzY7JiMxMjI7JiM2OTsmIzEyMDsmIzc3OyYjODM7JiM1NjsmIzEyMDsmIzc3OyYjNjg7JiMxMDc7JiMxMTg7JiM3NzsmIzg0OyYjNjU7JiMxMjA7JiM3NjsmIzEyMjsmIzY5OyYjMTIwOyYjNzg7JiMxMDU7JiM1NjsmIzEyMDsmIzc3OyYjODQ7JiM2OTsmIzExODsmIzc5OyYjODQ7JiM5OTsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzUwOyYjNzY7JiMxMjI7JiM2OTsmIzEyMDsmIzc4OyYjMTA1OyYjNTY7JiM1MzsmIzc4OyYjMTIxOyYjNTY7JiM1MzsmIzc5OyYjODM7JiM1NjsmIzEyMDsmIzc3OyYjNjg7JiM5OTsmIzExODsmIzc5OyYjODQ7JiM5OTsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzExOTsmIzc2OyYjMTIyOyYjNjk7JiMxMTk7JiM3NzsmIzY3OyYjNTY7JiMxMjA7JiM3NzsmIzY4OyYjNjU7JiMxMTg7JiM3NzsmIzg0OyYjNjU7JiMxMjA7JiM3NjsmIzEyMjsmIzY5OyYjMTE5OyYjNzc7JiMxMDU7JiM1NjsmIzEyMDsmIzc3OyYjNjg7JiM2OTsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzExOTsmIzc2OyYjMTIyOyYjMTA3OyYjNTM7JiM3NjsmIzEyMjsmIzY5OyYjMTE5OyYjNzc7JiM4MzsmIzU2OyYjMTIwOyYjNzc7JiM4NDsmIzEwNzsmIzExODsmIzc3OyYjODQ7JiM2OTsmIzEyMDsmIzc2OyYjMTIyOyYjNjk7JiMxMjA7JiM3ODsmIzY3OyYjNTY7JiMxMjA7JiM3NzsmIzY4OyYjMTAzOyYjMTE4OyYjNzc7JiM4NDsmIzY1OyYjMTE5Ow==</span><br></pre></td></tr></table></figure>
@@ -252,114 +166,63 @@
 <hr>
 <p>附上一个工具链接 ctf.ssleye.com/?tdsourcetag=s_pcqq_aiomsg</p>
 
-      
-    </div>
-    
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2019/10/24/zk十月赛/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
         
-          zk十月赛
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/09/27/zk月赛/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">zk月赛</div>
-      <strong class="article-nav-caption">&gt;</strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-<div class="ds-share share" data-thread-key="攻防世界crypto新手wp（3）" data-title="攻防世界crypto新手wp（3）" data-url="http://yoursite.com/2019/10/17/攻防世界crypto新手wp（3）/" data-images="https://lmcmc.github.io/img/lmc.jpg" data-content="攻防世界crypto新手wp（3）">
-    <div class="ds-share-inline">
-      <ul class="ds-share-icons-16">
-      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
-    </div>
- </div>
- 
-
-
-
-
-
-</div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2020 美豆
-      </div>
-        <div class="footer-right">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          
-      <span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
+        <br>
+        <div id="comment-container">
         </div>
-    </div>
-  </div>
-</footer>
-    </div>
-    
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <div id="disqus_thread"></div>
 
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
 
 <script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
 </script>
-<script src="/js/main.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
-
-
-  </div>
-</body>
 </html>

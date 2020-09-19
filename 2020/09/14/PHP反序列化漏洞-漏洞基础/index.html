@@ -1,225 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  <title>PHP反序列化漏洞-漏洞基础 | 美豆的博客</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-  <!-- keywords -->
-  
+    <title>
+        
+        PHP反序列化漏洞-漏洞基础 - undefined
+        
+    </title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="PHP中的序列化serialize()与反序列化unserialize()">
-<meta name="keywords" content="php,序列化,Web安全">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PHP反序列化漏洞-漏洞基础">
-<meta property="og:url" content="http://yoursite.com/2020/09/14/PHP反序列化漏洞-漏洞基础/index.html">
-<meta property="og:site_name" content="美豆的博客">
-<meta property="og:description" content="PHP中的序列化serialize()与反序列化unserialize()">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-09-18T13:12:22.718Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP反序列化漏洞-漏洞基础">
-<meta name="twitter:description" content="PHP中的序列化serialize()与反序列化unserialize()">
-  
-    <link rel="alternative" href="/atom.xml" title="美豆的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="https://lmcmc.github.io/img/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-  
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
 
-  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-  
-      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("7S69DnEEH3PVK38zUzHnIRj5-gzGzoHsz", "hbIfv1jdAgFoNluKfAFAnpjt");</script>
-<script src="/js/Counter.js"></script>
-  
-  
-</head></html>
 <body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">美豆</a></h1>
-		  
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/MD5/" style="font-size: 12px;">MD5</a> <a href="/tags/Web安全/" style="font-size: 14px;">Web安全</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/php/" style="font-size: 14px;">php</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/web安全/" style="font-size: 10px;">web安全</a> <a href="/tags/writeup/" style="font-size: 20px;">writeup</a> <a href="/tags/xss/" style="font-size: 10px;">xss</a> <a href="/tags/zkctf/" style="font-size: 16px;">zkctf</a> <a href="/tags/代码审计/" style="font-size: 12px;">代码审计</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/序列化/" style="font-size: 12px;">序列化</a> <a href="/tags/攻防世界/" style="font-size: 18px;">攻防世界</a> <a href="/tags/杂记/" style="font-size: 10px;">杂记</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-			</div>
-		</div>
-	</header>				
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">美豆</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="https://lmcmc.github.io/img/lmc.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">美豆</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap"><article id="post-PHP反序列化漏洞-漏洞基础" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2020/09/14/PHP反序列化漏洞-漏洞基础/" class="article-date">
-  	<time datetime="2020-09-14T12:10:16.000Z" itemprop="datePublished">2020-09-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      PHP反序列化漏洞-漏洞基础
-      
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web安全/">Web安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/序列化/">序列化</a></li></ul>
-	</div>
-
-        
-
-        
-          
-<div class="counter-tag counter">
-    <span id="/2020/09/14/PHP反序列化漏洞-漏洞基础/" class="leancloud_visitors post-title-link" style="font-size: 12px" data-flag-title="PHP反序列化漏洞-漏洞基础">
-         &nbsp;
-        view
-    </span>
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
 </div>
 
-        
-        <div class="clearfix"></div>
-      </div>
-      
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
     
-    <div class="article-entry" itemprop="articleBody">
-      
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0×00-PHP中的序列化与反序列化"><span class="toc-text">0×00 PHP中的序列化与反序列化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0×01-序列化与反序列化的作用"><span class="toc-text">0×01 序列化与反序列化的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0×02-序列化格式"><span class="toc-text">0×02 序列化格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0×03-反序列化漏洞成因"><span class="toc-text">0×03 反序列化漏洞成因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0×04-魔术方法（Magic-methods）"><span class="toc-text">0×04 魔术方法（Magic methods）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0×05-魔术方法的触发"><span class="toc-text">0×05 魔术方法的触发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sleep-和-wakeup"><span class="toc-text">sleep() 和 wakeup()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#toString-NaN"><span class="toc-text">__toString()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#invoke"><span class="toc-text">__invoke()</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        PHP反序列化漏洞-漏洞基础
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-09-14 20:10:16</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#php" title="php">php</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#序列化" title="序列化">序列化</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Web安全" title="Web安全">Web安全</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
         <p>PHP中的序列化serialize()与反序列化unserialize()<br><a id="more"></a></p>
 <h1 id="0×00-PHP中的序列化与反序列化"><a href="#0×00-PHP中的序列化与反序列化" class="headerlink" title="0×00 PHP中的序列化与反序列化"></a>0×00 PHP中的序列化与反序列化</h1><p>序列化：是将对象的状态信息转换为可以存储或传输的形式的过程</p>
 <p>反序列化：把字节序列还原为对象的过程称为反序列化。</p>
@@ -233,7 +150,7 @@
 <p>对象\变量\参数类型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">O - Class</span><br><span class="line">a - Array</span><br><span class="line">s - string  </span><br><span class="line">i - int</span><br><span class="line">b - boolean</span><br><span class="line">d - double</span><br><span class="line">o - common object</span><br><span class="line">r - reference</span><br><span class="line">C - custom object</span><br><span class="line">N - null</span><br><span class="line">R - pointer reference</span><br><span class="line">U - unicode string</span><br></pre></td></tr></table></figure></p>
 <p>序列符号：参数与变量之间用分号(;)隔开,同一变量和同一参数之间的数据用冒号(:)隔开。</p>
 <p><br></p>
-<h1 id="0×03-反序列化漏洞成因"><a href="#0×03-反序列化漏洞成因" class="headerlink" title="0×03 反序列化漏洞成因"></a>0×03 反序列化漏洞成因</h1><p>PHP反序列化漏洞又称PHP对象注入，是因为程序对输入数据处理不当导致的。漏洞的根源在于unserialize()函数的参数可控。如果反序列化对象中存在<strong>魔术方法</strong>，而且魔术方法中的代码或变量用户可控，就可能产生反序列化漏洞，根据反序列化后不同的代码可以导致各种攻击，如代码注入、SQL注入、目录遍历等等。</p>
+<h1 id="0×03-反序列化漏洞成因"><a href="#0×03-反序列化漏洞成因" class="headerlink" title="0×03 反序列化漏洞成因"></a>0×03 反序列化漏洞成因</h1><p>PHP反序列化漏洞又称PHP对象注入，是因为程序对输入数据处理不当导致的。漏洞的根源在于<strong>unserialize()函数的参数可控</strong>。如果反序列化对象中存在<strong>魔术方法</strong>，而且魔术方法中的代码或变量用户可控，就可能产生反序列化漏洞，根据反序列化后不同的代码可以导致各种攻击，如代码注入、SQL注入、目录遍历等等。</p>
 <p><br></p>
 <h1 id="0×04-魔术方法（Magic-methods）"><a href="#0×04-魔术方法（Magic-methods）" class="headerlink" title="0×04 魔术方法（Magic methods）"></a>0×04 魔术方法（Magic methods）</h1><p>PHP 将所有以 __（两个下划线）开头的类方法保留为魔术方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">__construct()  类的构造函数，在对象创建时自动调用</span><br><span class="line">__destruct()  类的析构函数，在脚本运行结束时自动调用</span><br><span class="line">__call()  在对象中调用一个不可访问方法时调用，</span><br><span class="line">__callStatic()  用静态方式中调用一个不可访问方法时调用，</span><br><span class="line">__get()  获得一个类的成员变量时调用，</span><br><span class="line">__set()  设置一个类的成员变量时调用，</span><br><span class="line">__isset()  当对不可访问属性调用isset()或empty()时调用，即类外检测一个私有属性时</span><br><span class="line">__unset()  当对不可访问属性调用unset()时被调用，即类外删除一个私有属性时</span><br><span class="line">__sleep()  执行serialize()时，先会调用这个函数。此方法必须有返回内容，否则NULL被序列化，并产生一个E_NOTICE级别的错误</span><br><span class="line">__wakeup()  执行unserialize()时，先会调用这个函数， </span><br><span class="line">__toString()  类被当成字符串时的回应方法，</span><br><span class="line">__invoke()  调用函数的方式调用一个对象时的回应方法， </span><br><span class="line">__set_state()  调用var_export()导出类时，此静态方法会被调用， </span><br><span class="line">__clone()  当对象复制完成时调用</span><br><span class="line">__autoload()  尝试加载未定义的类</span><br><span class="line">__debugInfo()  打印所需调试信息</span><br></pre></td></tr></table></figure>
@@ -247,105 +164,63 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">	class Test&#123;</span><br><span class="line">		function __invoke()&#123;</span><br><span class="line">			echo &apos;类被当作函数使用&apos;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	$obj = new Test();</span><br><span class="line">	$obj();</span><br><span class="line">?&gt;</span><br><span class="line">//输出：类被当作函数使用</span><br></pre></td></tr></table></figure>
 <p><br></p>
 
-      
-    </div>
-    
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2020/03/29/eval函数和system函数的区别——代码执行漏洞和命令执行漏洞/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">eval函数和system函数的区别——代码执行漏洞和命令执行漏洞</div>
-      <strong class="article-nav-caption">&gt;</strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-<div class="ds-share share" data-thread-key="PHP反序列化漏洞-漏洞基础" data-title="PHP反序列化漏洞-漏洞基础" data-url="http://yoursite.com/2020/09/14/PHP反序列化漏洞-漏洞基础/" data-images="https://lmcmc.github.io/img/lmc.jpg" data-content="PHP反序列化漏洞-漏洞基础">
-    <div class="ds-share-inline">
-      <ul class="ds-share-icons-16">
-      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
-    </div>
- </div>
- 
-
-
-
-
-
-</div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2020 美豆
-      </div>
-        <div class="footer-right">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          
-      <span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-</span>
+        
+        <br>
+        <div id="comment-container">
         </div>
-    </div>
-  </div>
-</footer>
-    </div>
-    
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+        <div id="disqus_thread"></div>
 
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
 
 <script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
 </script>
-<script src="/js/main.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
-
-
-  </div>
-</body>
 </html>
