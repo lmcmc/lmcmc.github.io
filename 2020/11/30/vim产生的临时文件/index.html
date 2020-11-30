@@ -11,7 +11,7 @@
 
     <title>
         
-        HTTP的八种请求方式 - undefined
+        vim产生的临时文件 - undefined
         
     </title>
 
@@ -113,15 +113,15 @@
 
 <div class="post-container">
     <div class="post-title">
-        HTTP的八种请求方式
+        vim产生的临时文件
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2020-03-02 14:29:57</span></span>
+        <span class="attr">Post：<span>2020-11-30 13:18:32</span></span>
         
         <span class="attr">Tags：/
         
-        <a class="tag" href="/tags/#其他" title="其他">其他</a>
+        <a class="tag" href="/tags/#Web安全" title="Web安全">Web安全</a>
         <span>/</span>
         
         
@@ -131,8 +131,13 @@
 
     </div>
     <div class="post-content ">
-        <a id="more"></a>
-<p>OPTIONS：<br>HEAD：<br>GET：<br>POST：<br>PUT：<br>DELETE<br>TRACE：<br>CONNECT：</p>
+        <p>你一定得认识到自己想往哪个方向发展，然后一定要对准那个方向出发，要马上。你再也浪费不起多一秒的时间了，你浪费不起。 &emsp; ——塞林格《麦田里的守望者》</p>
+<a id="more"></a>
+<hr>
+<p>vim编辑器中的swp即swap文件，在编辑文件时产生，它是隐藏文件，如果编辑文件时正常退出，则此文件会自动删除，如果未正常退出，终端被意外关闭，则这个文件会被保存，用于记录上次文件修改信息。</p>
+<p>例如，我在编写<code>flag文件</code>时强制关闭终端不对文件进行保存，再次打开<code>flag文件</code>时出现提示：<br><a href="https://imgchr.com/i/D20J9x" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/11/30/D20J9x.jpg" alt="swp.jpg"></a><br>查看<code>.flag.swp文件</code>可以看到我之前编写的内容：<br><a href="https://imgchr.com/i/D20H2V" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/11/30/D20H2V.jpg" alt="flagswp.jpg"></a></p>
+<p>这个临时文件要及时删除，防止被黑客利用。在ctf赛题中，这也是会考察的一个点。</p>
+<p>除此之外vim还会产生一个备份文件，例如<code>index.php</code>的备份文件为<code>index.php~</code></p>
 
         
         <br>
