@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        linux三剑客 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#正则表达式"><span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通字符（重点）"><span class="toc-text">普通字符（重点）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#限定符（重点）"><span class="toc-text">限定符（重点）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊字符（重点）"><span class="toc-text">特殊字符（重点）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#非打印字符"><span class="toc-text">非打印字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#贪婪和非贪婪"><span class="toc-text">贪婪和非贪婪</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#grep"><span class="toc-text">grep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sed"><span class="toc-text">sed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#awk"><span class="toc-text">awk</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        linux三剑客
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-12-02 22:02:45</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#linux" title="linux">linux</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#正则表达式" title="正则表达式">正则表达式</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>万族各有托，孤云独无依</p>
+<a id="more"></a>
+<hr>
+<p>Linux 三剑客是 <code>grep</code> , <code>sed</code> , <code>awk</code> 三者的简称，熟练使用这三个工具可以提高运维效率。</p>
+<p>三者的功能都是处理文本，但侧重点各不相同，其中属awk功能最强大，但也最复杂。grep更适合单纯的查找或匹配文本，sed更适合编辑匹配到的文本，awk更适合格式化文本，对文本进行较复杂格式处理。</p>
+<p>Linux 三剑客以正则表达式作为基础，熟练掌握好正则表达式是使用Linux三剑客的前提。在掌握好正则表达式后，将具体讲解三剑客的用法。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>正则表达式：regexp(regular expression) 。通过特定的字符串匹配模板，来获取到所需的内容。</p>
+<p>在Linux系统中，支持两种正则表达式，分别是标准正则表达式和扩展正则表达式。</p>
+<h4 id="普通字符（重点）"><a href="#普通字符（重点）" class="headerlink" title="普通字符（重点）"></a>普通字符（重点）</h4><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[ABC]</td>
+<td>匹配 […] 中的所有字符</td>
+</tr>
+<tr>
+<td>[^ABC]</td>
+<td>匹配除了 […] 中字符的所有字符</td>
+</tr>
+<tr>
+<td>[A-Z]</td>
+<td>匹配[A-Z]区间内的字符，即所有大写字母</td>
+</tr>
+<tr>
+<td>[\s\S]</td>
+<td>匹配所有。\s 是匹配所有空白符, 包括换行, \S 非空白符, 包括换行。</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母、数字、下划线。等价于 <code>[A-Za-z0-9_]</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="限定符（重点）"><a href="#限定符（重点）" class="headerlink" title="限定符（重点）"></a>限定符（重点）</h4><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配至少n次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>匹配n次到m次</td>
+</tr>
+</tbody>
+</table>
+<h4 id="特殊字符（重点）"><a href="#特殊字符（重点）" class="headerlink" title="特殊字符（重点）"></a>特殊字符（重点）</h4><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$</td>
+<td>匹配输入字符串的结尾位置</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置 (该符号在[]中使用时表示匹配除了方括号中的集合之外的其他字符)</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符 \n 之外的任何单字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>或</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>标记一个子表达式的开始和结束</td>
+</tr>
+<tr>
+<td>[</td>
+<td>标记一个中括号表达式的开始</td>
+</tr>
+<tr>
+<td>{</td>
+<td>标记限定符表达式的开始</td>
+</tr>
+</tbody>
+</table>
+<h4 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h4><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\cx</td>
+<td>匹配由x指明的控制字符。例如， \cM 匹配一个 <code>Control-M</code> 或回车符</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符。等价于 \x0c 和 \cL</td>
+</tr>
+<tr>
+<td><strong>\n</strong></td>
+<td><strong>匹配一个换行符</strong>。等价于 \x0a 和 \cJ</td>
+</tr>
+<tr>
+<td><strong>\r</strong></td>
+<td><strong>匹配一个回车符</strong>。等价于 \x0d 和 \cM</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符。等价于 \x0b 和 \cK</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符。等价于 \x09 和 \cI</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符。等价于 [ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]</td>
+</tr>
+</tbody>
+</table>
+<h4 id="贪婪和非贪婪"><a href="#贪婪和非贪婪" class="headerlink" title="贪婪和非贪婪"></a>贪婪和非贪婪</h4><p> <code>*</code> 和 <code>+</code> 限定符都是贪婪的，因为它们会尽可能多的匹配文字，只要在它们的后面加上一个 <code>?</code> 就可以实现非贪婪或最小匹配。</p>
+<p> 例如以下这个字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;今天我的爱情结束了&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+<p>贪婪模式:<code>/&lt;.*&gt;/</code> 将匹配整个字符串</p>
+<p>而非贪婪模式：<code>/&lt;.*?&gt;/</code> 只匹配到第一个<code>&lt;h1&gt;</code></p>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><p>最后： 正则表达式30分钟入门教程 <a href="https://deerchao.cn/tutorials/regex/regex.htm" target="_blank" rel="noopener">https://deerchao.cn/tutorials/regex/regex.htm</a></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
