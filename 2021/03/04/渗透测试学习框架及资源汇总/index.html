@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        渗透测试学习框架及资源汇总 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#端口漏洞"><span class="toc-text">端口漏洞</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        渗透测试学习框架及资源汇总
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2021-03-04 15:40:51</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#渗透测试" title="渗透测试">渗透测试</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>本节内容有：</p>
+<ul>
+<li>端口漏洞</li>
+<li>操作系统漏洞</li>
+<li>数据库漏洞</li>
+<li>应用软件漏洞</li>
+<li>内网渗透</li>
+</ul>
+<h1 id="端口漏洞"><a href="#端口漏洞" class="headerlink" title="端口漏洞"></a>端口漏洞</h1><p>需要注意的问题：<br>端口的banner信息<br>端口上运行的服务<br>常见应用的默认端口<br>端口扫描常用工具：<br>nmap<br>3389、1433等专门的端口扫描工具<br>常见应用的默认端口<br>21端口：FTP 文件传输服务<br>22端口：SSH 远程连接服务<br>23端口：TELNET 终端仿真服务<br>25端口：SMTP 简单邮件传输服务<br>53端口：DNS 域名解析服务<br>80端口：HTTP 超文本传输服务<br>443端口：HTTPS 加密的超文本传输服务<br>3306端口：MYSQL数据库端口<br>5432端口：PostgreSQL数据库端口<br>6379端口：Redis数据库端口<br>8080端口：TCP服务端默认端口<br>8888端口：Nginx服务器的端口<br>9200端口：Elasticsearch服务器端口<br>27017端口：mongoDB数据库默认端口<br>22122端口：fastdfs服务器默认端口<br>服务默认端口<br>公认端口(Well Known Ports)：0-1023   服务固定端口<br>注册端口(Registered Ports)：1024-49151  应用注册的端口<br>动态/私有：49152-65535  不为服务分配这些端口<br>常见端口漏洞</p>
+<p>操作系统漏洞<br>Windows漏洞<br>微软安全更新指南查询：<a href="https://msrc.microsoft.com/update-guide/zh-cn" target="_blank" rel="noopener">https://msrc.microsoft.com/update-guide/zh-cn</a><br>微软漏洞补丁安装目录：<a href="https://www.catalog.update.microsoft.com/search.aspx?q=kb编号" target="_blank" rel="noopener">https://www.catalog.update.microsoft.com/search.aspx?q=kb编号</a><br>阿里云安全漏洞预警：<a href="https://help.aliyun.com/knowledge_list/60803.html?spm=a2c4g.11186623.6.544.13b0795a2FP4Sd" target="_blank" rel="noopener">https://help.aliyun.com/knowledge_list/60803.html?spm=a2c4g.11186623.6.544.13b0795a2FP4Sd</a><br>打开cmd，输入systeminfo，可以查看windows电脑所安装的补丁<br>Windows漏洞扫描工具：WindowsVulnScan<br>Linux漏洞<br>Linux本地内核提权漏洞(CVE-2019-13272)：<a href="https://zhuanlan.zhihu.com/p/115078543" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/115078543</a><br>Linux漏洞漏洞扫描工具<br><a href="https://github.com/SecWiki/linux-kernel-exploits" target="_blank" rel="noopener">https://github.com/SecWiki/linux-kernel-exploits</a><br>vulmap</p>
+<p>数据库漏洞<br>MySQL数据库<br>默认端口：3306<br>攻击方法：<br>爆破<br>弱口令<br>身份认证漏洞：CVE-2012-2122<br>拒绝服务攻击<br>phpmyadmin万能密码绕过：用户名： ‘localhost‘@‘@’’ 密码任意<br>学习资料：<br><a href="https://www.seebug.org/appdir/MySQL" target="_blank" rel="noopener">https://www.seebug.org/appdir/MySQL</a><br><a href="http://www.waitalone.cn/mysql-tiquan-summary.html?replytocom=390" target="_blank" rel="noopener">http://www.waitalone.cn/mysql-tiquan-summary.html?replytocom=390</a><br><a href="https://xz.aliyun.com/t/1491" target="_blank" rel="noopener">https://xz.aliyun.com/t/1491</a><br>Oracle数据库<br>默认端口：<br>1521：数据库端口<br>1158：Oracle EMCTL端口<br>8080：Oracle XDB数据库<br>210：Oracle XDB FTP服务<br>攻击方法：爆破；弱口令；注入攻击<br>学习资料：<a href="https://www.leiphone.com/news/201711/JjzXFp46zEPMvJod.html" target="_blank" rel="noopener">https://www.leiphone.com/news/201711/JjzXFp46zEPMvJod.html</a><br>Redis数据库<br>默认端口：6379<br>Redis是一个开源的使用c语言写的，支持网络、可基于内存亦可持久化的日志型、key-value数据库。关于这个数据库这两年还是很火的，暴露出来的问题也很多。<br>攻击方法：<br>爆破<br>弱口令<br>未授权访问<br>配合ssh key提权<br>学习资料：<a href="http://www.alloyteam.com/2017/07/12910/" target="_blank" rel="noopener">http://www.alloyteam.com/2017/07/12910/</a><br>DB2 数据库<br>默认端口：5000<br>攻击方法：安全限制绕过；成功后可执行未授权操作（CVE-2015-1922）<br>学习资料：<a href="http://23.94.222.93/bug_detail.php?wybug_id=wooyun-2015-0113071" target="_blank" rel="noopener">http://23.94.222.93/bug_detail.php?wybug_id=wooyun-2015-0113071</a><br>MongoDB数据库<br>默认端口：27017<br>攻击方法：爆破；弱口令；未授权访问；<br>学习资料：<br><a href="http://www.cnblogs.com/LittleHann/p/6252421.html" target="_blank" rel="noopener">http://www.cnblogs.com/LittleHann/p/6252421.html</a><br><a href="http://www.tiejiang.org/19157.html" target="_blank" rel="noopener">http://www.tiejiang.org/19157.html</a><br>PostgreSQL数据库<br>默认端口：5432<br>PostgreSQL是目前世界上最先进，功能最强大的自由数据库管理系统。包括kali系统中msf也使用这个数据库<br>攻击方法：<br>爆破<br>弱口令<br>postgres缓冲区溢出：CVE-2014-2669<br>学习资料：<br><a href="http://drops.xmd5.com/static/drops/tips-6449.html" target="_blank" rel="noopener">http://drops.xmd5.com/static/drops/tips-6449.html</a><br><a href="https://www.secpulse.com/archives/69153.html" target="_blank" rel="noopener">https://www.secpulse.com/archives/69153.html</a></p>
+<p>应用软件漏洞<br>Server-U<br>Word<br>CVE-2017-8759 ：<br><a href="https://bbs.ichunqiu.com/thread-27989-1-1.html" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-27989-1-1.html</a><br><a href="https://www.cnblogs.com/deen-/p/7532078.html" target="_blank" rel="noopener">https://www.cnblogs.com/deen-/p/7532078.html</a><br>浏览器<br>IE、Chrome、Firefox</p>
+<p>内网渗透<br>域控局域网搭建<br>隧道通信技术<br>域内横向移动<br>域控制器安全<br>跨域攻击分析及防御<br>内网渗透工具：Cobalt Strike</p>
+<p>域内安全导图</p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
