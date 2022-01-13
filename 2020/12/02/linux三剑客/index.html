@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        linux三剑客 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-正则表达式"><span class="toc-text">1. 正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-元字符"><span class="toc-text">1.1 元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-修饰符"><span class="toc-text">1.2 修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-字符簇"><span class="toc-text">1.3 字符簇</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-贪婪和非贪婪"><span class="toc-text">1.4 贪婪和非贪婪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-、-lt-、-、-lt"><span class="toc-text">1.5 ?=、?&lt;=、?!、?&lt;!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-grep"><span class="toc-text">2. grep</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-命令格式"><span class="toc-text">2.1 命令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-命令参数"><span class="toc-text">2.2 命令参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-示例"><span class="toc-text">2.3 示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-sed"><span class="toc-text">3. sed</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-命令格式"><span class="toc-text">3.1 命令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-命令参数"><span class="toc-text">3.2 命令参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-命令动作"><span class="toc-text">3.3 命令动作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-示例"><span class="toc-text">3.4 示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-awk"><span class="toc-text">4. awk</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-命令格式"><span class="toc-text">4.1 命令格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-命令选项"><span class="toc-text">4.2 命令选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-awk内置变量"><span class="toc-text">4.3 awk内置变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-示例"><span class="toc-text">4.4 示例</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        linux三剑客
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-12-02 22:02:45</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#linux" title="linux">linux</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#正则表达式" title="正则表达式">正则表达式</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>万族各有托，孤云独无依</p>
+<a id="more"></a>
+<hr>
+<p>Linux 三剑客是 <code>grep</code> , <code>sed</code> , <code>awk</code> 三者的简称，熟练使用这三个工具可以提高运维效率。</p>
+<p>三者的功能都是处理文本，但侧重点各不相同，其中属awk功能最强大，但也最复杂。grep更适合单纯的查找或匹配文本，sed更适合编辑匹配到的文本，awk更适合格式化文本，对文本进行较复杂格式处理。</p>
+<p>Linux 三剑客以正则表达式作为基础，熟练掌握好正则表达式是使用Linux三剑客的前提。在掌握好正则表达式后，将具体讲解三剑客的用法。</p>
+<h2 id="1-正则表达式"><a href="#1-正则表达式" class="headerlink" title="1. 正则表达式"></a>1. 正则表达式</h2><p>正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串替换或者从某个串中取出符合某个条件的子串等。</p>
+<p>在Linux系统中，支持两种正则表达式，分别是标准正则表达式和扩展正则表达式。</p>
+<h3 id="1-1-元字符"><a href="#1-1-元字符" class="headerlink" title="1.1 元字符"></a>1.1 元字符</h3><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配输入字符串的结尾位置</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配至少n次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>匹配n次到m次</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界，即字与空格间的位置。</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>非单词边界匹配</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符 \n 之外的任何单字符</td>
+</tr>
+<tr>
+<td>[xyz]</td>
+<td>匹配 […] 中的所有字符</td>
+</tr>
+<tr>
+<td>[^xyz]</td>
+<td>匹配除了 […] 中字符的所有字符</td>
+</tr>
+<tr>
+<td>[a-z]</td>
+<td>匹配[a-z]区间内的字符，即所有小写字母</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配一个数字字符。等价于 [0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配一个非数字字符。等价于 [^0-9]</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母、数字、下划线。等价于 <code>[A-Za-z0-9_]</code></td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非字母、数字、下划线</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符。等价于 \x0c 和 \cL</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符。等价于 \x0a 和 \cJ</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符。等价于 \x0d 和 \cM</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符</td>
+</tr>
+<tr>
+<td>[\s\S]</td>
+<td>匹配所有。\s 是匹配所有空白符, 包括换行, \S 非空白符, 包括换行。</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符。等价于 \x09 和 \cI</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符。等价于 \x0b 和 \cK</td>
+</tr>
+<tr>
+<td>\cx</td>
+<td>匹配由x指明的控制字符。例如， \cM 匹配一个 <code>Control-M</code> 或回车符</td>
+</tr>
+<tr>
+<td>\num</td>
+<td>num 是一个正整数。对所获取的匹配的引用。例如，’(.)\1’ 匹配两个连续的相同字符。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-2-修饰符"><a href="#1-2-修饰符" class="headerlink" title="1.2 修饰符"></a>1.2 修饰符</h3><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>不区分大小写 (ignore)</td>
+</tr>
+<tr>
+<td>g</td>
+<td>全局匹配 (global)</td>
+</tr>
+<tr>
+<td>m</td>
+<td>多行匹配 (multi line)</td>
+</tr>
+<tr>
+<td>s</td>
+<td>使特殊字符圆点 . 中包含换行符 \n</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-3-字符簇"><a href="#1-3-字符簇" class="headerlink" title="1.3 字符簇"></a>1.3 字符簇</h3><p>PHP的正则表达式有一些内置的通用字符簇，列表如下：</p>
+<table>
+<thead>
+<tr>
+<th>字符簇</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[[:alpha:]]</td>
+<td>任何字母</td>
+</tr>
+<tr>
+<td>[[:digit:]]</td>
+<td>任何数字</td>
+</tr>
+<tr>
+<td>[[:alnum:]]</td>
+<td>任何字母和数字</td>
+</tr>
+<tr>
+<td>[[:space:]]</td>
+<td>任何空白字符</td>
+</tr>
+<tr>
+<td>[[:upper:]]</td>
+<td>任何大写字母</td>
+</tr>
+<tr>
+<td>[[:lower:]]</td>
+<td>任何小写字母</td>
+</tr>
+<tr>
+<td>[[:punct:]]</td>
+<td>任何标点符号</td>
+</tr>
+<tr>
+<td>[[:xdigit:]]</td>
+<td>任何16进制的数字，相当于[0-9a-fA-F]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-4-贪婪和非贪婪"><a href="#1-4-贪婪和非贪婪" class="headerlink" title="1.4 贪婪和非贪婪"></a>1.4 贪婪和非贪婪</h3><p> <code>*</code> 和 <code>+</code> 限定符都是贪婪的，因为它们会尽可能多的匹配文字，只要在它们的后面加上一个 <code>?</code> 就可以实现非贪婪或最小匹配。</p>
+<blockquote>
+<p><code>?</code> 当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。</p>
+</blockquote>
+<p> 例如以下这个字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;今天我的爱情结束了&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+<p>贪婪模式:<code>/&lt;.*&gt;/</code> 将匹配整个字符串</p>
+<p>而非贪婪模式：<code>/&lt;.*?&gt;/</code> 只匹配到第一个<code>&lt;h1&gt;</code></p>
+<h3 id="1-5-、-lt-、-、-lt"><a href="#1-5-、-lt-、-、-lt" class="headerlink" title="1.5 ?=、?&lt;=、?!、?&lt;!"></a>1.5 ?=、?&lt;=、?!、?&lt;!</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">exp1(?=exp2)：查找 exp2 前面的 exp1</span><br><span class="line">(?&lt;=exp2)exp1：查找 exp2 后面的 exp1</span><br><span class="line">exp1(?!exp2)：查找后面不是 exp2 的 exp1</span><br><span class="line">(?&lt;!exp2)exp1：查找前面不是 exp2 的 exp1</span><br></pre></td></tr></table></figure>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/meidou(?=[\d+])/g   匹配数字前面的meidou字符串</span><br><span class="line">/(?&lt;=[0-9]+)meidou/g 匹配数字后面的meidou字符串</span><br><span class="line">/meidou(?![0-9]+)/g  匹配后面不是数字的meidou字符串</span><br><span class="line">/(?&lt;![0-9]+)meidou/g 匹配前面不是数字的meidou字符串</span><br></pre></td></tr></table></figure>
+<h2 id="2-grep"><a href="#2-grep" class="headerlink" title="2. grep"></a>2. grep</h2><p>grep 命令用于查找文件里符合条件的字符串,并把匹配的行打印出来，将匹配到的标红。</p>
+<blockquote>
+<p>grep可用于shell脚本，因为grep通过返回一个状态值来说明搜索的状态，如果模板搜索成功，则返回0，如果搜索不成功，则返回1，如果搜索的文件不存在，则返回2。我们利用这些返回值就可进行一些自动化的文本处理工作。</p>
+</blockquote>
+<h3 id="2-1-命令格式"><a href="#2-1-命令格式" class="headerlink" title="2.1 命令格式"></a>2.1 命令格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [option] pattern file</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-命令参数"><a href="#2-2-命令参数" class="headerlink" title="2.2 命令参数"></a>2.2 命令参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-A&lt;显示行数&gt;：除了显示符合样式的那一行之外，还显示该行之后的内容。</span><br><span class="line">-B&lt;显示行数&gt;：除了显示符合样式的那一行之外，还显示该行之前的内容。</span><br><span class="line">-C&lt;显示行数&gt;：除了显示符合样式的那一行之外，并显示该行之前后的内容。</span><br><span class="line">-c：计算符合样式的列数</span><br><span class="line">-e ：实现多个选项间的逻辑or 关系</span><br><span class="line">-E：扩展的正则表达式</span><br><span class="line">-f FILE：从FILE获取PATTERN匹配</span><br><span class="line">-F ：相当于fgrep</span><br><span class="line">-i ：忽略字符大小写的差别。</span><br><span class="line">-n：显示匹配的行号</span><br><span class="line">-o：仅显示匹配到的字符串</span><br><span class="line">-q： 静默模式，不输出任何信息</span><br><span class="line">-s：不显示错误信息。</span><br><span class="line">-v：显示不包含匹配文本的所有行，相当于[^] 反向匹配</span><br><span class="line">-w ：匹配整个单词</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-示例"><a href="#2-3-示例" class="headerlink" title="2.3 示例"></a>2.3 示例</h3><p><a href="https://imgchr.com/i/D7LXLQ" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2020/12/03/D7LXLQ.jpg" alt="D7LXLQ.jpg"></a></p>
+<h2 id="3-sed"><a href="#3-sed" class="headerlink" title="3. sed"></a>3. sed</h2><p>Sed 命令主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。</p>
+<blockquote>
+<p>sed是一种流编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（patternspace ），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。然后读入下行，执行下一个循环。如果没有使诸如‘D’ 的特殊命令，那会在两个循环之间清空模式空间，但不会清空保留空间。这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出或-i。</p>
+</blockquote>
+<p>　　功能：主要用来自动编辑一个或多个文件, 简化对文件的反复操作<br>sed 可依照脚本的指令来处理、编辑文本文件。</p>
+<h3 id="3-1-命令格式"><a href="#3-1-命令格式" class="headerlink" title="3.1 命令格式"></a>3.1 命令格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options][动作][文件]</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-命令参数"><a href="#3-2-命令参数" class="headerlink" title="3.2 命令参数"></a>3.2 命令参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-e&lt;script&gt; 或 - -expression=&lt;script&gt;：多点编辑，以选项中指定的script来处理输入的文本文件</span><br><span class="line">-f&lt;script文件&gt; 或 - -file=&lt;script文件&gt;：直接将 sed 的动作写在一个文件内， -f filename 则可以运行 filename 内的 sed 动作</span><br><span class="line">-n 或 - -quiet 或 - -silent： 使用安静(silent)模式，不输出模式空间内容到屏幕，即不自动打印，只打印匹配到的行。(在一般 sed 的用法中，所有来自 STDIN 的数据一般都会被列出到终端上)</span><br><span class="line">-r ：支持扩展的正则表达式</span><br><span class="line">-i ：直接将处理的结果写入文件</span><br><span class="line">-i.bak：在将处理的结果写入文件之前备份一份</span><br><span class="line">-V或--version： 显示版本信息</span><br><span class="line">-h或--help：显示帮助</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-命令动作"><a href="#3-3-命令动作" class="headerlink" title="3.3 命令动作"></a>3.3 命令动作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a ：追加，在指定行后面追加文本，支持使用\n实现多行追加</span><br><span class="line">c ：替换，替换行为单行或多行文本，支持使用\n实现多行追加</span><br><span class="line">d ：删除</span><br><span class="line">i ：插入，在行前面插入文本，支持使用\n实现多行追加</span><br><span class="line">p ：打印，打印当前模式空间内容，追加到默认输出之后。(通常 p 会与参数 sed -n 一起运行)</span><br><span class="line">w：保存模式匹配的行至指定文件</span><br><span class="line">s ：查找替换，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！</span><br><span class="line">=：为模式空间中的行打印行号</span><br><span class="line">!：模式空间中匹配行取反处理</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-示例"><a href="#3-4-示例" class="headerlink" title="3.4 示例"></a>3.4 示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">d: 删除</span><br><span class="line">    sed  &quot;3d&quot;  file      # 删除第三行</span><br><span class="line">    sed  &quot;1,3d&quot;          # 删除前三行</span><br><span class="line">    sed  &quot;1d;3d;5d&quot;    # 删除1、3、5行</span><br><span class="line">    sed  &quot;/^$/d&quot;         # 删除空行   </span><br><span class="line">    sed  &quot;/abc/d&quot;        # 删除所有含有abc的行</span><br><span class="line">    sed  &quot;/abc/，/def/d&quot;   # 删除abc 和 def 之间的行，包括其自身</span><br><span class="line">    sed  &quot;1，/def/d&quot;     # 删除第一行到 def 之间的行，包括其自身</span><br><span class="line">    sed  &quot;/abc/，+3d &quot;   # 删除含有abc的行之后，在删除3行</span><br><span class="line">    sed  &quot;/abc/，～3d&quot;   # 从含有abc的行开始，共删除3行</span><br><span class="line">    sed  &quot;1~2d&quot;        # 从第1行开始，每2行删除一行， 删除奇数行</span><br><span class="line">    sed  &quot;2~2d&quot;        # 从第2行开始，每2行删除一行， 删除奇数行</span><br><span class="line">    sed  &quot;$d&quot;          # 删除最后一行</span><br><span class="line">    sed  &quot;/dd\|cc/d&quot;   # 删除有dd或者cc的行</span><br><span class="line"></span><br><span class="line">p: 打印</span><br><span class="line">    sed -n  &quot;3p&quot;  file   # 显示第三行</span><br><span class="line">    sed -n  &quot;1,3p&quot;       # 显示前三行</span><br><span class="line">    sed -n  &quot;2,+3p&quot;      # 显示第二行，及后面的三行</span><br><span class="line">    sed -n  &quot;$p&quot;         # 显示最后一行</span><br><span class="line">    sed -n &quot;1p;3p;5p&quot;    # 只显示文件1、3、5行</span><br><span class="line">    sed -n  &quot;$=&quot;         # 显示文件行数</span><br><span class="line"></span><br><span class="line">s: 替换</span><br><span class="line">    sed  &quot;s/\(all\)/bb/&quot;</span><br><span class="line">    sed -r &quot;s/(all)/bb/&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="4-awk"><a href="#4-awk" class="headerlink" title="4. awk"></a>4. awk</h2><p>AWK 是一种处理文本文件的语言，是一个强大的文本分析工具。</p>
+<p>之所以叫 AWK 是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的 Family Name 的首字符。</p>
+<blockquote>
+<p>　awk是一种编程语言，用于在linux/unix下对文本和数据进行处理。数据可以来自标准输入(stdin)、一个或多个文件，或其它命令的输出。它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。它在命令行中使用，但更多是作为脚本来使用。awk有很多内建的功能，比如数组、函数等，这是它和C语言的相同之处，灵活性是awk最大的优势。</p>
+</blockquote>
+<h3 id="4-1-命令格式"><a href="#4-1-命令格式" class="headerlink" title="4.1 命令格式"></a>4.1 命令格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk [option] &apos;PATTERN&#123;ACTION STATEMENTS&#125;&apos; FILE</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-命令选项"><a href="#4-2-命令选项" class="headerlink" title="4.2 命令选项"></a>4.2 命令选项</h3><p>常用命令选项option：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-F：指名输入字段的分隔符</span><br><span class="line">-v：用来实现自定义变量var=value</span><br><span class="line">-f：从脚本文件中读取awk命令</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-awk内置变量"><a href="#4-3-awk内置变量" class="headerlink" title="4.3 awk内置变量"></a>4.3 awk内置变量</h3><p>awk常用内置变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">FS                 设置输入域分隔符，默认空白字符，等价于命令行 -F选项</span><br><span class="line">OFS                输出字段分隔符。使用-v指定。</span><br><span class="line">RS                 输入时的换行符</span><br><span class="line">ORS                输出时的换行符</span><br><span class="line">NF                 number of field 每一行的字段数量。加上$NF表示最后一列</span><br><span class="line">NR                 number of record 文件的行数，打印出来是打印行号</span><br><span class="line">FN                 多个文件中的行数分别计数</span><br><span class="line">FILENAME           当前文件的文件名</span><br><span class="line">ARGC               参数命令行中参数的个数</span><br><span class="line">ARGV               返回数组，命令行中的每个参数</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-示例"><a href="#4-4-示例" class="headerlink" title="4.4 示例"></a>4.4 示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 统计/etc/passwd:文件名，每行的行号，每行的列数，对应的完整行内容:</span><br><span class="line">#awk  -F &apos;:&apos;  &apos;&#123;print &quot;filename:&quot; FILENAME &quot;,linenumber:&quot; NR &quot;,columns:&quot; NF &quot;,linecontent:&quot;$0&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 使用printf替代print,可以让代码更加简洁，易读</span><br><span class="line">awk  -F &apos;:&apos;  &apos;&#123;printf(&quot;filename:%10s,linenumber:%s,columns:%s,linecontent:%s\n&quot;,FILENAME,NR,NF,$0)&#125;&apos; /etc/passwd</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

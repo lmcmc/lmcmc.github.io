@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        攻防世界misc新手wp（一） - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pdf"><span class="toc-text">pdf</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SimpleRAR"><span class="toc-text">SimpleRAR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#坚持60s"><span class="toc-text">坚持60s</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        攻防世界misc新手wp（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-24 22:09:19</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#writeup" title="writeup">writeup</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#攻防世界" title="攻防世界">攻防世界</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>攻防世界misc新手题4-6题<br><a id="more"></a></p>
+<h1 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXeaD.png" alt="1"><br>根据题目描述可知，flag可能会隐藏在图片下面。<br>将图片移开的方法：</p>
+<ol>
+<li>用pdf编辑工具使图片缩小可以看到图片后面的flag</li>
+<li>利用在线工具：<a href="https://app.xunjiepdf.com/pdf2word" target="_blank" rel="noopener">https://app.xunjiepdf.com/pdf2word</a> 将pdf转换为word，从而移开图片</li>
+</ol>
+<h1 id="SimpleRAR"><a href="#SimpleRAR" class="headerlink" title="SimpleRAR"></a>SimpleRAR</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXEqK.png" alt="2"><br>解压后只有一个txt文件,上面写着flag is not here,将压缩包用winhex打发现RAR里面有一个图片，但是没有解压出来，原因是这个压缩包被损坏</p>
+<p><img src="https://s2.ax1x.com/2019/07/24/eVXkKx.png" alt="3"><br>更改RAR对png文件头的编码，把A8 3C 7A中的7A改成74，保存，重新解压，得到一个纯白图片</p>
+<p><img src="https://s2.ax1x.com/2019/07/24/eVXix1.png" alt="4"><br>把图片拖进winhex发现是个gif，用stegsolve打开选择帧功能模块，又看到两张纯白的图片。。。（后来才知道这两张纯白的图片，调节颜色后就能得到两张残缺的二维码图片。。。）</p>
+<p>。。而我选择先用PS打开secret.gif，有两个图层（题目中的双图层），分离后保存，再用Stegsolve分别打开，得到两张残缺的二维码图片<br><img src="https://s2.ax1x.com/2019/07/24/eVXAr6.png" alt="5"><br>使用ps将二维码合并补齐，扫描得到flag<br><img src="https://s2.ax1x.com/2019/07/25/eZJIwn.png" alt="6"></p>
+<h1 id="坚持60s"><a href="#坚持60s" class="headerlink" title="坚持60s"></a>坚持60s</h1><p><img src="https://s2.ax1x.com/2019/07/24/eVXmIe.png" alt="7"><br>使用java反编译工具，查看源码，看到经过base64加密后的flag，解密得到flag<br><img src="https://s2.ax1x.com/2019/07/24/eVXuPH.png" alt="8"><br>JD-GUI（Java反编译工具）下载地址： <a href="https://www.cr173.com/soft/5606.html" target="_blank" rel="noopener">https://www.cr173.com/soft/5606.html</a></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

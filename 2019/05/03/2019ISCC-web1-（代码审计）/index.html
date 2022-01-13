@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        2019ISCC web1 （代码审计） - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#题解"><span class="toc-text">题解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#知识点总结"><span class="toc-text">知识点总结</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#count-—-返回数组中元素的数目"><span class="toc-text">count — 返回数组中元素的数目</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#unset-—-释放给定的变量"><span class="toc-text">unset — 释放给定的变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#chr-—-返回相对应于-ascii-所指定的单个字符"><span class="toc-text">chr — 返回相对应于 ascii 所指定的单个字符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#intval-—-获取变量的整数值"><span class="toc-text">intval — 获取变量的整数值</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        2019ISCC web1 （代码审计）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-03 10:11:27</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#writeup" title="writeup">writeup</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#代码审计" title="代码审计">代码审计</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>2019ISCC web1题目<br><a id="more"></a></p>
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>拿到题目直接给出源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">require &apos;flag.php&apos;;</span><br><span class="line">$value = $_GET[&apos;value&apos;];</span><br><span class="line">$password = $_GET[&apos;password&apos;];</span><br><span class="line">$username = &apos;&apos;;</span><br><span class="line"></span><br><span class="line">for ($i = 0; $i &lt; count($value); ++$i) &#123;</span><br><span class="line">    if ($value[$i] &gt; 32 &amp;&amp; $value[$i] &lt; 127) unset($value);</span><br><span class="line">    else $username .= chr($value[$i]);</span><br><span class="line">    if ($username == &apos;w3lc0me_To_ISCC2019&apos; &amp;&amp; intval($password) &lt; 2333 &amp;&amp; intval($password + 1) &gt; 2333) &#123;</span><br><span class="line">        echo &apos;Hello &apos;.$username.&apos;!&apos;, &apos;&lt;br&gt;&apos;, PHP_EOL;</span><br><span class="line">        echo $flag, &apos;&lt;hr&gt;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br></pre></td></tr></table></figure>
+<p>在for循环内，当元素的值在32-127时，销毁value的值，在32-127范围之外的value值通过chr函数返回对应于ascii所指定字符，.=累加到$username上。</p>
+<p>看源码：</p>
+<p>当满足if ($username == ‘w3lc0me_To_ISCC2019’ &amp;&amp; intval($password) &lt; 2333 &amp;&amp; intval($password + 1) &gt; 2333)时输出flag</p>
+<p>$username第一个字母w所对应的ascii码为119，在32-127范围内，因为chr()函数会自动进行mod256，所以可以传参119+256得到w，写了一个c++脚本跑出了value的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char a[30]=&quot;w3lc0me_To_ISCC2019&quot;;</span><br><span class="line">	int i;</span><br><span class="line">	for(i=0;i&lt;19;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%d,&quot;,(int)a[i]+256);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>为375,307,364,355,304,365,357,351,340,367,351,329,339,323,323,306,304,305,313</p>
+<p>接着看if语句，发现intval($password) &lt; 2333和intval($password + 1) &gt; 2333要同时满足，查阅函数，得知intval函数在参数是字符串的情况下，只会返回第一个字母之前的数值，如果第一个就是字母则返回0.</p>
+<p>所以我们可以令password=0xaaaa（所传参数会自动当成字符串处理），此时intval($password)=0&lt;2333,字符串$password和数字相加会先转换成数字再相加，所以满足intval($password + 1) &gt; 2333</p>
+<p>所以传参：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?value[]=375&amp;value[]=307&amp;value[]=364&amp;value[]=355&amp;value[]=304&amp;value[]=365&amp;value[]=357&amp;value[]=351&amp;value[]=340&amp;value[]=367&amp;value[]=351&amp;value[]=329&amp;value[]=339&amp;value[]=323&amp;value[]=323&amp;value[]=306&amp;value[]=304&amp;value[]=305&amp;value[]=313&amp;password=0xaaaa</span><br></pre></td></tr></table></figure>
+<p>得到：Hello w3lc0me_To_ISCC2019!</p>
+<p>flag{8311873e241ccad54463eaa5d4efc1e9}</p>
+<hr>
+<h4 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h4><h5 id="count-—-返回数组中元素的数目"><a href="#count-—-返回数组中元素的数目" class="headerlink" title="count — 返回数组中元素的数目"></a>count — 返回数组中元素的数目</h5><h5 id="unset-—-释放给定的变量"><a href="#unset-—-释放给定的变量" class="headerlink" title="unset — 释放给定的变量"></a>unset — 释放给定的变量</h5><h5 id="chr-—-返回相对应于-ascii-所指定的单个字符"><a href="#chr-—-返回相对应于-ascii-所指定的单个字符" class="headerlink" title="chr — 返回相对应于 ascii 所指定的单个字符"></a>chr — 返回相对应于 ascii 所指定的单个字符</h5><p>   此外，chr()函数会自动进行mod256</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">官网上的注释为：</span><br><span class="line"> Note that if the number is higher than 256, it will  return the number mod 256.</span><br><span class="line"> For example :</span><br><span class="line"> chr(321)=A because A=65(256)</span><br></pre></td></tr></table></figure>
+<h5 id="intval-—-获取变量的整数值"><a href="#intval-—-获取变量的整数值" class="headerlink" title="intval — 获取变量的整数值"></a>intval — 获取变量的整数值</h5><blockquote>
+<p>intval函数，在如果参数是字符串，则返回字符串中第一个不是数字的字符之前的数字串所代表的整数值。<br>如果字符串第一个是’-‘，则从第二个开始算起。<br> 如果参数是符点数，则返回他取整之后的值。<br>当var是一个array时候，var为空则返回0，不为空则返回1</p>
+</blockquote>
+<p>所以intval(“12ab34”) 返回的是12</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">官网注释为：</span><br><span class="line">     It seems intval is interpreting valid numeric strings differently between PHP 5.6 and 7.0 on one hand, and PHP 7.1 on the other hand.</span><br><span class="line"></span><br><span class="line">    &lt;?php</span><br><span class="line">    echo intval(&apos;1e5&apos;);</span><br><span class="line">    ?&gt;</span><br><span class="line">    </span><br><span class="line">    will return 1 on PHP 5.6 and PHP 7.0,</span><br><span class="line">    but it will return 100000 on PHP 7.1.</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

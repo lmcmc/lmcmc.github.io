@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        攻防世界crypto新手wp（1） - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#转轮机加密"><span class="toc-text">转轮机加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#easy-RSA"><span class="toc-text">easy_RSA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不仅仅是Morse"><span class="toc-text">不仅仅是Morse</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        攻防世界crypto新手wp（1）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-24 23:55:33</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#writeup" title="writeup">writeup</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#攻防世界" title="攻防世界">攻防世界</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>crypto<br><a id="more"></a></p>
+<h1 id="转轮机加密"><a href="#转轮机加密" class="headerlink" title="转轮机加密"></a>转轮机加密</h1><blockquote>
+<p>你俩继续往前走，来到了前面的下一个关卡，这个铺面墙上写了好多奇奇怪怪的 英文字母，排列的的整整齐齐，店面前面还有一个大大的类似于土耳其旋转烤肉的架子，上面一圈圈的 也刻着很多英文字母，你是一个小历史迷，对于二战时候的历史刚好特别熟悉，一拍大腿：“嗨呀！我知道 是什么东西了！”。提示：托马斯·杰斐逊</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">1:  &lt; ZWAXJGDLUBVIQHKYPNTCRMOSFE &lt;</span><br><span class="line">2:  &lt; KPBELNACZDTRXMJQOYHGVSFUWI &lt;</span><br><span class="line">3:  &lt; BDMAIZVRNSJUWFHTEQGYXPLOCK &lt;</span><br><span class="line">4:  &lt; RPLNDVHGFCUKTEBSXQYIZMJWAO &lt;</span><br><span class="line">5:  &lt; IHFRLABEUOTSGJVDKCPMNZQWXY &lt;</span><br><span class="line">6:  &lt; AMKGHIWPNYCJBFZDRUSLOQXVET &lt;</span><br><span class="line">7:  &lt; GWTHSPYBXIZULVKMRAFDCEONJQ &lt;</span><br><span class="line">8:  &lt; NOZUTWDCVRJLXKISEFAPMYGHBQ &lt;</span><br><span class="line">9:  &lt; XPLTDSRFHENYVUBMCQWAOIKZGJ &lt;</span><br><span class="line">10: &lt; UDNAJFBOWTGVRSCZQKELMXYIHP &lt;</span><br><span class="line">11：&lt; MNBVCXZQWERTPOIUYALSKDJFHG &lt;</span><br><span class="line">12：&lt; LVNCMXZPQOWEIURYTASBKJDFHG &lt;</span><br><span class="line">13：&lt; JZQAWSXCDERFVBGTYHNUMKILOP &lt;</span><br><span class="line"></span><br><span class="line">密钥为：2,3,7,5,13,12,9,1,8,10,4,11,6</span><br><span class="line">密文为：NFQKSEVOQOFNP</span><br></pre></td></tr></table></figure>
+<p>把文件重新排序，并把密文转到第一个位置，发现FIREINTHEHOLE<br><img src="https://s2.ax1x.com/2019/09/25/uErBDO.png" alt="1"><br>换成小写得到flag：cyberpeace{fireinthehole}</p>
+<h1 id="easy-RSA"><a href="#easy-RSA" class="headerlink" title="easy_RSA"></a>easy_RSA</h1><blockquote>
+<p>解答出来了上一个题目的你现在可是春风得意，你们走向了下一个题目所处的地方 你一看这个题目傻眼了，这明明是一个数学题啊！！！可是你的数学并不好。扭头看向小鱼，小鱼哈哈一笑 ，让你在学校里面不好好听讲现在傻眼了吧~来我来！三下五除二，小鱼便把这个题目轻轻松松的搞定了。flag格式为cyberpeace{小写的你解出的答案}</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">在一次RSA密钥对生成中，假设p=473398607161，q=4511491，e=17</span><br><span class="line">求解出d</span><br></pre></td></tr></table></figure>
+<p>其实就是个数学题，不过首先要知道<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d*e≡1(mod φ(n)),</span><br><span class="line">又p、q为质数，</span><br><span class="line">所以φ(n)=(p-1)*(q-1),</span><br><span class="line">即d*e≡1(mod(p-1)*(q-1)</span><br></pre></td></tr></table></figure></p>
+<p>把e p q的值代入得到d，加上格式即为flag：cyberpeace{125631357777427553}</p>
+<h1 id="不仅仅是Morse"><a href="#不仅仅是Morse" class="headerlink" title="不仅仅是Morse"></a>不仅仅是Morse</h1><blockquote>
+<p>“这个题目和我们刚刚做的那个好像啊但是为什么按照刚刚的方法做出来答案却不对呢” ，你奇怪的问了问小鱼，“可能是因为还有一些奇怪的加密方式在里面吧，我们在仔细观察观察”。两个人 安安静静的坐下来开始思考，很耐心的把自己可以想到的加密方式一种种的过了一遍，十多分钟后两个人 异口同声的说“我想到了！”。一种食物,格式为cyberpeace{小写的你解出的答案}</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件：</span><br><span class="line">--/.-/-.--/..--.-/-..././..--.-/..../.-/...-/./..--.-/.-/-./---/-/...././.-./..--.-/-.././-.-./---/-.././..../..../..../..../.-/.-/.-/.-/.-/-.../.-/.-/-.../-.../-.../.-/.-/-.../-.../.-/.-/.-/.-/.-/.-/.-/.-/-.../.-/.-/-.../.-/-.../.-/.-/.-/.-/.-/.-/.-/-.../-.../.-/-.../.-/.-/.-/-.../-.../.-/.-/.-/-.../-.../.-/.-/-.../.-/.-/.-/.-/-.../.-/-.../.-/.-/-.../.-/.-/.-/-.../-.../.-/-.../.-/.-/.-/-.../.-/.-/.-/-.../.-/.-/-.../.-/-.../-.../.-/.-/-.../-.../-.../.-/-.../.-/.-/.-/-.../.-/-.../.-/-.../-.../.-/.-/.-/-.../-.../.-/-.../.-/.-/.-/-.../.-/.-/-.../.-/.-/-.../.-/.-/.-/.-/-.../-.../.-/-.../-.../.-/.-/-.../-.../.-/.-/-.../.-/.-/-.../.-/.-/.-/-.../.-/.-/-.../.-/.-/-.../.-/.-/-.../.-/-.../.-/.-/-.../-.../.-/-.../.-/.-/.-/.-/-.../-.../.-/-.../.-/.-/-.../-.../.-</span><br></pre></td></tr></table></figure>
+<p>进行morse解密，得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">may be have another decodehhhhaaaaabaabbbaabbaaaaaaaabaababaaaaaaabbabaaabbaaabbaabaaaababaabaaabbabaaabaaabaababbaabbbabaaabababbaaabbabaaabaabaabaaaabbabbaabbaabaabaaabaabaabaababaabbabaaaabbabaabba</span><br></pre></td></tr></table></figure></p>
+<p>题目提示了一种食物，结果我就是没想出来…后来才知道是培根..(我太zz了)</p>
+<p><strong>培根密码</strong>所用的密码是一种本质上用二进制数设计的，没有用通常的0和1来表示，而是采用a和b<br>培根密码加密有两种方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">方式一：</span><br><span class="line">A aaaaa B aaaab C aaaba D aaabb </span><br><span class="line">E aabaa F aabab G aabba H aabbb </span><br><span class="line">I abaaa J abaab K ababa L ababb </span><br><span class="line">M abbaa N abbab O abbba P abbbb </span><br><span class="line">Q baaaa R baaab T baabb U babaa </span><br><span class="line">V babab W babba X babbb Y bbaaa </span><br><span class="line">Z bbaab  </span><br><span class="line"></span><br><span class="line">方式二： </span><br><span class="line">a AAAAA g AABBA n ABBAA t BAABA </span><br><span class="line">b AAAAB h AABBB o ABBAB u-v BAABB </span><br><span class="line">c AAABA i-j ABAAA p ABBBA w BABAA </span><br><span class="line">d AAABB k ABAAB q ABBBB x BABAB </span><br><span class="line">e AABAA l ABABA r BAAAA y BABBA </span><br><span class="line">f AABAB m ABABB s BAAAB z BABBB</span><br></pre></td></tr></table></figure>
+<p>用在线工具解密(虽然大家都是自己写脚本)得到flag：cyberpeace{attackanddefenceworldisinteresting}</p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

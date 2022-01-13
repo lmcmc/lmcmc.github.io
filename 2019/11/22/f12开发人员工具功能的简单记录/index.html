@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="美豆的博客">
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        f12开发人员工具功能的简单记录 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar radius">
+            <img src="/img/lmc.jpg">
+        </div>
+        <div class="name">
+            <i>美豆</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#火狐和谷歌中的开发人员工具"><span class="toc-text">火狐和谷歌中的开发人员工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#几个常用工具"><span class="toc-text">几个常用工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看器"><span class="toc-text">查看器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络"><span class="toc-text">网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sources"><span class="toc-text">Sources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制台"><span class="toc-text">控制台</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-console-log"><span class="toc-text">1.console.log()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-console-table"><span class="toc-text">2.console.table</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-统计代码的执行时间"><span class="toc-text">3. 统计代码的执行时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-分组输出"><span class="toc-text">4.分组输出</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料："><span class="toc-text">参考资料：</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        f12开发人员工具功能的简单记录
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-11-22 11:39:59</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#工具" title="工具">工具</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>开发人员工具<br><a id="more"></a><br>写南邮攻防平台一道web题(AAencode)的时候，看了别人的wp才知道js代码可以直接在控制台中执行，当我还是找颜文字js解密网站的时候人家都是直接复制到控制台中跑一下就得到flag了..<br><img src="https://s2.ax1x.com/2019/11/22/MTCoNR.png" alt="1"><br>发现自己的基础知识可太薄弱了，于是决定总结一些开发人员工具里的功能</p>
+<hr>
+<h1 id="火狐和谷歌中的开发人员工具"><a href="#火狐和谷歌中的开发人员工具" class="headerlink" title="火狐和谷歌中的开发人员工具"></a>火狐和谷歌中的开发人员工具</h1><p><img src="https://s2.ax1x.com/2019/11/22/MTCIE9.png" alt="001"><br><img src="https://s2.ax1x.com/2019/11/22/MTChB4.png" alt="002"></p>
+<h1 id="几个常用工具"><a href="#几个常用工具" class="headerlink" title="几个常用工具"></a>几个常用工具</h1><h2 id="查看器"><a href="#查看器" class="headerlink" title="查看器"></a>查看器</h2><p>这个功能很熟悉了不用多说，作用查看页面源代码</p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p><img src="https://s2.ax1x.com/2019/11/22/MTC4HJ.png" alt="6"><br>记录了页面上网络请求的详情信息。Google里的network面板和Firefox里的网络面板显示内容略有不同，但功能都很强大，具体可以看这篇文章： <a href="https://blog.csdn.net/zengzhenzong/article/details/80446732" target="_blank" rel="noopener">Google开发者工具面板-network详解</a>，不过我注意到的一点是Firefox的网络面板可以直接点击“编辑和重发”进行模拟请求，跟bp功能差不多，(一些版本的Firefox这个功能失效了)谷歌应该也有，但是需要安装插件</p>
+<h2 id="Sources"><a href="#Sources" class="headerlink" title="Sources"></a>Sources</h2><p>进行js断点调试</p>
+<h2 id="控制台"><a href="#控制台" class="headerlink" title="控制台"></a>控制台</h2><p>控制台一般用于执行一次性代码，查看JavaScript对象，查看调试日志信息或异常信息.</p>
+<h4 id="1-console-log"><a href="#1-console-log" class="headerlink" title="1.console.log()"></a>1.console.log()</h4><p>用于在控制台输出信息。该方法对于开发过程进行测试很有帮助。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;消息内容！&apos;); //输出普通信息</span><br><span class="line">　　console.info(&apos;消息内容！&apos;); //输出提示信息</span><br><span class="line">　　console.error(&apos;消息内容！&apos;);//输出错误信息</span><br><span class="line">　　console.warn(&apos;消息内容！&apos;); //输出警告信息</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/11/22/MTCRjU.png" alt="2"></p>
+<h4 id="2-console-table"><a href="#2-console-table" class="headerlink" title="2.console.table"></a>2.console.table</h4><p>格式化表格。<br>console.table可以将一段同格式的数组转换为一个表格输出在控制台，方便查看<br><img src="https://s2.ax1x.com/2019/11/22/MTCfuF.png" alt="3"></p>
+<h4 id="3-统计代码的执行时间"><a href="#3-统计代码的执行时间" class="headerlink" title="3. 统计代码的执行时间"></a>3. 统计代码的执行时间</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.time(&apos;统计时间&apos;)</span><br><span class="line">for(var i = 0; i &lt; 999 ;i++)&#123;&#125;</span><br><span class="line">console.timeEnd(&apos;统计时间&apos;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/11/22/MTC2cT.png" alt="4"></p>
+<h4 id="4-分组输出"><a href="#4-分组输出" class="headerlink" title="4.分组输出"></a>4.分组输出</h4><p>调试复杂的程序，需做大量输出判断的时候使用分组输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.group(&apos;a组&apos;);</span><br><span class="line">　　console.log(&apos;a1&apos;);</span><br><span class="line">　　console.log(&apos;a2&apos;);</span><br><span class="line">　　console.log(&apos;a3&apos;);</span><br><span class="line">　　console.groupEnd();</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/11/22/MTCg3V.png" alt="5"></p>
+<p>and so on ….<br>        …<br>        ..<br>        .<br>    （不想写了.^.）</p>
+<hr>
+<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p>Chrome——F12 谷歌开发者工具详解<br><a href="https://www.cnblogs.com/xiaowenshu/p/10450848.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaowenshu/p/10450848.html</a></p>
+<p>关于火狐浏览器开发者工具使用<br><a href="https://blog.csdn.net/gutie_bartholomew/article/details/82558031" target="_blank" rel="noopener">https://blog.csdn.net/gutie_bartholomew/article/details/82558031</a></p>
+<p>Google开发者工具面板-network详解<br><a href="https://blog.csdn.net/zengzhenzong/article/details/80446732" target="_blank" rel="noopener">https://blog.csdn.net/zengzhenzong/article/details/80446732</a></p>
+<p>js技巧 console.log使用<a href="https://blog.csdn.net/qq_30811721/article/details/83147090" target="_blank" rel="noopener">https://blog.csdn.net/qq_30811721/article/details/83147090</a></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
